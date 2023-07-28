@@ -35,6 +35,12 @@
                 <p><strong>Jam Buka:</strong> {{ $destinasiWisata->JamBuka }}</p>
                 <p><strong>Deskripsi:</strong> {{ $destinasiWisata->Deskripsi }}</p>
                 <p><strong>Sejarah:</strong> {{ $destinasiWisata->Sejarah }}</p>
+               @if ($destinasiWisata->gambar)
+                <p><strong>Gambar:</strong></p>
+                @foreach (json_decode($destinasiWisata->gambar) as $imagePath)
+                <img src="{{ url('storage/' . $imagePath) }}" alt="Gambar Destinasi Wisata" class="img-fluid">
+                @endforeach
+                @endif
                 <div id="map" style="height: 400px;"></div>
                 <a href="https://www.google.com/maps?q={{ $destinasiWisata->latitude }},{{ $destinasiWisata->longitude }}"
                     target="_blank" class="btn btn-primary mt-3">Buka di Google Maps</a>

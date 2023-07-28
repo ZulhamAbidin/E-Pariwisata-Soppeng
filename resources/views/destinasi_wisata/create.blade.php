@@ -22,47 +22,51 @@
             {{ Session::get('success') }}
         </div>
         @endif
-        <form action="{{ route('destinasi-wisata.store') }}" method="POST">
+        <form action="{{ route('destinasi-wisata.store') }}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="form-group">
                 <label for="nama">Nama Destinasi Wisata</label>
-                <input type="text" name="nama" id="nama" class="form-control" required>
+                <input type="text" value="tes" name="nama" id="nama" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="alamat">Alamat</label>
-                <input type="text" name="alamat" id="alamat" class="form-control" required>
+                <input type="text" value="tes" name="alamat" id="alamat" class="form-control" required>
             </div>
-            <div class="form-group">
-                <label for="latitude">Latitude</label>
-                <input type="text" name="latitude" id="latitude" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="longitude">Longitude</label>
-                <input type="text" name="longitude" id="longitude" class="form-control" required>
-            </div>
+          
             <div class="form-group">
                 <label for="HargaTiket">Harga Tiket</label>
-                <input type="text" name="HargaTiket" id="HargaTiket" class="form-control">
+                <input type="text"  value="tes" name="HargaTiket" id="HargaTiket" class="form-control">
             </div>
             <div class="form-group">
                 <label for="FasilitasDestinasi">Fasilitas Destinasi</label>
-                <input type="text" name="FasilitasDestinasi" id="FasilitasDestinasi" class="form-control">
+                <input type="text"  value="tes" name="FasilitasDestinasi" id="FasilitasDestinasi" class="form-control">
             </div>
             <div class="form-group">
                 <label for="JamBuka">Jam Buka</label>
-                <input type="text" name="JamBuka" id="JamBuka" class="form-control">
+                <input type="text" value="tes" name="JamBuka" id="JamBuka" class="form-control">
             </div>
             <div class="form-group">
                 <label for="Deskripsi">Deskripsi</label>
-                <textarea name="Deskripsi" id="Deskripsi" class="form-control"></textarea>
+                <textarea name="Deskripsi"  id="Deskripsi" class="form-control"></textarea>
             </div>
             <div class="form-group">
                 <label for="Sejarah">Sejarah</label>
                 <textarea name="Sejarah" id="Sejarah" class="form-control"></textarea>
             </div>
+             <div class="form-group">
+                <label for="latitude" class="sr-only">Latitude</label>
+                <input type="text" name="latitude" id="latitude" class="form-control" required readonly>
+            </div>
+            <div class="form-group">
+                <label for="longitude" class="sr-only">Longitude</label>
+                <input type="text" name="longitude" id="longitude" class="form-control" required readonly>
+            </div>
+            <div class="form-group">
+                <label for="image">Gambar</label>
+                <input type="file" name="gambar[]" id="gambar[]" class="form-control-file">
+            </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
-        
         <div id="map" style="height: 400px; margin-top: 20px;"></div>
     </div>
 

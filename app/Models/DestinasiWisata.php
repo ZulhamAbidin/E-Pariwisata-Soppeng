@@ -31,5 +31,6 @@ class DestinasiWisata extends Model
         'Sejarah',
         'latitude',
         'longitude',
+        'image_path', // Tambahkan kolom image_path
     ];
 }

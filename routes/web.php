@@ -24,5 +24,8 @@ Route::get('/destinasi-wisata', [DestinasiWisataController::class, 'index'])->na
 Route::get('/destinasi-wisata/create', [DestinasiWisataController::class, 'create'])->name('destinasi-wisata.create');
 Route::post('/destinasi-wisata', [DestinasiWisataController::class, 'store'])->name('destinasi-wisata.store');
 Route::get('/destinasi-wisata/{id}', [DestinasiWisataController::class, 'show'])->name('destinasi-wisata.show');
+Route::get('/destinasi-wisata/{id}/edit', [DestinasiWisataController::class, 'edit'])->name('destinasi-wisata.edit');
+Route::delete('/destinasi-wisata/{id}', [DestinasiWisataController::class, 'destroy'])->name('destinasi-wisata.destroy');
+Route::put('/destinasi-wisata/{id}', [DestinasiWisataController::class, 'update'])->name('destinasi-wisata.update');
 
 require __DIR__.'/auth.php';

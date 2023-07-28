@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->text('Sejarah')->nullable();
             $table->float('latitude', 10, 6);
             $table->float('longitude', 10, 6);
+            $table->string('gambar')->nullable(); // Image field to store the image path
             $table->timestamps();
         });
     }
