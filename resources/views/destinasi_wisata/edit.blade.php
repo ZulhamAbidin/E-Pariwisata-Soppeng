@@ -15,6 +15,15 @@
 </head>
 
 <body class="font-sans antialiased">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="container">
         <h2>Edit Destinasi Wisata</h2>
         @if(Session::has('success'))
@@ -46,6 +55,7 @@
                 <input type="text" name="longitude" id="longitude" class="form-control"
                     value="{{ $destinasiWisata->longitude }}" required>
             </div>
+            
             <div class="form-group">
                 <label for="HargaTiket">Harga Tiket</label>
                 <input type="text" name="HargaTiket" id="HargaTiket" class="form-control"
@@ -96,56 +106,50 @@
     <div id="map" style="height: 400px; margin-top: 20px;"></div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+   
     <script>
         var map;
         var marker;
         var initialLatitude = {{ $destinasiWisata->latitude }};
         var initialLongitude = {{ $destinasiWisata->longitude }};
-
+    
         function initMap() {
-            map = L.map('map').setView([initialLatitude, initialLongitude],
-            13); // Koordinat default dari data destinasi wisata yang akan diedit
-
+            map = L.map('map').setView([initialLatitude, initialLongitude], 13);
+    
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
+    
             marker = L.marker([initialLatitude, initialLongitude], {
                 draggable: true
             }).addTo(map);
-
+    
             map.on('click', function(event) {
                 marker.setLatLng(event.latlng);
                 fillLatitudeLongitudeInputs(event.latlng.lat, event.latlng.lng);
             });
-
+    
             document.getElementById('alamat').addEventListener('input', function() {
                 var keyword = this.value.trim();
                 if (keyword) {
                     geocodeAlamat(keyword);
                 } else {
-                    // Reset preview map
                     marker.setLatLng([initialLatitude, initialLongitude]);
                     map.setView([initialLatitude, initialLongitude], 13);
                     fillLatitudeLongitudeInputs(initialLatitude, initialLongitude);
                 }
             });
         }
-
-        // ... fungsi geocodeAlamat ...
-
+    
+        function fillLatitudeLongitudeInputs(latitude, longitude) {
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+        }
+    
         document.addEventListener('DOMContentLoaded', function() {
             initMap();
         });
     </script>
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+   
 
 </body>
 

@@ -164,7 +164,8 @@ class DestinasiWisataController extends Controller
             ->route('destinasi-wisata.index')
             ->with('success', 'Destinasi wisata berhasil dihapus.');
     }
-public function update(Request $request, $id)
+    
+    public function update(Request $request, $id)
 {
     // Validate the input data
     $request->validate([
@@ -227,6 +228,7 @@ public function update(Request $request, $id)
         ->route('destinasi-wisata.index')
         ->with('success', 'Destinasi Wisata berhasil diupdate.');
 }
+
 
 
 
