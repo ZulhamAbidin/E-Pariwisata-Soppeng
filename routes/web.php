@@ -28,4 +28,5 @@ Route::get('/destinasi-wisata/{id}/edit', [DestinasiWisataController::class, 'ed
 Route::delete('/destinasi-wisata/{id}', [DestinasiWisataController::class, 'destroy'])->name('destinasi-wisata.destroy');
 Route::put('/destinasi-wisata/{id}', [DestinasiWisataController::class, 'update'])->name('destinasi-wisata.update');
 
+
 require __DIR__.'/auth.php';

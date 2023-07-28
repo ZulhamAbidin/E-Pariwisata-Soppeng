@@ -61,9 +61,15 @@
                 <label for="longitude" class="sr-only">Longitude</label>
                 <input type="text" name="longitude" id="longitude" class="form-control" required readonly>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="image">Gambar</label>
                 <input type="file" name="gambar[]" id="gambar[]" class="form-control-file">
+            </div> --}}
+
+            <div class="form-group">
+                <label for="gambar">Gambar</label>
+                <input type="file" name="gambar[]" id="gambar" class="form-control-file" multiple>
+                <small class="form-text text-muted">Unggah gambar baru (jpeg, png, jpg, gif)</small>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
