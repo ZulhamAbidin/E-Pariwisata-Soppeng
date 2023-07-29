@@ -14,10 +14,20 @@ class PengunjungController extends Controller
         return view('pengunjung.destinasi_list', compact('destinasiWisataList'));
     }
 
-    public function show(DestinasiWisata $destinasiWisata)
-    {
-        return view('pengunjung.destinasi_detail', compact('destinasiWisata'));
-    }
+    // public function show(DestinasiWisata $destinasiWisata)
+    // {
+    //     return view('pengunjung.destinasi_detail', compact('destinasiWisata'));
+    // }
+ public function show(DestinasiWisata $destinasiWisata)
+{
+    // Ambil data daftar postingan terbaru (kecuali postingan saat ini)
+    $daftarPostinganTerbaru = DestinasiWisata::where('id', '!=', $destinasiWisata->id)
+                                           ->orderBy('created_at', 'desc')
+                                           ->limit(5)
+                                           ->get();
+
+    return view('pengunjung.destinasi_detail', compact('destinasiWisata', 'daftarPostinganTerbaru'));
+}
 
     public function tambahKomentar(Request $request, DestinasiWisata $destinasiWisata)
 {
