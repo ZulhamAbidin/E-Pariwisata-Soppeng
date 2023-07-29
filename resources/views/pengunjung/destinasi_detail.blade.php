@@ -24,18 +24,14 @@
                                    {{ $destinasiWisata->created_at->translatedFormat('l d F Y') }}
                                 </div>
                             </a>
-                            
-                            <!-- Tampilkan total rating dengan 2 angka desimal -->
-                            {{-- <p>Total Rating: {{ number_format($destinasiWisata->totalRating(), 1) }}</p> --}}
-                            
-                            <!-- Tampilkan average rating dengan 2 angka desimal -->
-                            <p>Average Rating: {{ number_format($destinasiWisata->averageRating(), 2) }}</p>
 
-                            {{-- <a href="profile.html" class="d-flex mb-2"><i
-                                    class="fe fe-user fs-16 me-1 p-3 bg-primary-transparent text-primary bradius"></i>
-                                <div class=" mt-3 ms-1 text-muted font-weight-semibold">Harry Fisher</div>
-                            </a> --}}
-                           
+                            <a href="javascript:void(0);" class="d-flex me-4 mb-2">
+                                <i class="fe fe-star fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
+                                <div class="mt-3 ms-1 text-muted font-weight-semibold">
+                                    Rating: {{ number_format($destinasiWisata->averageRating(), 2) }}
+                                </div>
+                            </a>
+                                                       
                             <div class="ms-auto">
                                 <a href="javascript:void(0);" class="d-flex mb-2">
                                 <i  class="fe fe-message-square fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
@@ -78,6 +74,55 @@
                     </div>
                     @endforeach
 
+                    {{-- ular --}}
+                    
+                    {{-- <div class="card-body pb-0">
+                        @foreach ($destinasiWisata->komentars->take(3) as $komentar)
+                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
+                            <div class="me-3 mb-2">
+                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
+                                        src="../assets/images/users/2.jpg"> </a>
+                            </div>
+                            <div class="media-body overflow-visible">
+                                <div class="border mb-5 p-4 br-5">
+                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
+                                    <span><i class="fe fe-thumb-up text-danger"></i></span>
+                                    <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
+                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">
+                                        {{ $komentar->created_at->diffForHumans() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    
+                        @if ($destinasiWisata->komentars->count() > 3)
+                        <div class="text-end">
+                            <a href="#" id="showAllComments" class="text-muted">Lihat semua komentar</a>
+                        </div>
+                        <div id="allComments" style="display: none;">
+                            @foreach ($destinasiWisata->komentars->slice(3) as $komentar)
+                            <div class="media mb-1 overflow-visible d-block d-sm-flex">
+                                <div class="me-3 mb-2">
+                                    <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
+                                            src="../assets/images/users/2.jpg"> </a>
+                                </div>
+                                <div class="media-body overflow-visible">
+                                    <div class="border mb-5 p-4 br-5">
+                                        <h5 class="mt-0">{{ $komentar->nama }}</h5>
+                                        <span><i class="fe fe-thumb-up text-danger"></i></span>
+                                        <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
+                                        <div class="mt-3 ms-1 text-muted font-weight-semibold">
+                                            {{ $komentar->created_at->diffForHumans() }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
+                    </div> --}}
+
                 </div>
 
 
@@ -92,6 +137,7 @@
                     {{ session('success') }}
                 </div>
                 @endif
+
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Add a Comments</div>
@@ -159,4 +205,18 @@
         </div>
 
     </div>
+
+
+    {{-- ular --}}
+
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#showAllComments").click(function(e) {
+                e.preventDefault();
+                $("#allComments").slideToggle();
+            });
+        });
+    </script> --}}
+
 @endsection
