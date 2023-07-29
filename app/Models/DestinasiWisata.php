@@ -21,7 +21,19 @@ use Illuminate\Database\Eloquent\Model;
 class DestinasiWisata extends Model
 {
     protected $table = 'destinasi_wisata'; // Nama tabel yang sesuai dengan tabel di database
-     protected $fillable = [
+    //  protected $fillable = [
+    //     'nama',
+    //     'alamat',
+    //     'HargaTiket',
+    //     'FasilitasDestinasi',
+    //     'JamBuka',
+    //     'Deskripsi',
+    //     'Sejarah',
+    //     'latitude',
+    //     'longitude',
+    //     'image_path', // Tambahkan kolom image_path
+    // ];
+    protected $fillable = [
         'nama',
         'alamat',
         'HargaTiket',
@@ -31,6 +43,7 @@ class DestinasiWisata extends Model
         'Sejarah',
         'latitude',
         'longitude',
-        'image_path', // Tambahkan kolom image_path
+        'sampul', // Ubah "image_path" menjadi "sampul" untuk sesuai dengan skema database
+        'gambar', // Tambahkan kolom "gambar" untuk sesuai dengan skema database
     ];
 }

@@ -18,10 +18,10 @@
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
 
-    <!-- Referensi ke file CSS SweetAlert -->
+    {{-- <!-- Referensi ke file CSS SweetAlert -->--}}
     <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
-
+    
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -48,7 +48,7 @@
     
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-
+    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('assets/js/alert/sweetalert2.all.js') }}"></script>
     <script src="{{ asset('assets/js/alert/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('assets/js/alert/sweetalert2.js') }}"></script>
@@ -92,10 +92,9 @@
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
-    @stack('script')
+    @stack('scripts')
 
 </body>
 
-{{-- {!! $dataTable->scripts() !!} --}}
 
 </html>

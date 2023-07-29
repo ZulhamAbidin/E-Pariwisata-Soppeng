@@ -80,6 +80,33 @@
                 <label for="Sejarah">Sejarah</label>
                 <textarea name="Sejarah" id="Sejarah" class="form-control">{{ $destinasiWisata->Sejarah }}</textarea>
             </div>
+
+
+            <div class="form-group">
+                <label for="sampul">Sampul</label>
+                <input type="file" name="sampul" id="sampul" class="form-control-file">
+                <small class="form-text text-muted">Unggah gambar sampul baru (jpeg, png, jpg, gif)</small>
+            </div>
+            
+            <!-- Menampilkan sampul lama jika ada -->
+            <div class="form-group">
+                <label for="sampul_lama">Sampul Lama</label>
+                @if ($destinasiWisata->sampul)
+                <div class="mb-2">
+                    <img src="{{ asset('storage/' . $destinasiWisata->sampul) }}" alt="Sampul Lama" class="img-fluid"
+                        style="max-height: 200px;">
+                </div>
+                @else
+                <p>Tidak ada sampul lama.</p>
+                @endif
+            </div>
+
+
+
+
+
+
+
             <div class="form-group">
                 <label for="gambar">Gambar</label>
                 <input type="file" name="gambar[]" id="gambar" class="form-control-file" multiple>

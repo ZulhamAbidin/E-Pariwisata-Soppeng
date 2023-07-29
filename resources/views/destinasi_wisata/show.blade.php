@@ -35,6 +35,10 @@
                 <p><strong>Jam Buka:</strong> {{ $destinasiWisata->JamBuka }}</p>
                 <p><strong>Deskripsi:</strong> {{ $destinasiWisata->Deskripsi }}</p>
                 <p><strong>Sejarah:</strong> {{ $destinasiWisata->Sejarah }}</p>
+                @if ($destinasiWisata->sampul)
+                <p><strong>Sampul:</strong></p>
+                <img src="{{ url('storage/' . $destinasiWisata->sampul) }}" alt="Sampul Destinasi Wisata" class="img-fluid">
+                @endif
                @if ($destinasiWisata->gambar)
                 <p><strong>Gambar:</strong></p>
                 @foreach (json_decode($destinasiWisata->gambar) as $imagePath)

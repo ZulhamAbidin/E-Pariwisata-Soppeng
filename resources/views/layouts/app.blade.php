@@ -30,5 +30,7 @@
             <!-- Page Content -->
             
         </div>
+
+        @stack('scripts')
     </body>
 </html>
