@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\DestinasiWisata;
 use App\Models\Komentar;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
 
 class PengunjungController extends Controller
 {
@@ -14,43 +17,74 @@ class PengunjungController extends Controller
         return view('pengunjung.destinasi_list', compact('destinasiWisataList'));
     }
 
-    // public function show(DestinasiWisata $destinasiWisata)
-    // {
-    //     return view('pengunjung.destinasi_detail', compact('destinasiWisata'));
-    // }
- public function show(DestinasiWisata $destinasiWisata)
-{
-    // Ambil data daftar postingan terbaru (kecuali postingan saat ini)
-    $daftarPostinganTerbaru = DestinasiWisata::where('id', '!=', $destinasiWisata->id)
-                                           ->orderBy('created_at', 'desc')
-                                           ->limit(5)
-                                           ->get();
+    public function show(DestinasiWisata $destinasiWisata)
+    {
+        // Ambil data daftar postingan terbaru (kecuali postingan saat ini)
+        $daftarPostinganTerbaru = DestinasiWisata::where('id', '!=', $destinasiWisata->id)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+        // Hitung total rating dan rating rata-rata
+        $totalRating = $this->totalRating($destinasiWisata);
+        $averageRating = $this->averageRating($destinasiWisata);
+        $comments = $destinasiWisata->komentars;
 
-    return view('pengunjung.destinasi_detail', compact('destinasiWisata', 'daftarPostinganTerbaru'));
-}
+        return view('pengunjung.destinasi_detail', compact('destinasiWisata', 'daftarPostinganTerbaru', 'totalRating', 'averageRating', 'comments'));
+    }
 
-    public function tambahKomentar(Request $request, DestinasiWisata $destinasiWisata)
+    public function totalRating(DestinasiWisata $destinasiWisata)
+    {
+        // Menghitung total rating dari komentar-komentar pada postingan destinasi
+        return $destinasiWisata->komentars()->sum('rating');
+    }
+
+    public function averageRating(DestinasiWisata $destinasiWisata)
+    {
+        // Menghitung rata-rata rating dari komentar-komentar pada postingan destinasi
+        $totalRating = $this->totalRating($destinasiWisata);
+        $totalKomentar = $destinasiWisata->komentars()->count();
+
+        if ($totalKomentar > 0) {
+            return $totalRating / $totalKomentar;
+        } else {
+            return 0;
+        }
+    }
+
+public function tambahKomentar(Request $request, DestinasiWisata $destinasiWisata)
 {
-    $request->validate([
-        'nama' => 'required',
+    $validator = Validator::make($request->all(), [
+        'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'], // Hanya huruf dan spasi yang diperbolehkan
         'isi_komentar' => 'required',
+        'rating' => 'required|numeric|min:1|max:5', // Validasi rating antara 1 hingga 5
     ]);
 
-    $komentar = new Komentar();
-    $komentar->nama = $request->input('nama');
-    $komentar->isi_komentar = $request->input('isi_komentar');
-
-    // Validasi jika kolom 'isi_komentar' memang tidak boleh kosong
-    if ($komentar->isi_komentar) {
-        $destinasiWisata->komentars()->save($komentar);
+    if ($validator->fails()) {
         return redirect()
             ->back()
-            ->with('success', 'Komentar berhasil ditambahkan.');
-    } else {
-        return redirect()
-            ->back()
-            ->with('error', 'Komentar harus diisi.');
+            ->withErrors($validator)
+            ->withInput();
     }
+
+    // Membuat objek Komentar
+    $komentar = new Komentar([
+        'nama' => $request->input('nama'),
+        'isi_komentar' => $request->input('isi_komentar'),
+        'rating' => $request->input('rating'),
+    ]);
+
+    // Simpan komentar ke dalam tabel komentars yang berelasi dengan destinasi wisata
+    $destinasiWisata->komentars()->save($komentar);
+
+    // Update nilai rata-rata rating di tabel destinasi_wisata
+    $averageRating = $destinasiWisata->komentars->avg('rating');
+    $destinasiWisata->update([
+        'rating' => $averageRating,
+    ]);
+
+    return redirect()
+        ->back()
+        ->with('success', 'Komentar dan rating berhasil ditambahkan.');
 }
 
 }

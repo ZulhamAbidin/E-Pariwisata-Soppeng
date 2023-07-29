@@ -13,12 +13,14 @@ class CreateKomentarsTable extends Migration
             $table->string('nama');
             $table->text('isi_komentar')->nullable();
             $table->unsignedBigInteger('destinasi_wisata_id');
+            $table->integer('rating')->nullable(); // Kolom rating dengan tipe data integer (bisa NULL)
             $table->timestamps();
-
-            // Set foreign key constraint
-            $table->foreign('destinasi_wisata_id')->references('id')->on('destinasi_wisata')->onDelete('cascade');
+            $table
+                ->foreign('destinasi_wisata_id')
+                ->references('id')
+                ->on('destinasi_wisata')
+                ->onDelete('cascade');
         });
-
     }
 
     public function down()

@@ -11,10 +11,11 @@ class Komentar extends Model
 
     protected $table = 'komentars';
 
-    protected $fillable = ['destinasi_wisata_id', 'nama', 'komentar'];
+    protected $fillable = ['destinasi_wisata_id', 'nama', 'isi_komentar', 'rating'];
     
     public function destinasiWisata()
     {
         return $this->belongsTo(DestinasiWisata::class);
     }
+    
 }
