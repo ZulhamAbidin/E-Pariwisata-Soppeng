@@ -15,7 +15,7 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                <div class="card">
+                {{-- <div class="card">
 
                     <div class="card-body pb-4">
                         <div class="input-group mb-2">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -33,53 +33,7 @@
                     </div>
 
                     <div class="card-body">
-                        {{-- <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Harga Tiket</th>
-                                    <th>Fasilitas Destinasi</th>
-                                    <th>Jam Buka</th>
-                                    <th>Deskripsi</th>
-                                    <th>Sejarah</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($destinasiWisataList as $destinasiWisata)
-                                    <tr>
-                                        <td>{{ $destinasiWisata->id }}</td>
-                                        <td>{{ $destinasiWisata->nama }}</td>
-                                        <td>{{ $destinasiWisata->alamat }}</td>
-                                        <td>{{ $destinasiWisata->HargaTiket }}</td>
-                                        <td>{{ $destinasiWisata->FasilitasDestinasi }}</td>
-                                        <td>{{ $destinasiWisata->JamBuka }}</td>
-                                        <td>{{ $destinasiWisata->Deskripsi }}</td>
-                                        <td>{{ $destinasiWisata->Sejarah }}</td>
-                                        <td>{{ $destinasiWisata->latitude }}</td>
-                                        <td>{{ $destinasiWisata->longitude }}</td>
-                                        <td>
-                                            <a href="{{ route('destinasi-wisata.show', ['id' => $destinasiWisata->id]) }}"
-                                                class="btn btn-primary">Lihat</a>
-                                            <a href="{{ route('destinasi-wisata.edit', ['id' => $destinasiWisata->id]) }}"
-                                                class="btn btn-warning">Edit</a>
-                                            <form
-                                                action="{{ route('destinasi-wisata.destroy', ['id' => $destinasiWisata->id]) }}"
-                                                method="POST" style="display: inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus destinasi wisata ini?')">Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table> --}}
+                       
 
                         <div class="side-app">
 

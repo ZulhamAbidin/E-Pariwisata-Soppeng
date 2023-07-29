@@ -31,6 +31,11 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
 
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 
 <body class="app ltr landing-page horizontal">
@@ -53,7 +58,8 @@
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
-                            <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo"
+                                alt="logo">
                             <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
@@ -99,8 +105,8 @@
                                     </a>
                                     <ul class="side-menu">
                                         <li class="slide">
-                                            <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
-                                                    class="side-menu__label">Home</span></a>
+                                            <a class="side-menu__item active" data-bs-toggle="slide"
+                                                href="#home"><span class="side-menu__label">Home</span></a>
                                         </li>
                                         <li class="slide">
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Features"><span
@@ -143,7 +149,7 @@
                     </div>
                     <!--/APP-SIDEBAR-->
                 </div>
-                
+
             </div>
 
             <!--app-content open-->
@@ -153,7 +159,7 @@
                     <!-- CONTAINER -->
                     <div class="main-container">
                         <div class="">
-                                @yield('container')
+                            @yield('container')
                         </div>
                     </div>
                     <!-- CONTAINER CLOSED-->
@@ -205,8 +211,8 @@
                                     </div>
                                     <div class="col-lg-4 col-sm-12 col-md-4 reveal revealleft">
                                         <div class="">
-                                            <a href="index.html"><img loading="lazy" alt="" class="logo-2 mb-3"
-                                                    src="../assets/images/brand/logo-3.png"></a>
+                                            <a href="index.html"><img loading="lazy" alt=""
+                                                    class="logo-2 mb-3" src="../assets/images/brand/logo-3.png"></a>
                                             <a href="index.html"><img src="../assets/images/brand/logo.png"
                                                     class="logo-3" alt="logo"></a>
                                             <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
@@ -239,7 +245,8 @@
                             <footer class="main-footer px-0 pb-0 text-center">
                                 <div class="row ">
                                     <div class="col-md-12 col-sm-12">
-                                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>.
+                                        Copyright © <span id="year"></span> <a
+                                            href="javascript:void(0)">Sash</a>.
                                         Designed with <span class="fa fa-heart text-danger"></span> by <a
                                             href="javascript:void(0)"> Spruko </a> All rights reserved.
                                     </div>

@@ -45,6 +45,23 @@
                         <h3><a href="javascript:void(0)"> {{ $destinasiWisata->nama }}</a></h3>
                         <p class="card-text">{{ $destinasiWisata->alamat }}</p>
                         <p class="text-justify"> {{ $destinasiWisata->Deskripsi }}</p>
+
+                        @if ($destinasiWisata->gambar)
+                        <div class="row">
+                            @foreach (json_decode($destinasiWisata->gambar) as $image)
+                            <div class="col-md-4 mb-3">
+                                <img src="{{ asset('storage/' . $image) }}" alt="Gambar" class="img-fluid">
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
+
+                        <div class="ms-auto">
+                            <div id="map" style="height: 250px;"></div>
+                        </div>
+                        <!-- Replace $destinasiWisata->latitude and $destinasiWisata->longitude with the actual variables holding the latitude and longitude values -->
+                        <a href="https://www.google.com/maps?q={{ $destinasiWisata->latitude }},{{ $destinasiWisata->longitude }}"
+                            target="_blank" class="btn block btn-primary mt-2">Lihat di Google Maps</a>
                     </div>
                 </div>
 
@@ -206,6 +223,27 @@
 
     </div>
 
+
+    <script>
+        var map;
+    
+        function initMap() {
+            var latitude = {{ $destinasiWisata->latitude }};
+            var longitude = {{ $destinasiWisata->longitude }};
+            var location = [latitude, longitude];
+    
+            map = L.map('map').setView(location, 13);
+    
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    
+            L.marker(location).addTo(map)
+                .bindPopup('{{ $destinasiWisata->nama }}').openPopup();
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+        });
+    </script>
 
     {{-- ular --}}
 
