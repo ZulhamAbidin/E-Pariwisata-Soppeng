@@ -14,17 +14,23 @@ class CreateKomentarsTable extends Migration
             $table->text('isi_komentar')->nullable();
             $table->unsignedBigInteger('destinasi_wisata_id')->nullable();
             $table->unsignedBigInteger('destinasi_kuliner_id')->nullable();
-            $table->integer('rating')->nullable(); // Kolom rating dengan tipe data integer (bisa NULL)
+            $table->unsignedBigInteger('destinasi_hotel_id')->nullable(); // Tambahkan kolom destinasi_hotel_id
+            $table->integer('rating')->nullable();
             $table->timestamps();
-            $table
-                ->foreign('destinasi_wisata_id')
+
+            $table->foreign('destinasi_wisata_id')
                 ->references('id')
                 ->on('destinasi_wisata')
                 ->onDelete('cascade');
-            $table
-                ->foreign('destinasi_kuliner_id')
+
+            $table->foreign('destinasi_kuliner_id')
                 ->references('id')
                 ->on('destinasi_kuliner')
+                ->onDelete('cascade');
+
+            $table->foreign('destinasi_hotel_id') // Tambahkan foreign key untuk destinasi_hotel
+                ->references('id')
+                ->on('destinasi_hotel')
                 ->onDelete('cascade');
         });
     }
@@ -34,3 +40,4 @@ class CreateKomentarsTable extends Migration
         Schema::dropIfExists('komentars');
     }
 }
+

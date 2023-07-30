@@ -4,7 +4,7 @@
     <div class="main-container container-fluid">
 
         <div class="page-header">
-            <h1 class="page-title">List Destinasi Wisata</h1>
+            <h1 class="page-title">List Destinasi Hotel</h1>
             <div>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Destinasi</a></li>
@@ -29,14 +29,14 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Tambah Destinasi Wisata</h4>
+                        <h4 class="card-title">Tambah Destinasi Hotel</h4>
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('destinasi-wisata.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('destinasi-hotel.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="nama">Nama Destinasi Wisata</label>
+                                <label for="nama">Nama Destinasi Hotel</label>
                                 <input type="text" value="tes" required name="nama" id="nama"
                                     class="form-control" required>
                             </div>
@@ -44,17 +44,6 @@
                                 <label for="alamat">Alamat</label>
                                 <input type="text" value="tes" required name="alamat" id="alamat"
                                     class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="HargaTiket">Harga Tiket</label>
-                                <input type="number" value="20000" required name="HargaTiket" id="HargaTiket"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="FasilitasDestinasi">Fasilitas Destinasi</label>
-                                <input type="text" value="tes" required name="FasilitasDestinasi"
-                                    id="FasilitasDestinasi" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="JamBuka">Jam Buka</label>
@@ -64,10 +53,6 @@
                             <div class="form-group">
                                 <label for="Deskripsi">Deskripsi</label>
                                 <textarea name="Deskripsi" required id="Deskripsi" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="Sejarah">Sejarah</label>
-                                <textarea name="Sejarah" required id="Sejarah" class="form-control"></textarea>
                             </div>
                             <div id="map" style="height: 400px; margin-top: 20px;"></div>
                             <div class="form-group">
@@ -87,8 +72,7 @@
                             <div class="form-group">
                                 <label for="gambar">Gambar</label>
                                 <input type="file" name="gambar[]" required id="gambar" class="form-control-file" multiple>
-                                <small class="form-text text-muted" >Unggah gambar baru (jpeg, png, jpg,
-                                    gif)</small>
+                                <small class="form-text text-muted"  >Unggah gambar baru (jpeg, png, jpg,  gif)</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
