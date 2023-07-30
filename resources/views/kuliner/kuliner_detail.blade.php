@@ -160,7 +160,32 @@
                         <div class="card-title">Add a Comments</div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('pengunjung.destinasi.tambah-komentar', $destinasiKuliner) }}" method="POST">
+                        {{-- <form action="{{ route('pengunjung.destinasi.tambah-komentar', $destinasiKuliner) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama lengkap" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="isi_komentar">Komentar</label>
+                                <textarea class="form-control" id="isi_komentar" name="isi_komentar" rows="5" placeholder="Isi komentar"
+                                    required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="rating">Rating</label>
+                                <select class="form-control" id="rating" name="rating" required>
+                                    <option value="">Pilih rating</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Tambah Komentar dan Rating</button>
+                        </form> --}}
+
+                        <form action="{{ route('pengunjung.kuliner.tambah-komentar', $destinasiKuliner) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama</label>
@@ -184,6 +209,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Tambah Komentar dan Rating</button>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -197,7 +223,7 @@
                     <div class="card-body">
                         <div class="">
 
-                            @foreach ($daftarPostinganTerbaru as $postinganTerbaru)
+                            @foreach ($daftarKulinerTerbaru as $postinganTerbaru)
                                 <div class="d-flex overflow-visible">
                                     <a href="{{ route('pengunjung.destinasi.show', $postinganTerbaru) }}"
                                         class="card-aside-column br-5 cover-image"
