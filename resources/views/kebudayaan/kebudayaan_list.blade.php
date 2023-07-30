@@ -6,7 +6,7 @@
             <div class="row">
                 <h4 class="text-center fw-semibold">Postingan Kebudayaan Terbaru </h4>
                 <span class="landing-title"></span>
-                <h2 class="text-center fw-semibold mb-7">Destinasi.</h2>
+                <h2 class="text-center fw-semibold mb-7">Kebudayaan.</h2>
 
                 <div class="row">
                     @foreach ($destinasikebudayaanList as $destinasikebudayaan)

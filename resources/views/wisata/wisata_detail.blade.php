@@ -73,10 +73,10 @@
                     @foreach ($destinasiWisata->komentars as $komentar)
                     <div class="card-body pb-0">
                         <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
+                            {{-- <div class="me-3 mb-2">
                                 <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
                                         src="../assets/images/users/2.jpg"> </a>
-                            </div>
+                            </div> --}}
                             <div class="media-body overflow-visible">
                                 <div class="border mb-5 p-4 br-5">
                                     <h5 class="mt-0">{{ $komentar->nama }}</h5>

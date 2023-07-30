@@ -161,7 +161,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="../assets/images/landing/market4.png" alt="">
+                                <img src="{{ asset('assets/images/brand/ikki.jpg') }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                             </div>
                            
 
-                            <!-- ROW-3 OPEN -->
+                            {{-- <!-- ROW-3 OPEN -->
                             <div class="section bg-landing pb-0 bg-image-style" id="About">
                                 <div class="container">
                                     <div class="row">
@@ -423,7 +423,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- ROW-8 CLOSED -->
+                            <!-- ROW-8 CLOSED --> --}}
 
 
                         </div>

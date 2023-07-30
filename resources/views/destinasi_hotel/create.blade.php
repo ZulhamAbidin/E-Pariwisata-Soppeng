@@ -4,11 +4,11 @@
     <div class="main-container container-fluid">
 
         <div class="page-header">
-            <h1 class="page-title">List Destinasi Hotel</h1>
+            <h1 class="page-title">Tambah Destinasi Hotel</h1>
             <div>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Destinasi</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">List</li>
+                    <li class="breadcrumb-item active" aria-current="page">Tambah</li>
                 </ol>
             </div>
         </div>

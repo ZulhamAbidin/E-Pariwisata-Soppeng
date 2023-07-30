@@ -183,11 +183,11 @@
 <div class="main-container container-fluid">
 
     <div class="page-header">
-        <h1 class="page-title">List Destinasi Wisata</h1>
+        <h1 class="page-title">Edit Destinasi Wisata</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Destinasi</a></li>
-                <li class="breadcrumb-item active" aria-current="page">List</li>
+                <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
         </div>
     </div>
@@ -208,7 +208,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Tambah Destinasi Wisata</h4>
+                    <h4 class="card-title">Edit Destinasi Wisata</h4>
                 </div>
 
                 <div class="card-body">

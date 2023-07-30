@@ -13,7 +13,7 @@
 
                     <div class="card-body">
                         <!-- Form untuk menambah data kebudayaan -->
-                        <form action="{{ route('kebudayaan.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('destinasi-kebudayaan.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama Kebudayaan</label>
