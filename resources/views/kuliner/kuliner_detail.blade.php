@@ -7,48 +7,48 @@
 
             <div class="col-xl-8">
                 <div class="card">
-                    <img class="card-img-top" src="{{ asset('storage/' . $destinasiWisata->sampul) }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('storage/' . $destinasiKuliner->sampul) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="d-md-flex">
 
                             <a href="javascript:void(0);" class="d-flex me-4 mb-2">
                                 <i class="fe fe-clock fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
                                 <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                    {{ $destinasiWisata->created_at->diffForHumans() }}
+                                    {{ $destinasiKuliner->created_at->diffForHumans() }}
                                 </div>
                             </a>
 
                             <a href="javascript:void(0);" class="d-flex me-4 mb-2">
                                 <i class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
                                 <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                   {{ $destinasiWisata->created_at->translatedFormat('l d F Y') }}
+                                   {{ $destinasiKuliner->created_at->translatedFormat('l d F Y') }}
                                 </div>
                             </a>
 
                             <a href="javascript:void(0);" class="d-flex me-4 mb-2">
                                 <i class="fe fe-star fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
                                 <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                    Rating: {{ number_format($destinasiWisata->averageRating(), 2) }}
+                                    Rating: {{ number_format($destinasiKuliner->averageRating(), 2) }}
                                 </div>
                             </a>
                                                        
                             <div class="ms-auto">
                                 <a href="javascript:void(0);" class="d-flex mb-2">
                                 <i  class="fe fe-message-square fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
-                                <div class=" mt-3 ms-1 text-muted font-weight-semibold">{{ $destinasiWisata->totalKomentar() }} Komentar</div>
+                                <div class=" mt-3 ms-1 text-muted font-weight-semibold">{{ $destinasiKuliner->totalKomentar() }} Komentar</div>
                                 </a>
                             </div>
 
                         </div>
                     </div>
                     <div class="card-body">
-                        <h3><a href="javascript:void(0)"> {{ $destinasiWisata->nama }}</a></h3>
-                        <p class="card-text">{{ $destinasiWisata->alamat }}</p>
-                        <p class="text-justify"> {{ $destinasiWisata->Deskripsi }}</p>
+                        <h3><a href="javascript:void(0)"> {{ $destinasiKuliner->nama }}</a></h3>
+                        <p class="card-text">{{ $destinasiKuliner->alamat }}</p>
+                        <p class="text-justify"> {{ $destinasiKuliner->Deskripsi }}</p>
 
-                        @if ($destinasiWisata->gambar)
+                        @if ($destinasiKuliner->gambar)
                         <div class="row">
-                            @foreach (json_decode($destinasiWisata->gambar) as $image)
+                            @foreach (json_decode($destinasiKuliner->gambar) as $image)
                             <div class="col-md-4 mb-3">
                                 <img src="{{ asset('storage/' . $image) }}" alt="Gambar" class="img-fluid">
                             </div>
@@ -59,8 +59,8 @@
                         <div class="ms-auto">
                             <div id="map" style="height: 250px;"></div>
                         </div>
-                        <!-- Replace $destinasiWisata->latitude and $destinasiWisata->longitude with the actual variables holding the latitude and longitude values -->
-                        <a href="https://www.google.com/maps?q={{ $destinasiWisata->latitude }},{{ $destinasiWisata->longitude }}"
+                        <!-- Replace $destinasiKuliner->latitude and $destinasiKuliner->longitude with the actual variables holding the latitude and longitude values -->
+                        <a href="https://www.google.com/maps?q={{ $destinasiKuliner->latitude }},{{ $destinasiKuliner->longitude }}"
                             target="_blank" class="btn block btn-primary mt-2">Lihat di Google Maps</a>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         <div class="card-title">Commentar</div>
                     </div>
                     
-                    @foreach ($destinasiWisata->komentars as $komentar)
+                    @foreach ($destinasiKuliner->komentars as $komentar)
                     <div class="card-body pb-0">
                         <div class="media mb-1 overflow-visible d-block d-sm-flex">
                             <div class="me-3 mb-2">
@@ -94,7 +94,7 @@
                     {{-- ular --}}
                     
                     {{-- <div class="card-body pb-0">
-                        @foreach ($destinasiWisata->komentars->take(3) as $komentar)
+                        @foreach ($destinasiKuliner->komentars->take(3) as $komentar)
                         <div class="media mb-1 overflow-visible d-block d-sm-flex">
                             <div class="me-3 mb-2">
                                 <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
@@ -113,12 +113,12 @@
                         </div>
                         @endforeach
                     
-                        @if ($destinasiWisata->komentars->count() > 3)
+                        @if ($destinasiKuliner->komentars->count() > 3)
                         <div class="text-end">
                             <a href="#" id="showAllComments" class="text-muted">Lihat semua komentar</a>
                         </div>
                         <div id="allComments" style="display: none;">
-                            @foreach ($destinasiWisata->komentars->slice(3) as $komentar)
+                            @foreach ($destinasiKuliner->komentars->slice(3) as $komentar)
                             <div class="media mb-1 overflow-visible d-block d-sm-flex">
                                 <div class="me-3 mb-2">
                                     <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
@@ -160,7 +160,7 @@
                         <div class="card-title">Add a Comments</div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('pengunjung.destinasi.tambah-komentar', $destinasiWisata) }}" method="POST">
+                        <form action="{{ route('pengunjung.destinasi.tambah-komentar', $destinasiKuliner) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama</label>
@@ -228,8 +228,8 @@
         var map;
     
         function initMap() {
-            var latitude = {{ $destinasiWisata->latitude }};
-            var longitude = {{ $destinasiWisata->longitude }};
+            var latitude = {{ $destinasiKuliner->latitude }};
+            var longitude = {{ $destinasiKuliner->longitude }};
             var location = [latitude, longitude];
     
             map = L.map('map').setView(location, 13);
@@ -237,7 +237,7 @@
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
     
             L.marker(location).addTo(map)
-                .bindPopup('{{ $destinasiWisata->nama }}').openPopup();
+                .bindPopup('{{ $destinasiKuliner->nama }}').openPopup();
         }
     
         document.addEventListener('DOMContentLoaded', function() {

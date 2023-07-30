@@ -12,8 +12,8 @@ class CreateKomentarsTable extends Migration
             $table->id();
             $table->string('nama');
             $table->text('isi_komentar')->nullable();
-            $table->unsignedBigInteger('destinasi_wisata_id');
-            $table->unsignedBigInteger('destinasi_kuliner_id');
+            $table->unsignedBigInteger('destinasi_wisata_id')->nullable();
+            $table->unsignedBigInteger('destinasi_kuliner_id')->nullable();
             $table->integer('rating')->nullable(); // Kolom rating dengan tipe data integer (bisa NULL)
             $table->timestamps();
             $table

@@ -26,6 +26,7 @@ class DestinasiKuliner extends Model
     {
         return $this->hasMany(Komentar::class, 'destinasi_kuliner_id');
     }
+
     
     public function totalRating()
     {

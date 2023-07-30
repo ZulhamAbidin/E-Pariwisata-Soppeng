@@ -28,6 +28,7 @@ class DestinasiWisata extends Model
         return $this->hasMany(Komentar::class, 'destinasi_wisata_id');
     }
     
+    
 
     public function totalRating()
     {

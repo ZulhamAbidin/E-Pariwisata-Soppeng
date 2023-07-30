@@ -12,6 +12,10 @@ class Komentar extends Model
     protected $table = 'komentars';
 
     protected $fillable = ['destinasi_wisata_id', 'destinasi_kuliner_id', 'nama', 'isi_komentar', 'rating'];
+
+    protected $attributes = [
+        'isi_komentar' => null,
+    ];
     
     public function destinasiWisata()
     {
