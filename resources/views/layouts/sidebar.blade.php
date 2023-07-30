@@ -24,7 +24,16 @@
                 </li>
 
                 <li class="slide">
-                    <a href="{{ route('dashboard') }}" class="side-menu__item has-link active" data-bs-toggle="slide"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dasboard</span></a>
+                    <a href="{{ route('dashboard') }}" class="side-menu__item has-link active" data-bs-toggle="slide">
+                        <i class="side-menu__icon fa fa-tachometer"></i>
+                        <span class="side-menu__label">Dasboard</span></a>
+                </li>
+
+                <li class="slide">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="/profile">
+                        <i class="side-menu__icon fa fa-thumbs-up"></i>
+                        <span class="side-menu__label">Visi Misi</span>
+                    </a>
                 </li>
 
                 <li class="sub-category">
@@ -65,6 +74,18 @@
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{ route('destinasi-hotel.index') }}" class="slide-item">List Destinasi Hotel </a></li>
                         <li><a href="{{ route('destinasi-hotel.create') }}" class="slide-item">Tambah Destinasi Hotel </a></li>
+                    </ul>
+                </li>
+
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fa fa-home"></i><span class="side-menu__label">Data Kebudayaan</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="{{ route('destinasi-kebudayaan.index') }}" class="slide-item">List Kebudayaan </a></li>
+                        <li><a href="{{ route('destinasi-kebudayaan.create') }}" class="slide-item">Tambah Kebudayaan </a></li>
                     </ul>
                 </li>
 

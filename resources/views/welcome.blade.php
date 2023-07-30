@@ -73,7 +73,7 @@
                                             class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto"
                                             target="_blank">New User
                                         </a>
-                                        <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
+                                        <a href="login.php" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
                                             target="_blank">Login
                                         </a>
                                     </div>
@@ -99,35 +99,31 @@
                                     </a>
                                     <ul class="side-menu">
                                         <li class="slide">
-                                            <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
+                                            <a class="side-menu__item {{ request()->is('pengunjung/hotel*') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('pengunjung.destinasi.index') }}"><span
                                                     class="side-menu__label">Home</span></a>
                                         </li>
                                         <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Features"><span
-                                                    class="side-menu__label">Features</span></a>
+                                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('pengunjung.destinasi.index') }}"><span
+                                                    class="side-menu__label">Wisata</span></a>
                                         </li>
                                         <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#About"><span
-                                                    class="side-menu__label">About</span></a>
+                                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('pengunjung.kuliner.index') }}"><span
+                                                    class="side-menu__label">Kuliner</span></a>
                                         </li>
                                         <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Faqs"><span
-                                                    class="side-menu__label">Faq's</span></a>
+                                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('pengunjung.hotel.index') }}"><span
+                                                    class="side-menu__label">Penginapan</span></a>
                                         </li>
                                         <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Blog"><span
-                                                    class="side-menu__label">Blog</span></a>
+                                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('kebudayaan.index') }}"><span
+                                                    class="side-menu__label">Kebudayaan</span></a>
                                         </li>
                                         <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
-                                                    class="side-menu__label">Clients</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span
+                                            <a class="side-menu__item" data-bs-toggle="slide" href="{{-- {{ route('pengunjung.kontak.index') }} --}}"><span
                                                     class="side-menu__label">Contact</span></a>
                                         </li>
                                     </ul>
-                                    <div class="header-nav-right d-none d-lg-flex">
+                                    {{-- <div class="header-nav-right d-none d-lg-flex">
                                         <a href="register.html"
                                             class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                             target="_blank">New User
@@ -136,13 +132,13 @@
                                             class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                             target="_blank">Login
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--/APP-SIDEBAR-->
                 </div>
+
                 <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
                     <div class="container px-sm-0">
                         <div class="row">
@@ -170,6 +166,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
 
             <!--app-content open-->

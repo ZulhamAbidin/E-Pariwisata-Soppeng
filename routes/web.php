@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\KebudayaanController;
 use App\Http\Controllers\DestinasiHotelController;
 use App\Http\Controllers\DestinasiWisataController;
-
 use App\Http\Controllers\PengunjungHotelController;
 use App\Http\Controllers\DestinasiKulinerController;
 use App\Http\Controllers\PengunjungWisataController;
 use App\Http\Controllers\PengunjungKulinerController;
+use App\Http\Controllers\DestinasiKebudayaanController;
 
 
 Route::get('/', function () {
@@ -60,8 +61,6 @@ Route::get('/kuliner', [PengunjungKulinerController::class, 'index'])->name('pen
 Route::get('/kuliner/{destinasiKuliner}', [PengunjungKulinerController::class, 'show'])->name('pengunjung.kuliner.show');
 Route::post('/kuliner/{destinasiKuliner}/tambah-komentar', [PengunjungKulinerController::class, 'tambahKomentar'])->name('pengunjung.kuliner.tambah-komentar');
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // DestinasiHotel
@@ -75,11 +74,21 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/destinasi-hotel/{id}', [DestinasiHotelController::class, 'update'])->name('destinasi-hotel.update');
 });
 
-//pengunjung/hotel/destinasi_detail, destinasi_list
 Route::get('/hotel', [PengunjungHotelController::class, 'index'])->name('pengunjung.hotel.index');
 Route::get('/hotel/{destinasihotel}', [PengunjungHotelController::class, 'show'])->name('pengunjung.hotel.show');
 Route::post('/hotel/{destinasihotel}/tambah-komentar', [PengunjungHotelController::class, 'tambahKomentar'])->name('pengunjung.hotel.tambah-komentar');
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/destinasi-kebudayaan/create', [DestinasiKebudayaanController::class, 'create'])->name('destinasi-kebudayaan.create');
+    Route::post('/destinasi-kebudayaan', [DestinasiKebudayaanController::class, 'store'])->name('destinasi-kebudayaan.store');
+    Route::get('/destinasi-kebudayaan/{id}', [DestinasiKebudayaanController::class, 'show'])->name('destinasi-kebudayaan.show');
+    Route::get('/destinasi-kebudayaan', [DestinasiKebudayaanController::class, 'index'])->name('destinasi-kebudayaan.index');
+    Route::get('/destinasi-kebudayaan/{id}/edit', [DestinasiKebudayaanController::class, 'edit'])->name('destinasi-kebudayaan.edit');
+    Route::put('/destinasi-kebudayaan/{id}', [DestinasiKebudayaanController::class, 'update'])->name('destinasi-kebudayaan.update');
+    Route::delete('/destinasi-kebudayaan/{id}', [DestinasiKebudayaanController::class, 'destroy'])->name('destinasi-kebudayaan.destroy');
+});
+
 
 require __DIR__.'/auth.php';
