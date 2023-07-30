@@ -11,7 +11,7 @@ use App\Http\Controllers\DestinasiKulinerController;
 use App\Http\Controllers\PengunjungWisataController;
 use App\Http\Controllers\PengunjungKulinerController;
 use App\Http\Controllers\DestinasiKebudayaanController;
-
+use App\Http\Controllers\PengunjungKebudayaanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -91,4 +93,19 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-require __DIR__.'/auth.php';
+Route::get('/kebudayaan', [PengunjungKebudayaanController::class, 'index'])->name('pengunjung.kebudayaan.index');
+Route::get('/kebudayaan/{destinasikebudayaan}', [PengunjungKebudayaanController::class, 'show'])->name('pengunjung.kebudayaan.show');
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/deskripsi-kabupaten', [DeskripsiKabupatenController::class, 'index'])->name('deskripsi-kabupaten.index');
+    Route::get('/deskripsi-kabupaten/create', [DeskripsiKabupatenController::class, 'create'])->name('deskripsi-kabupaten.create');
+    Route::post('/deskripsi-kabupaten', [DeskripsiKabupatenController::class, 'store'])->name('deskripsi-kabupaten.store');
+    Route::get('/deskripsi-kabupaten/{id}', [DeskripsiKabupatenController::class, 'show'])->name('deskripsi-kabupaten.show');
+    Route::get('/deskripsi-kabupaten/{id}/edit', [DeskripsiKabupatenController::class, 'edit'])->name('deskripsi-kabupaten.edit');
+    Route::put('/deskripsi-kabupaten/{id}', [DeskripsiKabupatenController::class, 'update'])->name('deskripsi-kabupaten.update');
+    Route::delete('/deskripsi-kabupaten/{id}', [DeskripsiKabupatenController::class, 'destroy'])->name('deskripsi-kabupaten.destroy');
+});
+
+require __DIR__ . '/auth.php';

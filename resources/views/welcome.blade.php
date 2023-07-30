@@ -115,7 +115,7 @@
                                                     class="side-menu__label">Penginapan</span></a>
                                         </li>
                                         <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('kebudayaan.index') }}"><span
+                                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('pengunjung.kebudayaan.index') }}"><span
                                                     class="side-menu__label">Kebudayaan</span></a>
                                         </li>
                                         <li class="slide">

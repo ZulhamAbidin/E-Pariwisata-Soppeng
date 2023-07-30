@@ -31,4 +31,9 @@ class Komentar extends Model
     {
         return $this->belongsTo(DestinasiHotel::class, 'destinasi_hotel_id');
     }
+
+    public function Kebudayaan()
+    {
+        return $this->belongsTo(Kebudayaan::class, 'kebudayaan_id');
+    }
 }
