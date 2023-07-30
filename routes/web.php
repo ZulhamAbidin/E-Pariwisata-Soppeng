@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\DestinasiWisataController;
-use App\Http\Controllers\PengunjungController;
+use App\Http\Controllers\DestinasiKulinerController;
+
+use App\Http\Controllers\PengunjungWisataController;
+use App\Http\Controllers\PengunjungKulinerController;
 
 
 Route::get('/', function () {
@@ -20,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+// DestinasiWisata
 Route::middleware(['auth'])->group(function () {
     Route::get('/destinasi-wisata', [DestinasiWisataController::class, 'index'])->name('destinasi-wisata.index');
     Route::get('/destinasi-wisata/create', [DestinasiWisataController::class, 'create'])->name('destinasi-wisata.create');
@@ -30,10 +36,27 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/destinasi-wisata/{id}', [DestinasiWisataController::class, 'update'])->name('destinasi-wisata.update');
 });
 
-Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung.destinasi.index');
-Route::get('/pengunjung/{destinasiWisata}', [PengunjungController::class, 'show'])->name('pengunjung.destinasi.show');
-// Route::post('/pengunjung/{destinasiWisata}/komentar', [PengunjungController::class, 'tambahKomentar'])->name('pengunjung.destinasi.tambah-komentar');
-Route::post('/pengunjung/{destinasiWisata}/tambah-komentar', [PengunjungController::class, 'tambahKomentar'])->name('pengunjung.destinasi.tambah-komentar');
+//pengunjung/destinasi_detail, destinasi_list
+Route::get('/wisata', [PengunjungWisataController::class, 'index'])->name('pengunjung.destinasi.index');
+Route::get('/wisata/{destinasiWisata}', [PengunjungWisataController::class, 'show'])->name('pengunjung.destinasi.show');
+Route::post('/wisata/{destinasiWisata}/tambah-komentar', [PengunjungWisataController::class, 'tambahKomentar'])->name('pengunjung.destinasi.tambah-komentar');
+
+// DestinasiKuliner
+Route::middleware(['auth'])->group(function () {
+    Route::get('/destinasi-kuliner', [DestinasiKulinerController::class, 'index'])->name('destinasi-kuliner.index');
+    Route::get('/destinasi-kuliner/create', [DestinasiKulinerController::class, 'create'])->name('destinasi-kuliner.create');
+    Route::post('/destinasi-kuliner', [DestinasiKulinerController::class, 'store'])->name('destinasi-kuliner.store');
+    Route::get('/destinasi-kuliner/{id}', [DestinasiKulinerController::class, 'show'])->name('destinasi-kuliner.show');
+    Route::get('/destinasi-kuliner/{id}/edit', [DestinasiKulinerController::class, 'edit'])->name('destinasi-kuliner.edit');
+    Route::delete('/destinasi-kuliner/{id}', [DestinasiKulinerController::class, 'destroy'])->name('destinasi-kuliner.destroy');
+    Route::put('/destinasi-kuliner/{id}', [DestinasiKulinerController::class, 'update'])->name('destinasi-kuliner.update');
+});
+
+
+//pengunjung/kuliner/destinasi_detail, destinasi_list
+Route::get('/kuliner', [PengunjungKulinerController::class, 'index'])->name('pengunjung.kuliner.index');
+Route::get('/kuliner/{destinasiKuliner}', [PengunjungKulinerController::class, 'show'])->name('pengunjung.kuliner.show');
+Route::post('/kuliner/{destinasiKuliner}/tambah-komentar', [PengunjungKulinerController::class, 'tambahKomentar'])->name('pengunjung.kuliner.tambah-komentar');
 
 
 require __DIR__.'/auth.php';

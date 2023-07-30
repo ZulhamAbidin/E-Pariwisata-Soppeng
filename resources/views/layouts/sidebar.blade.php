@@ -34,13 +34,25 @@
           
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                        <i class="side-menu__icon fe fe-folder"></i><span class="side-menu__label">Destinasi Wisata</span>
+                        <i class="side-menu__icon fa fa-globe"></i><span class="side-menu__label">Destinasi Wisata</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="/documents" class="slide-item"> List Destinasi</a></li>
-                        <li><a href="/documents/create" class="slide-item"> Tambah Destinasi</a></li>
+                        <li><a href="{{ route('destinasi-wisata.index') }}" class="slide-item">List Destinasi Wisata</a></li>
+                        <li><a href="{{ route('destinasi-wisata.create') }}" class="slide-item">Tambah Destinasi Wisata</a></li>
+                    </ul>
+                </li>
+
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fa fa-cutlery"></i><span class="side-menu__label">Destinasi Kuliner</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="{{ route('destinasi-kuliner.index') }}" class="slide-item">List Destinasi Kuliner</a></li>
+                        <li><a href="{{ route('destinasi-kuliner.create') }}" class="slide-item">Tambah Destinasi Kuliner</a></li>
                     </ul>
                 </li>
 

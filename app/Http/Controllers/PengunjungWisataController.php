@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\QueryException;
 
-class PengunjungController extends Controller
+class PengunjungWisataController extends Controller
 {
     public function index()
     {
         $destinasiWisataList = DestinasiWisata::all();
-        return view('pengunjung.destinasi_list', compact('destinasiWisataList'));
+        return view('wisata.wisata_list', compact('destinasiWisataList'));
     }
 
     public function show(DestinasiWisata $destinasiWisata)
@@ -29,7 +29,7 @@ class PengunjungController extends Controller
         $averageRating = $this->averageRating($destinasiWisata);
         $comments = $destinasiWisata->komentars;
 
-        return view('pengunjung.destinasi_detail', compact('destinasiWisata', 'daftarPostinganTerbaru', 'totalRating', 'averageRating', 'comments'));
+        return view('wisata.wisata_detail', compact('destinasiWisata', 'daftarPostinganTerbaru', 'totalRating', 'averageRating', 'comments'));
     }
 
     public function totalRating(DestinasiWisata $destinasiWisata)

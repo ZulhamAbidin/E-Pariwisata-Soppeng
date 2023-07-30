@@ -196,13 +196,13 @@
         <div class="col-xl-12 col-lg-12">
             <div class="card">
 
-                <div class="card-body pb-4">
+                {{-- <div class="card-body pb-4">
                     <div class="input-group mb-2">
                         <input type="seach" class="form-control form-control" id="search-input"
                             placeholder="Searching.....">
                         <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
 
