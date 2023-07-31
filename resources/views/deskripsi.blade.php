@@ -64,8 +64,7 @@
                                             </div>
                                         </div>
                                     </div>
-            
-            
+                        
                                     <div class="timeline-wrapper timeline-inverted timeline-wrapper-danger">
                                         <div class="avatar avatar-md timeline-badge">
             

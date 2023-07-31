@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RootController;
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KebudayaanController;
 use App\Http\Controllers\DestinasiHotelController;
 use App\Http\Controllers\DestinasiWisataController;
@@ -14,15 +16,16 @@ use App\Http\Controllers\DeskripsiKabupatenController;
 use App\Http\Controllers\DestinasiKebudayaanController;
 use App\Http\Controllers\PengunjungKebudayaanController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+
+// Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth', 'verified']);
+
+
+Route::get('/', [RootController::class, 'index'])->name('deskripsi.index');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth', 'verified']);
+
+
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -116,6 +119,6 @@ Route::middleware(['auth'])->group(function () {
 
 // Jika Anda ingin menampilkan list deskripsi, tambahkan rute ini
 Route::get('/deskripsi', [DeskripsiKabupatenController::class, 'index2'])->name('deskripsi.index2');
-
+ 
 
 require __DIR__ . '/auth.php';

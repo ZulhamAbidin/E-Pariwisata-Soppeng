@@ -24,7 +24,7 @@
                 </li>
 
                 <li class="slide">
-                    <a href="{{ route('dashboard') }}" class="side-menu__item has-link active" data-bs-toggle="slide">
+                    <a href="{{ route('dashboard.index') }}" class="side-menu__item has-link active" data-bs-toggle="slide">
                         <i class="side-menu__icon fa fa-tachometer"></i>
                         <span class="side-menu__label">Dasboard</span></a>
                 </li>

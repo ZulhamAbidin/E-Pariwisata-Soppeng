@@ -2,11 +2,16 @@
 <html lang="en" dir="ltr">
 
 <head>
+
+    <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
+
+    <!-- TITLE -->
     <title>E-Pariwisata</title>
+
     <style>
         .typed-cursor {
             display: none !important;
@@ -47,8 +52,7 @@
 
                 @include('layouts.pengunjung.headerlink')
 
-                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal"
-                    id="home">
+                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
                     <div class="container px-sm-0">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
@@ -88,6 +92,7 @@
                     <div class="main-container">
                         <div class="">
 
+
                             <!-- FITUR LIST -->
                             <div class="sptb section bg-white" id="Features">
                                 <div class="container">
@@ -99,7 +104,8 @@
                                             fitur penunjang untuk liburan anda.</p>
                                         <div class="row mt-7">
 
-                                           <a href="{{ route('pengunjung.destinasi.index') }}"class="col-lg-6 col-md-12 d-lg-block">
+                                            <a href="{{ route('pengunjung.destinasi.index') }}"
+                                                class="col-lg-6 col-md-12 d-lg-block">
                                                 <div class="card features main-features main-features-1 wow fadeInUp reveal revealleft"
                                                     data-wow-delay="0.1s">
                                                     <div class="bg-img mb-2 text-left">
@@ -116,7 +122,8 @@
                                                 </div>
                                             </a>
 
-                                            <a href="{{ route('pengunjung.hotel.index') }}" class="col-lg-6 col-md-12 d-lg-block">
+                                            <a href="{{ route('pengunjung.hotel.index') }}"
+                                                class="col-lg-6 col-md-12 d-lg-block">
                                                 <div class="card  features main-features main-features-2 wow fadeInUp reveal revealleft"
                                                     data-wow-delay="0.1s">
                                                     <div class="bg-img mb-2 text-left">
@@ -133,7 +140,8 @@
                                                 </div>
                                             </a>
 
-                                            <a href="{{ route('pengunjung.kuliner.index') }}" class="col-lg-6 col-md-12 d-lg-block">
+                                            <a href="{{ route('pengunjung.kuliner.index') }}"
+                                                class="col-lg-6 col-md-12 d-lg-block">
                                                 <div class="card features main-features main-features-11 wow fadeInUp reveal revealleft"
                                                     data-wow-delay="0.2s">
                                                     <div class="bg-img mb-2 text-left">
@@ -151,7 +159,8 @@
                                                 </div>
                                             </a>
 
-                                            <a href="{{ route('pengunjung.kebudayaan.index') }}" class="col-lg-6 col-md-12 d-lg-block">
+                                            <a href="{{ route('pengunjung.kebudayaan.index') }}"
+                                                class="col-lg-6 col-md-12 d-lg-block">
                                                 <div class="card features main-features main-features-10 wow fadeInUp reveal revealleft"
                                                     data-wow-delay="0.2s">
                                                     <div class="bg-img mb-2 text-left">
@@ -174,6 +183,76 @@
                                 </div>
                             </div>
 
+                            @foreach ($data as $item)
+                            <div class="section">
+                                <div class="container">
+                                    <div class="row">
+                                        <section class="sptb demo-screen-demo" id="faqs">
+                                            <div class="container text-center">
+
+                                                <div class="row align-items-center">
+                                                    <h4 class="text-center fw-semibold">Visi dan Misi</h4>
+                                                    <span class="landing-title"></span>
+                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                    <div class="col-lg-12">
+                                                        <div class="row justify-content-center">
+                                                            <p class="col-lg-9 text-default sub-text mb-7">
+                                                                {{ $item->visi_misi }}
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row align-items-center">
+                                                    <h4 class="text-center fw-semibold">Deskripsi</h4>
+                                                    <span class="landing-title"></span>
+                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                    <div class="col-lg-12">
+                                                        <div class="row justify-content-center">
+                                                            <p class="col-lg-9 text-default sub-text mb-7">
+                                                                {{ $item->deskripsi }}
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row align-items-center">
+                                                    <h4 class="text-center fw-semibold">Sejarah</h4>
+                                                    <span class="landing-title"></span>
+                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                    <div class="col-lg-12">
+                                                        <div class="row justify-content-center">
+                                                            <p class="col-lg-9 text-default sub-text mb-7">
+                                                                {{ $item->sejarah }}
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row align-items-center">
+                                                    <h4 class="text-center fw-semibold">Letak Geografis</h4>
+                                                    <span class="landing-title"></span>
+                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                    <div class="col-lg-12">
+                                                        <div class="row justify-content-center">
+                                                            <p class="col-lg-9 text-default sub-text mb-7">
+                                                                {{ $item->geografis }}
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+
 
                         </div>
                     </div>
@@ -191,7 +270,7 @@
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var options = {
                 strings: ['E-Pariwisata Kabupaten Soppeng'],
                 typeSpeed: 100, // Speed of typing in milliseconds

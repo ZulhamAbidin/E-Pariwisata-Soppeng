@@ -34,10 +34,10 @@
                                 href="{{ route('pengunjung.kebudayaan.index') }}"><span
                                     class="side-menu__label">Kebudayaan</span></a>
                         </li>
-                        <li class="slide">
-                            <a class="bok" data-bs-toggle="slide" href="{{ route('deskripsi.index2') }}"><span
+                        {{-- <li class="slide">
+                            <a class="bok" data-bs-toggle="slide" href="{{ route('deskripsi.index') }}"><span
                                     class="side-menu__label">Deskripsi</span></a>
-                        </li>
+                        </li> --}}
                         <li class="slide">
                             <a class="bok" data-bs-toggle="slide" href=""><span
                                     class="side-menu__label">Contact</span></a>
