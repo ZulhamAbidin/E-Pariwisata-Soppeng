@@ -4,13 +4,13 @@
     <div class="section bg-landing" id="Blog">
         <div class="container">
             <div class="row">
-                <h4 class="text-center fw-semibold">Postingan Kebudayaan Terbaru </h4>
+                <h4 class="text-center fw-semibold bok">Postingan Kebudayaan Terbaru </h4>
                 <span class="landing-title"></span>
-                <h2 class="text-center fw-semibold mb-7">Kebudayaan.</h2>
+                <h2 class="text-center fw-semibold mb-7">List Kebudayaan.</h2>
 
                 <div class="row">
                     @foreach ($destinasikebudayaanList as $destinasikebudayaan)
-                        <div class="col-sm-6 col-md-12 col-lg-3 col-xl-6">
+                        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-6">
                             <div class="card"> <a href="{{ route('pengunjung.destinasi.show', $destinasikebudayaan) }}"><img class="card-img-top"
                                         src="{{ url('storage/' . $destinasikebudayaan->sampul) }}"
                                         alt="And this isn't my nose. This is a false one."></a>
@@ -37,3 +37,12 @@
     </div>
 
 @endsection
+
+
+<style>
+    @media screen and (max-width: 992px) {
+        .bok {
+            margin-top: 40px !important
+        }
+    }
+</style>
