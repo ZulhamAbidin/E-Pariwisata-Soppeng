@@ -35,7 +35,11 @@
                                     class="side-menu__label">Kebudayaan</span></a>
                         </li>
                         <li class="slide">
-                            <a class="bok" data-bs-toggle="slide" href="{{-- {{ route('pengunjung.kontak.index') }} --}}"><span
+                            <a class="bok" data-bs-toggle="slide" href="{{ route('deskripsi.index2') }}"><span
+                                    class="side-menu__label">Deskripsi</span></a>
+                        </li>
+                        <li class="slide">
+                            <a class="bok" data-bs-toggle="slide" href=""><span
                                     class="side-menu__label">Contact</span></a>
                         </li>
                     </ul>

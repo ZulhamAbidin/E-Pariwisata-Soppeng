@@ -10,6 +10,7 @@ use App\Http\Controllers\PengunjungHotelController;
 use App\Http\Controllers\DestinasiKulinerController;
 use App\Http\Controllers\PengunjungWisataController;
 use App\Http\Controllers\PengunjungKulinerController;
+use App\Http\Controllers\DeskripsiKabupatenController;
 use App\Http\Controllers\DestinasiKebudayaanController;
 use App\Http\Controllers\PengunjungKebudayaanController;
 
@@ -104,13 +105,17 @@ Route::get('/kebudayaan/{destinasikebudayaan}', [PengunjungKebudayaanController:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/deskripsi-kabupaten', [DeskripsiKabupatenController::class, 'index'])->name('deskripsi-kabupaten.index');
-    Route::get('/deskripsi-kabupaten/create', [DeskripsiKabupatenController::class, 'create'])->name('deskripsi-kabupaten.create');
-    Route::post('/deskripsi-kabupaten', [DeskripsiKabupatenController::class, 'store'])->name('deskripsi-kabupaten.store');
-    Route::get('/deskripsi-kabupaten/{id}', [DeskripsiKabupatenController::class, 'show'])->name('deskripsi-kabupaten.show');
-    Route::get('/deskripsi-kabupaten/{id}/edit', [DeskripsiKabupatenController::class, 'edit'])->name('deskripsi-kabupaten.edit');
-    Route::put('/deskripsi-kabupaten/{id}', [DeskripsiKabupatenController::class, 'update'])->name('deskripsi-kabupaten.update');
-    Route::delete('/deskripsi-kabupaten/{id}', [DeskripsiKabupatenController::class, 'destroy'])->name('deskripsi-kabupaten.destroy');
+    Route::get('/visimisi', [DeskripsiKabupatenController::class, 'index'])->name('visimisi.index');
+    Route::get('/visimisi/create', [DeskripsiKabupatenController::class, 'create'])->name('visimisi.create');
+    Route::post('/visimisi/store', [DeskripsiKabupatenController::class, 'store'])->name('visimisi.store');
+    Route::get('/visimisi/{deskripsiKabupaten}/edit', [DeskripsiKabupatenController::class, 'edit'])->name('visimisi.edit');
+    Route::put('/visimisi/{deskripsiKabupaten}/update', [DeskripsiKabupatenController::class, 'update'])->name('visimisi.update');
+    Route::delete('/visimisi/{deskripsiKabupaten}/destroy', [DeskripsiKabupatenController::class, 'destroy'])->name('visimisi.destroy');
 });
+
+
+// Jika Anda ingin menampilkan list deskripsi, tambahkan rute ini
+Route::get('/deskripsi', [DeskripsiKabupatenController::class, 'index2'])->name('deskripsi.index2');
+
 
 require __DIR__ . '/auth.php';

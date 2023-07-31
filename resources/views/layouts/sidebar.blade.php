@@ -30,7 +30,7 @@
                 </li>
 
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="/profile">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('visimisi.index') }}">
                         <i class="side-menu__icon fa fa-thumbs-up"></i>
                         <span class="side-menu__label">Visi Misi</span>
                     </a>
@@ -95,7 +95,7 @@
 
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="/profile">
-                        <i class="side-menu__icon fe fe-settings"></i>
+                        <i class="side-menu__icon fa fa-cog"></i>
                         <span class="side-menu__label">Pengaturan Profile</span>
                     </a>
                 </li>
@@ -103,7 +103,7 @@
                 <li class="slide">
                     <form action="{{ route('logout') }}" method="post" class="side-menu__item has-link" data-bs-toggle="slide">
                         @csrf
-                        <i class="side-menu__icon mr-2 fe fe-log-out"></i>
+                        <i class="side-menu__icon mr-2 fa fa-sign-out"></i>
                         <button type="submit" class="border-0 bg-transparent">
                             <span class="side-menu__label">Sign out</span>
                         </button>

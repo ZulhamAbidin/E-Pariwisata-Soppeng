@@ -2,16 +2,11 @@
 <html lang="en" dir="ltr">
 
 <head>
-
-    <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
-
-    <!-- TITLE -->
     <title>E-Pariwisata</title>
-
     <style>
         .typed-cursor {
             display: none !important;

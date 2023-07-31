@@ -41,8 +41,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <div class="drop-heading">
-                                        <div class="text-center">
-                                            <h5 class="text-dark mb-0 fs-14 fw-semibold text-uppercase">{{auth()->user()->name }}</h5>
+                                        <div class="text-left">
+                                            <h5 class="text-dark mb-0 fs-14 fw-semibold">{{auth()->user()->name }}</h5>
                                             {{-- <small class="text-muted">Senior Admin</small> --}}
                                         </div>
                                     </div>

@@ -1,64 +1,71 @@
 <?php
 
+// app/Http/Controllers/DeskripsiKabupatenController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\DeskripsiKabupaten;
 
 class DeskripsiKabupatenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $data = DeskripsiKabupaten::all();
+        return view('visimisi.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+     public function index2()
+    {
+        $data = DeskripsiKabupaten::all();
+        return view('deskripsi', compact('data'));
+    }
+
     public function create()
     {
-        //
+        return view('visimisi.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'deskripsi' => 'required',
+            'visi_misi' => 'required',
+            'sejarah' => 'required',
+            'geografis' => 'required',
+        ]);
+
+        DeskripsiKabupaten::create($request->all());
+
+        return redirect()->route('visimisi.index')->with('success', 'Data added successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(DeskripsiKabupaten $deskripsiKabupaten)
     {
-        //
+        return view('visimisi.edit', compact('deskripsiKabupaten'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, DeskripsiKabupaten $deskripsiKabupaten)
     {
-        //
+        $request->validate([
+            'deskripsi' => 'required',
+            'visi_misi' => 'required',
+            'sejarah' => 'required',
+            'geografis' => 'required',
+        ]);
+
+        $deskripsiKabupaten->update($request->all());
+
+        return redirect()->route('visimisi.index')->with('success', 'Data updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(DeskripsiKabupaten $deskripsiKabupaten)
     {
-        //
+        $deskripsiKabupaten->delete();
+
+        return redirect()->route('visimisi.index')->with('success', 'Data deleted successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
+
 }
