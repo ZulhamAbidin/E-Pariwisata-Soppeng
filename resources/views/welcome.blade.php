@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 
@@ -7,8 +7,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
-
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
     <!-- TITLE -->
     <title>E-Pariwisata</title>
 
@@ -66,17 +65,17 @@
                                     Soppeng mampu memberikan nuansa yang sejuk, segar, dan menyenangkan bagi wisatawan.
                                 </h6>
 
-                                <a href="https://themeforest.net/item/sash-bootstrap-5-admin-dashboard-template/35183671"
-                                    target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                        class="fe fe-play me-2"></i> Get Started
+                                <a href="{{ route('pengunjung.destinasi.index') }}" target="_blank"
+                                    class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i class="fe fe-eye me-2"></i>
+                                    Lihat Destinasi
                                 </a>
-                                <a href="https://themeforest.net/user/spruko/portfolio"
+                                <a href="{{ route('pengunjung.kuliner.index') }}"
                                     class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                        class="fe fe-eye me-2"></i>Discover More
+                                        class="fa fa-cutlery me-2"></i>Lihat Kuliner
                                 </a>
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="{{ asset('assets/images/brand/ikki.jpg') }}" alt="">
+                                <img src="{{ asset('assets/images/brand/ikki2.jpg') }}" alt="">
                             </div>
                         </div>
                     </div>

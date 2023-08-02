@@ -94,7 +94,7 @@
                 </li>
 
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="/profile">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('profile.edit') }}">
                         <i class="side-menu__icon fa fa-cog"></i>
                         <span class="side-menu__label">Pengaturan Profile</span>
                     </a>

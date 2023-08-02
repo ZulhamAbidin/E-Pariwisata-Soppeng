@@ -41,7 +41,7 @@
                             <label for="current_password" class="col-md-4 col-form-label ">{{ __('Current Password') }}</label>
                         
                             <div class="col-md-12">
-                                <input id="current_password" type="password"
+                                <input id="current_password" type="password" 
                                     class="form-control @error('current_password') is-invalid @enderror" name="current_password"
                                     autocomplete="current-password">
                         
