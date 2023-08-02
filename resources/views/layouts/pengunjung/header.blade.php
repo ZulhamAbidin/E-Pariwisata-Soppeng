@@ -9,7 +9,7 @@
                 <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
             </a>
             <!-- LOGO -->
-            <div class="d-flex order-lg-2 ms-auto header-right-icons">
+            {{-- <div class="d-flex order-lg-2 ms-auto header-right-icons">
                 <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
                     aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

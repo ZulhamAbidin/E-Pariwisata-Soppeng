@@ -12,7 +12,7 @@
                     <ul class="side-menu">
                         <li class="slide">
                             <a class="bok"
-                                data-bs-toggle="slide" href="/"><span
+                                data-bs-toggle="slide" href="{{ route('deskripsi.index') }}/#"><span
                                     class="side-menu__label">Home</span></a>
                         </li>
                         <li class="slide">
@@ -38,10 +38,10 @@
                             <a class="bok" data-bs-toggle="slide" href="{{ route('deskripsi.index') }}"><span
                                     class="side-menu__label">Deskripsi</span></a>
                         </li> --}}
-                        <li class="slide">
+                        {{-- <li class="slide">
                             <a class="bok" data-bs-toggle="slide" href=""><span
                                     class="side-menu__label">Contact</span></a>
-                        </li>
+                        </li> --}}
                     </ul>
                     {{-- <div class="header-nav-right d-none d-lg-flex">
                         <a href="register.html"
