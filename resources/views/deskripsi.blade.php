@@ -74,7 +74,7 @@
                                                 <h6 class="timeline-title">Deskripsi Kabupaten Soppeng</h6>
                                             </div>
                                             <div class="timeline-body">
-                                                <p>{{ $item->deskripsi }}</p>
+                                                <p>{{ $item->Deskripsi }}</p>
                                             </div>
                                         </div>
                                     </div>

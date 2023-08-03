@@ -14,11 +14,11 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
-                            <textarea id="deskripsi" name="deskripsi"
-                                class="form-control @error('deskripsi') is-invalid @enderror" rows="3"
-                                required>{{ old('deskripsi') }}</textarea>
-                            @error('deskripsi')
+                            <label for="Deskripsi">Deskripsi</label>
+                            <textarea id="Deskripsi" name="Deskripsi"
+                                class="form-control @error('Deskripsi') is-invalid @enderror" rows="3"
+                                required>{{ old('Deskripsi') }}</textarea>
+                            @error('Deskripsi')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

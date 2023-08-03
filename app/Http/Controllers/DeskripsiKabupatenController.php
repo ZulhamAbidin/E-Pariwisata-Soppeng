@@ -18,7 +18,7 @@ class DeskripsiKabupatenController extends Controller
      public function index2()
     {
         $data = DeskripsiKabupaten::all();
-        return view('deskripsi', compact('data'));
+        return view('Deskripsi', compact('data'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class DeskripsiKabupatenController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'deskripsi' => 'required',
+            'Deskripsi' => 'required',
             'visi_misi' => 'required',
             'sejarah' => 'required',
             'geografis' => 'required',
@@ -48,7 +48,7 @@ class DeskripsiKabupatenController extends Controller
     public function update(Request $request, DeskripsiKabupaten $deskripsiKabupaten)
     {
         $request->validate([
-            'deskripsi' => 'required',
+            'Deskripsi' => 'required',
             'visi_misi' => 'required',
             'sejarah' => 'required',
             'geografis' => 'required',

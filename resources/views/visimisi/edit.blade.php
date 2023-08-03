@@ -3,9 +3,9 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="container">
+<div class="containe mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Edit Data Deskripsi Kabupaten') }}</div>
 
@@ -16,7 +16,7 @@
 
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea id="deskripsi" name="deskripsi"
+                            <textarea id="deskripsi" name="Deskripsi"
                                 class="form-control @error('deskripsi') is-invalid @enderror" rows="3"
                                 required>{{ old('deskripsi', $deskripsiKabupaten->deskripsi) }}</textarea>
                             @error('deskripsi')

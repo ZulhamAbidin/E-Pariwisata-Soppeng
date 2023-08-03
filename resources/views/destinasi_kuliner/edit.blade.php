@@ -17,17 +17,17 @@
 
     <div class="row">
         <div class="col-xl-12 col-lg-12">
-            <div class="card">
+            {{-- <div class="card">
 
-                {{-- <div class="card-body pb-4">
+                <div class="card-body pb-4">
                     <div class="input-group mb-2">
                         <input type="seach" class="form-control form-control" id="search-input"
                             placeholder="Searching.....">
                         <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
                     </div>
-                </div> --}}
+                </div>
 
-            </div>
+            </div> --}}
 
             <div class="card">
                 <div class="card-header">
@@ -56,12 +56,12 @@
                     <div class="form-group">
                         <label for="latitude">Latitude</label>
                         <input type="text" name="latitude" id="latitude" class="form-control" value="{{ $destinasiKuliner->latitude }}"
-                            required>
+                        readonly   required>
                     </div>
                     <div class="form-group">
                         <label for="longitude">Longitude</label>
                         <input type="text" name="longitude" id="longitude" class="form-control"
-                            value="{{ $destinasiKuliner->longitude }}" required>
+                         readonly   value="{{ $destinasiKuliner->longitude }}" required>
                     </div>
                 
                     <div class="form-group">

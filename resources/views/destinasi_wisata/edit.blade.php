@@ -233,12 +233,12 @@
                     <div class="form-group">
                         <label for="latitude">Latitude</label>
                         <input type="text" name="latitude" id="latitude" class="form-control" value="{{ $destinasiWisata->latitude }}"
-                            required>
+                         readonly   required>
                     </div>
                     <div class="form-group">
                         <label for="longitude">Longitude</label>
                         <input type="text" name="longitude" id="longitude" class="form-control"
-                            value="{{ $destinasiWisata->longitude }}" required>
+                         readonly   value="{{ $destinasiWisata->longitude }}" required>
                     </div>
                 
                     <div class="form-group">
