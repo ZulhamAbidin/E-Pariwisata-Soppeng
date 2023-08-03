@@ -47,6 +47,20 @@
                             <input type="text" name="nama" id="nama" class="form-control"
                                 value="{{ $kebudayaan->nama }}" required>
                         </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" name="alamat" id="alamat" class="form-control" value="{{ $kebudayaan->alamat }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="latitude">Latitude</label>
+                            <input type="text" name="latitude" id="latitude" class="form-control" value="{{ $kebudayaan->latitude }}"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="longitude">Longitude</label>
+                            <input type="text" name="longitude" id="longitude" class="form-control" value="{{ $kebudayaan->longitude }}"
+                                required>
+                        </div>
 
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
@@ -95,9 +109,93 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
+                    <div id="map" style="height: 400px; margin-top: 20px;">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+@if ($errors->any())
+<script>
+    var errorMessage = "<ul>";
+            @foreach ($errors->all() as $error)
+                errorMessage += "<li>{{ $error }}</li>";
+            @endforeach
+            errorMessage += "</ul>";
+
+            Swal.fire({
+                title: "Error",
+                html: errorMessage,
+                icon: "error",
+                timer: 15000,
+                showConfirmButton: false
+            });
+</script>
+@endif
+
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+    var map;
+        var marker;
+        var initialLatitude = {{ $kebudayaan->latitude }};
+        var initialLongitude = {{ $kebudayaan->longitude }};
+    
+        function initMap() {
+            map = L.map('map').setView([initialLatitude, initialLongitude], 13);
+    
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    
+            marker = L.marker([initialLatitude, initialLongitude], {
+                draggable: true
+            }).addTo(map);
+    
+            map.on('click', function(event) {
+                marker.setLatLng(event.latlng);
+                fillLatitudeLongitudeInputs(event.latlng.lat, event.latlng.lng);
+            });
+    
+            document.getElementById('alamat').addEventListener('input', function() {
+                var keyword = this.value.trim();
+                if (keyword) {
+                    geocodeAlamat(keyword);
+                } else {
+                    marker.setLatLng([initialLatitude, initialLongitude]);
+                    map.setView([initialLatitude, initialLongitude], 13);
+                    fillLatitudeLongitudeInputs(initialLatitude, initialLongitude);
+                }
+            });
+        }
+    
+        function fillLatitudeLongitudeInputs(latitude, longitude) {
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+        });
+</script>
+
+@if (session('error'))
+<script>
+    Swal.fire({
+                title: "Gagal",
+                text: "{{ session('error') }}",
+                icon: "error",
+                timer: 3000,
+                showConfirmButton: false
+            });
+</script>
+@endif
+
+@endpush

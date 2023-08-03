@@ -29,25 +29,37 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar sampul yang diizinkan
+            'Deskripsi' => 'required|string',
+            'alamat' => 'required|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar sampul yang diizinkan
             'gambar' => 'nullable|array',
-            'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
+            'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar yang diizinkan
         ], [
             'nama.required' => 'Pastikan Anda mengisi nama kebudayaan.',
-            'deskripsi.required' => 'Pastikan Anda mengisi deskripsi kebudayaan.',
+            'Deskripsi.required' => 'Pastikan Anda mengisi Deskripsi kebudayaan.',
+            'alamat.required' => 'Pastikan Anda mengisi alamat destinasi.',
+            'latitude.required' => 'Pastikan Anda Memilih Lokasi Kebudayaan.',
+            'longitude.required' => 'Pastikan Anda Memilih Lokasi Kebudayaan.',
             'gambar.0.image' => 'Pastikan Anda memilih gambar yang sesuai dengan format dan ukuran yang diizinkan.',
             'gambar.0.mimes' => 'Pastikan Anda memilih gambar dengan format: jpeg, png, jpg, gif.',
         ]);
 
         // Ambil data dari form
         $nama = $request->input('nama');
-        $deskripsi = $request->input('deskripsi');
+        $Deskripsi = $request->input('Deskripsi');
+        $alamat = $request->input('alamat');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
 
         // Simpan data ke dalam database
         $kebudayaan = new Kebudayaan([
             'nama' => $nama,
-            'deskripsi' => $deskripsi,
+            'Deskripsi' => $Deskripsi,
+            'alamat' => $alamat,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
         ]);
 
         // Upload dan simpan gambar sampul
@@ -141,7 +153,10 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
         // Validate the input data
         $request->validate([
             'nama' => 'required',
-            'deskripsi' => 'required',
+            'Deskripsi' => 'required',
+            'alamat' => 'required|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
             'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar sampul yang diizinkan
             'gambar' => 'nullable|array',
             'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
@@ -152,7 +167,10 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
 
         // Update the kebudayaan data
         $kebudayaan->nama = $request->input('nama');
-        $kebudayaan->deskripsi = $request->input('deskripsi');
+        $kebudayaan->Deskripsi = $request->input('Deskripsi');
+        $kebudayaan->alamat = $request->input('alamat');
+        $kebudayaan->longitude = $request->input('longitude');
+        $kebudayaan->latitude = $request->input('latitude');
 
         // Process and update the uploaded images
         if ($request->hasFile('sampul')) {

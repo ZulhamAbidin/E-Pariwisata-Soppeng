@@ -15,17 +15,17 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                <div class="card">
+                {{-- <div class="card">
 
-                    {{-- <div class="card-body pb-4">
+                    <div class="card-body pb-4">
                         <div class="input-group mb-2">
                             <input type="seach" class="form-control form-control" id="search-input"
                                 placeholder="Searching.....">
                             <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
                         </div>
-                    </div> --}}
+                    </div>
 
-                </div>
+                </div> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -37,17 +37,17 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama Destinasi Hotel</label>
-                                <input type="text" value="tes" required name="nama" id="nama"
+                                <input type="text" value="" required name="nama" id="nama"
                                     class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <input type="text" value="tes" required name="alamat" id="alamat"
+                                <input type="text" value="" required name="alamat" id="alamat"
                                     class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="JamBuka">Jam Buka</label>
-                                <input type="text" value="tes" required name="JamBuka" id="JamBuka"
+                                <input type="time" value="" required name="JamBuka" id="JamBuka"
                                     class="form-control">
                             </div>
                             <div class="form-group">

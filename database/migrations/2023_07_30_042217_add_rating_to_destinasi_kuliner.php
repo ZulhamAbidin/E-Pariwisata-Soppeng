@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('destinasi_kuliner', function (Blueprint $table) {
-            //
+            $table->decimal('rating', 3, 2)->default(0);
         });
     }
 

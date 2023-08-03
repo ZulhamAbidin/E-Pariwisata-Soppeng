@@ -104,6 +104,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/kebudayaan', [PengunjungKebudayaanController::class, 'index'])->name('pengunjung.kebudayaan.index');
 Route::get('/kebudayaan/{destinasikebudayaan}', [PengunjungKebudayaanController::class, 'show'])->name('pengunjung.kebudayaan.show');
+Route::post('/kebudayaan/{destinasikebudayaan}/tambah-komentar', [PengunjungKebudayaanController::class, 'tambahKomentar'])->name('pengunjung.kebudayaan.tambah-komentar');
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

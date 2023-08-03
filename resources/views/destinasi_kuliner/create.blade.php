@@ -4,28 +4,28 @@
     <div class="main-container container-fluid">
 
         <div class="page-header">
-            <h1 class="page-title">List Destinasi kuliner</h1>
+            <h1 class="page-title">Tambah Destinasi kuliner</h1>
             <div>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Destinasi</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">List</li>
+                    <li class="breadcrumb-item active" aria-current="page">Tambah</li>
                 </ol>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                <div class="card">
+                {{-- <div class="card">
 
-                    {{-- <div class="card-body pb-4">
+                    <div class="card-body pb-4">
                         <div class="input-group mb-2">
                             <input type="seach" class="form-control form-control" id="search-input"
                                 placeholder="Searching.....">
                             <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
                         </div>
-                    </div> --}}
+                    </div>
 
-                </div>
+                </div> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -37,27 +37,28 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama Destinasi kuliner</label>
-                                <input type="text" value="tes" required name="nama" id="nama"
+                                <input type="text" value="" required name="nama" id="nama"
                                     class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <input type="text" value="tes" required name="alamat" id="alamat"
+                                <input type="text" value="" required name="alamat" id="alamat"
                                     class="form-control" required>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="HargaTiket">Harga Tiket</label>
-                                <input type="number" value="20000" required name="HargaTiket" id="HargaTiket"
+                                <input type="number" value="" required name="HargaTiket" id="HargaTiket"
                                     class="form-control">
-                            </div>
+                            </div> --}}
+
                             <div class="form-group">
                                 <label for="JamBuka">Menu Utama Kuliner</label>
-                                <input type="text" value="MenuKuliner" required name="MenuKuliner" id="MenuKuliner" class="form-control">
+                                <input type="text" value="" required name="MenuKuliner" id="MenuKuliner" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="JamBuka">Jam Buka</label>
-                                <input type="text" value="tes" required name="JamBuka" id="JamBuka"
+                                <input type="time" value="" required name="JamBuka" id="JamBuka"
                                     class="form-control">
                             </div>
                             <div class="form-group">
@@ -82,7 +83,7 @@
                             <div class="form-group">
                                 <label for="gambar">Gambar</label>
                                 <input type="file" name="gambar[]" required id="gambar" class="form-control-file" multiple>
-                                <small class="form-text text-muted"  >Unggah gambar baru (jpeg, png, jpg,  gif)</small>
+                                <small class="form-text text-muted"  >Unggah gambar baru Maksimal 4 Gambar (jpeg, png, jpg,  gif)</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

@@ -37,9 +37,9 @@ class DestinasiWisataController extends Controller
             'Sejarah' => 'nullable|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar sampul yang diizinkan
+            'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar sampul yang diizinkan
             'gambar' => 'nullable|array',
-            'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
+            'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar yang diizinkan
         ], [
         'nama.required' => 'Pastikan Anda mengisi nama destinasi.',
         'alamat.required' => 'Pastikan Anda mengisi alamat destinasi.',

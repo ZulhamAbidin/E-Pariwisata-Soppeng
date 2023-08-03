@@ -7,48 +7,48 @@
 
             <div class="col-xl-8">
                 <div class="card">
-                    <img class="card-img-top" src="{{ asset('storage/' . $destinasihotel->sampul) }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('storage/' . $destinasikebudayaan->sampul) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="d-md-flex">
 
                             <a href="javascript:void(0);" class="d-flex me-4 mb-2">
                                 <i class="fe fe-clock fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
                                 <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                    {{ $destinasihotel->created_at->diffForHumans() }}
+                                    {{ $destinasikebudayaan->created_at->diffForHumans() }}
                                 </div>
                             </a>
 
                             <a href="javascript:void(0);" class="d-flex me-4 mb-2">
                                 <i class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
                                 <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                   {{ $destinasihotel->created_at->translatedFormat('l d F Y') }}
+                                   {{ $destinasikebudayaan->created_at->translatedFormat('l d F Y') }}
                                 </div>
                             </a>
 
                             <a href="javascript:void(0);" class="d-flex me-4 mb-2">
                                 <i class="fe fe-star fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
                                 <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                    Rating: {{ number_format($destinasihotel->averageRating(), 2) }}
+                                    Rating: {{ number_format($destinasikebudayaan->averageRating(), 2) }}
                                 </div>
                             </a>
                                                        
                             <div class="ms-auto">
                                 <a href="javascript:void(0);" class="d-flex mb-2">
                                 <i  class="fe fe-message-square fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
-                                <div class=" mt-3 ms-1 text-muted font-weight-semibold">{{ $destinasihotel->totalKomentar() }} Komentar</div>
+                                <div class=" mt-3 ms-1 text-muted font-weight-semibold">{{ $destinasikebudayaan->totalKomentar() }} Komentar</div>
                                 </a>
                             </div>
 
                         </div>
                     </div>
                     <div class="card-body">
-                        <h3><a href="javascript:void(0)"> {{ $destinasihotel->nama }}</a></h3>
-                        <p class="card-text">{{ $destinasihotel->alamat }}</p>
-                        <p class="text-justify"> {{ $destinasihotel->Deskripsi }}</p>
+                        <h3><a href="javascript:void(0)"> {{ $destinasikebudayaan->nama }}</a></h3>
+                        <p class="card-text">{{ $destinasikebudayaan->alamat }}</p>
+                        <p class="text-justify"> {{ $destinasikebudayaan->Deskripsi }}</p>
 
-                        @if ($destinasihotel->gambar)
+                        @if ($destinasikebudayaan->gambar)
                         <div class="row">
-                            @foreach (json_decode($destinasihotel->gambar) as $image)
+                            @foreach (json_decode($destinasikebudayaan->gambar) as $image)
                             <div class="col-md-4 mb-3">
                                 <img src="{{ asset('storage/' . $image) }}" alt="Gambar" class="img-fluid">
                             </div>
@@ -59,8 +59,8 @@
                         <div class="ms-auto">
                             <div id="map" style="height: 250px;"></div>
                         </div>
-                        <!-- Replace $destinasihotel->latitude and $destinasihotel->longitude with the actual variables holding the latitude and longitude values -->
-                        <a href="https://www.google.com/maps?q={{ $destinasihotel->latitude }},{{ $destinasihotel->longitude }}"
+                        <!-- Replace $destinasikebudayaan->latitude and $destinasikebudayaan->longitude with the actual variables holding the latitude and longitude values -->
+                        <a href="https://www.google.com/maps?q={{ $destinasikebudayaan->latitude }},{{ $destinasikebudayaan->longitude }}"
                             target="_blank" class="btn block btn-primary mt-2">Lihat di Google Maps</a>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         <div class="card-title">Commentar</div>
                     </div>
                     
-                    @foreach ($destinasihotel->komentars as $komentar)
+                    @foreach ($destinasikebudayaan->komentars as $komentar)
                     <div class="card-body pb-0">
                         <div class="media mb-1 overflow-visible d-block d-sm-flex">
                             <div class="me-3 mb-2">
@@ -94,7 +94,7 @@
                     {{-- ular --}}
                     
                     {{-- <div class="card-body pb-0">
-                        @foreach ($destinasihotel->komentars->take(3) as $komentar)
+                        @foreach ($destinasikebudayaan->komentars->take(3) as $komentar)
                         <div class="media mb-1 overflow-visible d-block d-sm-flex">
                             <div class="me-3 mb-2">
                                 <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
@@ -113,12 +113,12 @@
                         </div>
                         @endforeach
                     
-                        @if ($destinasihotel->komentars->count() > 3)
+                        @if ($destinasikebudayaan->komentars->count() > 3)
                         <div class="text-end">
                             <a href="#" id="showAllComments" class="text-muted">Lihat semua komentar</a>
                         </div>
                         <div id="allComments" style="display: none;">
-                            @foreach ($destinasihotel->komentars->slice(3) as $komentar)
+                            @foreach ($destinasikebudayaan->komentars->slice(3) as $komentar)
                             <div class="media mb-1 overflow-visible d-block d-sm-flex">
                                 <div class="me-3 mb-2">
                                     <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
@@ -162,7 +162,7 @@
                     <div class="card-body">
                         
 
-                        <form action="{{ route('pengunjung.hotel.tambah-komentar', $destinasihotel) }}" method="POST">
+                        <form action="{{ route('pengunjung.kebudayaan.tambah-komentar', $destinasikebudayaan) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama</label>
@@ -200,15 +200,15 @@
                     <div class="card-body">
                         <div class="">
 
-                            @foreach ($daftarhotelTerbaru as $postinganTerbaru)
+                            @foreach ($daftarkebudayaanTerbaru as $postinganTerbaru)
                                 <div class="d-flex overflow-visible">
-                                    <a href="{{ route('pengunjung.hotel.show', $postinganTerbaru) }}"
+                                    <a href="{{ route('pengunjung.kebudayaan.show', $postinganTerbaru) }}"
                                         class="card-aside-column br-5 cover-image"
                                         data-bs-image-src="{{ asset('storage/' . $postinganTerbaru->sampul) }}"
                                         style="background: url('{{ asset('storage/' . $postinganTerbaru->sampul) }}') center center;"></a>
                                     <div class="ps-3 flex-column">
                                         <h4><a
-                                                href="{{ route('pengunjung.hotel.show', $postinganTerbaru) }}">{{ $postinganTerbaru->nama }}</a>
+                                                href="{{ route('pengunjung.kebudayaan.show', $postinganTerbaru) }}">{{ $postinganTerbaru->nama }}</a>
                                         </h4>
                                         <div class="text-muted">{{ $postinganTerbaru->alamat }}</div>
                                     </div>
@@ -231,8 +231,8 @@
         var map;
     
         function initMap() {
-            var latitude = {{ $destinasihotel->latitude }};
-            var longitude = {{ $destinasihotel->longitude }};
+            var latitude = {{ $destinasikebudayaan->latitude }};
+            var longitude = {{ $destinasikebudayaan->longitude }};
             var location = [latitude, longitude];
     
             map = L.map('map').setView(location, 13);
@@ -240,7 +240,7 @@
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
     
             L.marker(location).addTo(map)
-                .bindPopup('{{ $destinasihotel->nama }}').openPopup();
+                .bindPopup('{{ $destinasikebudayaan->nama }}').openPopup();
         }
     
         document.addEventListener('DOMContentLoaded', function() {

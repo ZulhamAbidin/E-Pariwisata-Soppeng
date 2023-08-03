@@ -8,5 +8,5 @@ class DeskripsiKabupaten extends Model
 {
     protected $table = 'deskripsi_kabupaten';
     
-    protected $fillable = ['deskripsi', 'visi_misi', 'sejarah', 'geografis'];
+    protected $fillable = ['Deskripsi', 'visi_misi', 'sejarah', 'geografis'];
 }

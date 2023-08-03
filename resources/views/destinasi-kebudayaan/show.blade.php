@@ -60,10 +60,20 @@
                                     <h3 class="mb-3 fw-semibold">{{ $kebudayaan->nama }}</h3>
                                     <p class="text-muted mb-4">{{ $kebudayaan->alamat }}</p>
 
-                                    <h4 class="mt-4 "><b> Deskripsi Lokasi Destinasi</b></h4>
-                                    <p class="fw-bold fw-bold text-justify">{{ $kebudayaan->deskripsi }}</p>
+                                    <h4 class="mt-4 "><b> Deskripsi Lokasi Kebudayaan</b></h4>
+                                    <p class="fw-bold fw-bold text-justify">{{ $kebudayaan->Deskripsi }}</p>
                                 </div>
                             </div>
+                            
+                            <div class="">
+                                <span class="fw-bold me-2">Lokasi :</span>
+                                <div class="ms-auto">
+                                    <div id="map" style="height: 250px;"></div>
+                                </div>
+                                <a href="https://www.google.com/maps?q={{ $kebudayaan->latitude }},{{ $kebudayaan->longitude }}"
+                                    target="_blank" class="btn btn-primary block">Buka di Google Maps</a>
+                            </div>
+                            
                             
                         </div>
                     </div>
@@ -71,3 +81,32 @@
             </div>
         </div>
     @endsection
+
+
+
+    @push('scripts')
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <script>
+        var map;
+        
+                function initMap() {
+                    var latitude = {{ $kebudayaan->latitude }};
+                    var longitude = {{ $kebudayaan->longitude }};
+                    var location = [latitude, longitude];
+        
+                    map = L.map('map').setView(location, 13);
+        
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+                    L.marker(location).addTo(map)
+                        .bindPopup('{{ $kebudayaan->nama }}').openPopup();
+                }
+        
+                document.addEventListener('DOMContentLoaded', function() {
+                    initMap();
+                });
+    </script>
+    
+    
+    @endpush

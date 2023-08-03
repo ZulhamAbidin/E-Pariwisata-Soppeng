@@ -11,7 +11,7 @@
                 <div class="row">
                     @foreach ($destinasiKulinerList as $destinasiKuliner)
                         <div class="col-sm-12 col-md-12 col-lg-3 col-xl-6">
-                            <div class="card"> <a href="{{ route('pengunjung.destinasi.show', $destinasiKuliner) }}"><img class="card-img-top"
+                            <div class="card"> <a href="{{ route('pengunjung.kuliner.show', $destinasiKuliner) }}"><img class="card-img-top"
                                         src="{{ url('storage/' . $destinasiKuliner->sampul) }}"
                                         alt="And this isn't my nose. This is a false one."></a>
                                 <div class="card-body d-flex flex-column">

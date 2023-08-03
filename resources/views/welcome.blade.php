@@ -182,6 +182,45 @@
                                 </div>
                             </div>
 
+                            <div class="section bg-landing" id="Blog">
+                                <div class="container">
+                                    <div class="row">
+                                        <h4 class="text-center fw-semibold">Postingan Dengan Rating Tertinngi </h4>
+                                        <span class="landing-title"></span>
+                                        <h2 class="text-center fw-semibold mb-7">Rating Tertinggi.</h2>
+
+                                       @foreach ($posts->take(4) as $post)
+                                    <div class="col-lg-6">
+                                        <div class="card bg-transparent reveal active">
+                                            <div class="card-body px-1">
+                                                <div class="d-flex overflow-visible">
+                                                    @if ($post->sampul)
+                                                    <a href="" class="card-aside-column br-5 cover-image" data-bs-image-src="{{ $post->Sampul }}"
+                                                        style="background: url(&quot;{{ $post->sampul }}&quot;) center center;">
+                                                    </a>
+                                                    @endif
+                                                    <div class="ps-3 flex-column">
+                                                        <span class="badge bg-primary me-1 mb-1 mt-1">Berasal dari tabel {{ $post->getTable() }}</span>
+                                                        <h3><a href="{{-- {{ route('post.show', ['id' => $post->id]) }} --}}">{{ $post->Nama }}</a></h3>
+                                                        <div class="">{{ $post->Deskripsi }}</div>
+                                                        <a href="{{-- {{ route('post.show', ['id' => $post->id]) }} --}}" class="btn btn-primary mt-2">Lihat
+                                                            Selengkapnya</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    
+                                        <div class="text-center">
+                                            <a href="blog.html" target="_blank" class="btn btn-outline-primary pt-2 pb-2"><i
+                                                    class="fe fe-arrow-right me-2"></i>Discover More
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             @foreach ($data as $item)
                             <div class="section">
                                 <div class="container">

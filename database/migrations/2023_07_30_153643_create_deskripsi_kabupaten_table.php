@@ -15,7 +15,7 @@ class CreateDeskripsiKabupatenTable extends Migration
     {
         Schema::create('deskripsi_kabupaten', function (Blueprint $table) {
             $table->id();
-            $table->text('deskripsi');
+            $table->text('Deskripsi');
             $table->text('visi_misi');
             $table->text('sejarah');
             $table->text('geografis');

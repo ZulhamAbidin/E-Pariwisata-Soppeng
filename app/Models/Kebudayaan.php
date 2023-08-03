@@ -8,7 +8,7 @@ class Kebudayaan extends Model
 {
     protected $table = 'kebudayaan'; // Nama tabel di database
 
-    protected $fillable = ['nama', 'deskripsi', 'sampul', 'gambar'];
+    protected $fillable = ['nama', 'Deskripsi', 'latitude', 'longitude', 'sampul', 'gambar', 'alamat'];
 
     public function komentars()
     {
@@ -31,7 +31,7 @@ class Kebudayaan extends Model
             return $totalRating / $totalKomentar;
         } else {
             return 0;
-        }
+        } 
     }
 
     public function totalKomentar()
