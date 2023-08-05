@@ -18,7 +18,7 @@
                             <label for="deskripsi">Deskripsi</label>
                             <textarea id="deskripsi" name="Deskripsi"
                                 class="form-control @error('deskripsi') is-invalid @enderror" rows="3"
-                                required>{{ old('deskripsi', $deskripsiKabupaten->deskripsi) }}</textarea>
+                                required>{{ old('deskripsi', $deskripsiKabupaten->Deskripsi) }}</textarea>
                             @error('deskripsi')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

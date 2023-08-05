@@ -43,7 +43,7 @@
                                     <p>Selamat datang di sistem informasi pariwisata! Sistem ini berisi informasi
                                         tentang destinasi kuliner, wisata, hotel, dan
                                         kebudayaan di berbagai lokasi yang menarik untuk dikunjungi.</p>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Enter your email"
                                                 aria-label="Example text with button addon"
@@ -51,7 +51,7 @@
                                             <button class="btn btn-primary" type="button"
                                                 id="button-addon2">Submit</button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="btn-list mt-6">
                                     <button type="button" class="btn btn-icon rounded-pill"><i
@@ -71,7 +71,7 @@
                         <div class="row ">
                             <div class="col-md-12 col-sm-12">
                                 Copyright © <span id="year"></span> <a href="javascript:void(0)"></a>.
-                                Designed with by <a href="javascript:void(0)"> zlhm</a> All rights reserved.
+                                Designed with by <a href="https://www.instagram.com/zlhm.a/"> zlhm</a> All rights reserved.
                             </div>
                         </div>
                     </footer>

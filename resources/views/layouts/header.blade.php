@@ -16,6 +16,42 @@
                 <div class="navbar navbar-collapse responsive-navbar p-0">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                         <div class="d-flex order-lg-2">
+
+                            <div class="dropdown  d-flex message">
+                                <a class="nav-link icon text-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fe fe-message-square"></i><span class="pulse-danger"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <div class="drop-heading border-bottom">
+                                        <div class="d-flex">
+                                            <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">You have 
+                                                Messages</h6>
+                                            <div class="ms-auto">
+                                                <a href="javascript:void(0)" class="text-muted p-0 fs-12">make all unread</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="message-menu {{-- message-menu-scroll --}}">
+                                        <a class="dropdown-item d-flex" href="chat.html">
+                                            {{-- <span class="avatar avatar-md brround me-3 align-self-center cover-image"
+                                                data-bs-image-src="../assets/images/users/1.jpg"
+                                                style="background: url(&quot;../assets/images/users/1.jpg&quot;) center center;"></span> --}}
+                                            <div class="wd-90p">
+                                                <div class="d-flex">
+                                                    <h5 class="mb-1">Peter Theil</h5>
+                                                    <small class="text-muted ms-auto text-end">
+                                                        6:45 am
+                                                    </small>
+                                                </div>
+                                                <span>Commented on file Guest list....</span>
+                                            </div>
+                                        </a>  
+                                                                                      
+                                    </div>
+
+                                </div>
+                            </div>
                           
                             
                             <!-- THEME -->
@@ -31,7 +67,6 @@
                                     <i class="fe fe-minimize fullscreen-button"></i>
                                 </a>
                             </div>
-
                             
                             <!-- SIDE-MENU -->
                             <div class="dropdown d-flex profile-1">
@@ -49,7 +84,7 @@
 
                                     <div class="dropdown-divider m-0"></div>
 
-                                    <a class="dropdown-item" href="/profile">
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
                                         <button class="btn"><i class="dropdown-icon fe fe-user"></i> Profile</button>
                                     </a>
 

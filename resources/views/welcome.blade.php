@@ -51,7 +51,8 @@
 
                 @include('layouts.pengunjung.headerlink')
 
-                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
+                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal"
+                    id="home">
                     <div class="container px-sm-0">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
@@ -183,16 +184,20 @@
                             </div>
 
 
-                            <style>
+                            {{-- <style>
                                 .square-image {
-                                width: 200px; /* Sesuaikan lebar gambar sesuai kebutuhan */
-                                height: 200px; /* Tinggi gambar sama dengan lebar untuk membuatnya persegi panjang */
+                                    width: 200px;
+                                    /* Sesuaikan lebar gambar sesuai kebutuhan */
+                                    height: 200px;
+                                    /* Tinggi gambar sama dengan lebar untuk membuatnya persegi panjang */
                                 }
+
                                 .description {
-                                display: -webkit-box;
-                                -webkit-box-orient: vertical;
-                                -webkit-line-clamp: 3; /* Batas jumlah baris yang ingin ditampilkan */
-                                overflow: hidden;
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    -webkit-line-clamp: 3;
+                                    /* Batas jumlah baris yang ingin ditampilkan */
+                                    overflow: hidden;
                                 }
                             </style>
 
@@ -203,150 +208,175 @@
                                         <span class="landing-title"></span>
                                         <h2 class="text-center fw-semibold mb-7">Rating Tertinggi.</h2>
 
-                          @foreach ($posts->take(4) as $post)
-                        <div class="col-lg-6">
-                            <div class="card bg-transparent reveal active">
-                                <div class="card-body px-1">
-                                    <div class="d-flex overflow-visible">
-                                        @if ($post->kebudayaan && $post->kebudayaan->sampul)
-                                        <a href="#" class="card-aside-column br-5 cover-image square-image"
-                                            data-bs-image-src="{{ asset('storage/' . $post->kebudayaan->sampul) }}"
-                                            style="background: url(&quot;{{ asset('storage/' . $post->kebudayaan->sampul) }}&quot;) center center;">
-                                        </a>
-                                        @elseif ($post->destinasiWisata && $post->destinasiWisata->sampul)
-                                        <a href="#" class="card-aside-column br-5 cover-image square-image"
-                                            data-bs-image-src="{{ asset('storage/' . $post->destinasiWisata->sampul) }}"
-                                            style="background: url(&quot;{{ asset('storage/' . $post->destinasiWisata->sampul) }}&quot;) center center;">
-                                        </a>
-                                        @elseif ($post->destinasiKuliner && $post->destinasiKuliner->sampul)
-                                        <a href="#" class="card-aside-column br-5 cover-image square-image"
-                                            data-bs-image-src="{{ asset('storage/' . $post->destinasiKuliner->sampul) }}"
-                                            style="background: url(&quot;{{ asset('storage/' . $post->destinasiKuliner->sampul) }}&quot;) center center;">
-                                        </a>
-                                        @elseif ($post->destinasiHotel && $post->destinasiHotel->sampul)
-                                        <a href="#" class="card-aside-column br-5 cover-image square-image"
-                                            data-bs-image-src="{{ asset('storage/' . $post->destinasiHotel->sampul) }}"
-                                            style="background: url(&quot;{{ asset('storage/' . $post->destinasiHotel->sampul) }}&quot;) center center;">
-                                        </a>
-                                        @endif
-                                        <div class="ps-3 flex-column">
-                                            @if ($post->kebudayaan)
-                                            <span class="badge bg-primary me-1 mb-1 mt-1">Berasal dari tabel Kebudayaan</span>
-                                            <h3><a href="{{ route('pengunjung.kebudayaan.show', ['destinasikebudayaan' => $post->kebudayaan->id]) }}">{{
-                                                    $post->kebudayaan->nama }}</a></h3>
-                                            <div class="description">{{ $post->kebudayaan->Deskripsi }}</div>
-                                            <!-- Tambahkan link menuju postingan Kebudayaan -->
-                                            <a href="{{ route('pengunjung.kebudayaan.show', ['destinasikebudayaan' => $post->kebudayaan->id]) }}"
-                                                class="btn btn-primary mt-2">Lihat Selengkapnya</a>
-                                            @elseif ($post->destinasiWisata)
-                                            <span class="badge bg-primary me-1 mb-1 mt-1">Berasal dari tabel Destinasi Wisata</span>
-                                            <h3><a href="{{ route('pengunjung.destinasi.show', ['destinasiWisata' => $post->destinasiWisata->id]) }}">{{
-                                                    $post->destinasiWisata->nama }}</a></h3>
-                                            <div class="description">{{ $post->destinasiWisata->Deskripsi }}</div>
-                                            <!-- Tambahkan link menuju postingan Destinasi Wisata -->
-                                            <a href="{{ route('pengunjung.destinasi.show', ['destinasiWisata' => $post->destinasiWisata->id]) }}"
-                                                class="btn btn-primary mt-2">Lihat Selengkapnya</a>
-                                            @elseif ($post->destinasiKuliner)
-                                            <span class="badge bg-primary me-1 mb-1 mt-1">Berasal dari tabel Destinasi Kuliner</span>
-                                            <h3><a href="{{ route('pengunjung.kuliner.show', ['destinasiKuliner' => $post->destinasiKuliner->id]) }}">{{
-                                                    $post->destinasiKuliner->nama }}</a></h3>
-                                            <div class="description">{{ $post->destinasiKuliner->Deskripsi }}</div>
-                                            <!-- Tambahkan link menuju postingan Destinasi Kuliner -->
-                                            <a href="{{ route('pengunjung.kuliner.show', ['destinasiKuliner' => $post->destinasiKuliner->id]) }}"
-                                                class="btn btn-primary mt-2">Lihat Selengkapnya</a>
-                                            @elseif ($post->destinasiHotel)
-                                            <span class="badge bg-primary me-1 mb-1 mt-1">Berasal dari tabel Destinasi Hotel</span>
-                                            <h3><a href="{{ route('pengunjung.hotel.show', ['destinasihotel' => $post->destinasiHotel->id]) }}">{{
-                                                    $post->destinasiHotel->nama }}</a></h3>
-                                            <div class="description">{{ $post->destinasiHotel->Deskripsi }}</div>
-                                            <!-- Tambahkan link menuju postingan Destinasi Hotel -->
-                                            <a href="{{ route('pengunjung.hotel.show', ['destinasihotel' => $post->destinasiHotel->id]) }}"
-                                                class="btn btn-primary mt-2">Lihat Selengkapnya</a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                                    
+                                        @foreach ($posts->take(4) as $post)
+                                            <div class="col-lg-6">
+                                                <div class="card bg-transparent reveal active">
+                                                    <div class="card-body px-1">
+                                                        <div class="d-flex overflow-visible">
+                                                            @if ($post->kebudayaan && $post->kebudayaan->sampul)
+                                                                <a href="#"
+                                                                    class="card-aside-column br-5 cover-image square-image"
+                                                                    data-bs-image-src="{{ asset('storage/' . $post->kebudayaan->sampul) }}"
+                                                                    style="background: url(&quot;{{ asset('storage/' . $post->kebudayaan->sampul) }}&quot;) center center;">
+                                                                </a>
+                                                            @elseif ($post->destinasiWisata && $post->destinasiWisata->sampul)
+                                                                <a href="#"
+                                                                    class="card-aside-column br-5 cover-image square-image"
+                                                                    data-bs-image-src="{{ asset('storage/' . $post->destinasiWisata->sampul) }}"
+                                                                    style="background: url(&quot;{{ asset('storage/' . $post->destinasiWisata->sampul) }}&quot;) center center;">
+                                                                </a>
+                                                            @elseif ($post->destinasiKuliner && $post->destinasiKuliner->sampul)
+                                                                <a href="#"
+                                                                    class="card-aside-column br-5 cover-image square-image"
+                                                                    data-bs-image-src="{{ asset('storage/' . $post->destinasiKuliner->sampul) }}"
+                                                                    style="background: url(&quot;{{ asset('storage/' . $post->destinasiKuliner->sampul) }}&quot;) center center;">
+                                                                </a>
+                                                            @elseif ($post->destinasiHotel && $post->destinasiHotel->sampul)
+                                                                <a href="#"
+                                                                    class="card-aside-column br-5 cover-image square-image"
+                                                                    data-bs-image-src="{{ asset('storage/' . $post->destinasiHotel->sampul) }}"
+                                                                    style="background: url(&quot;{{ asset('storage/' . $post->destinasiHotel->sampul) }}&quot;) center center;">
+                                                                </a>
+                                                            @endif
+                                                            <div class="ps-3 flex-column">
+                                                                @if ($post->kebudayaan)
+                                                                    <span
+                                                                        class="badge bg-primary me-1 mb-1 mt-1">Berasal
+                                                                        dari tabel Kebudayaan</span>
+                                                                    <h3><a
+                                                                            href="{{ route('pengunjung.kebudayaan.show', ['destinasikebudayaan' => $post->kebudayaan->id]) }}">{{ $post->kebudayaan->nama }}</a>
+                                                                    </h3>
+                                                                    <div class="description">
+                                                                        {{ $post->kebudayaan->Deskripsi }}</div>
+                                                                    <!-- Tambahkan link menuju postingan Kebudayaan -->
+                                                                    <a href="{{ route('pengunjung.kebudayaan.show', ['destinasikebudayaan' => $post->kebudayaan->id]) }}"
+                                                                        class="btn btn-primary mt-2">Lihat
+                                                                        Selengkapnya</a>
+                                                                @elseif ($post->destinasiWisata)
+                                                                    <span
+                                                                        class="badge bg-primary me-1 mb-1 mt-1">Berasal
+                                                                        dari tabel Destinasi Wisata</span>
+                                                                    <h3><a
+                                                                            href="{{ route('pengunjung.destinasi.show', ['destinasiWisata' => $post->destinasiWisata->id]) }}">{{ $post->destinasiWisata->nama }}</a>
+                                                                    </h3>
+                                                                    <div class="description">
+                                                                        {{ $post->destinasiWisata->Deskripsi }}</div>
+                                                                    <!-- Tambahkan link menuju postingan Destinasi Wisata -->
+                                                                    <a href="{{ route('pengunjung.destinasi.show', ['destinasiWisata' => $post->destinasiWisata->id]) }}"
+                                                                        class="btn btn-primary mt-2">Lihat
+                                                                        Selengkapnya</a>
+                                                                @elseif ($post->destinasiKuliner)
+                                                                    <span
+                                                                        class="badge bg-primary me-1 mb-1 mt-1">Berasal
+                                                                        dari tabel Destinasi Kuliner</span>
+                                                                    <h3><a
+                                                                            href="{{ route('pengunjung.kuliner.show', ['destinasiKuliner' => $post->destinasiKuliner->id]) }}">{{ $post->destinasiKuliner->nama }}</a>
+                                                                    </h3>
+                                                                    <div class="description">
+                                                                        {{ $post->destinasiKuliner->Deskripsi }}</div>
+                                                                    <!-- Tambahkan link menuju postingan Destinasi Kuliner -->
+                                                                    <a href="{{ route('pengunjung.kuliner.show', ['destinasiKuliner' => $post->destinasiKuliner->id]) }}"
+                                                                        class="btn btn-primary mt-2">Lihat
+                                                                        Selengkapnya</a>
+                                                                @elseif ($post->destinasiHotel)
+                                                                    <span
+                                                                        class="badge bg-primary me-1 mb-1 mt-1">Berasal
+                                                                        dari tabel Destinasi Hotel</span>
+                                                                    <h3><a
+                                                                            href="{{ route('pengunjung.hotel.show', ['destinasihotel' => $post->destinasiHotel->id]) }}">{{ $post->destinasiHotel->nama }}</a>
+                                                                    </h3>
+                                                                    <div class="description">
+                                                                        {{ $post->destinasiHotel->Deskripsi }}</div>
+                                                                    <!-- Tambahkan link menuju postingan Destinasi Hotel -->
+                                                                    <a href="{{ route('pengunjung.hotel.show', ['destinasihotel' => $post->destinasiHotel->id]) }}"
+                                                                        class="btn btn-primary mt-2">Lihat
+                                                                        Selengkapnya</a>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
                                         <div class="text-center">
-                                            <a href="blog.html" target="_blank" class="btn btn-outline-primary pt-2 pb-2"><i
+                                            <a href="blog.html" target="_blank"
+                                                class="btn btn-outline-primary pt-2 pb-2"><i
                                                     class="fe fe-arrow-right me-2"></i>Discover More
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             @foreach ($data as $item)
-                            <div class="section">
-                                <div class="container">
-                                    <div class="row">
-                                        <section class="sptb demo-screen-demo" id="faqs">
-                                            <div class="container text-center">
+                                <div class="section">
+                                    <div class="container">
+                                        <div class="row">
+                                            <section class="sptb demo-screen-demo" id="faqs">
+                                                <div class="container text-center">
 
-                                                <div class="row align-items-center">
-                                                    <h4 class="text-center fw-semibold">Visi dan Misi</h4>
-                                                    <span class="landing-title"></span>
-                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
-                                                    <div class="col-lg-12">
-                                                        <div class="row justify-content-center">
-                                                            <p class="col-lg-9 text-default sub-text mb-7">
-                                                                {{ $item->visi_misi }}
-                                                            </p>
+                                                    <div class="row align-items-center">
+                                                        <h4 class="text-center fw-semibold">Visi dan Misi</h4>
+                                                        <span class="landing-title"></span>
+                                                        {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                        <div class="col-lg-12">
+                                                            <div class="row justify-content-center">
+                                                                <p class="col-lg-9 text-default sub-text mb-7">
+                                                                    {{ $item->visi_misi }}
+                                                                </p>
+                                                            </div>
+
                                                         </div>
-
                                                     </div>
-                                                </div>
 
-                                                <div class="row align-items-center">
-                                                    <h4 class="text-center fw-semibold">Deskripsi</h4>
-                                                    <span class="landing-title"></span>
-                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
-                                                    <div class="col-lg-12">
-                                                        <div class="row justify-content-center">
-                                                            <p class="col-lg-9 text-default sub-text mb-7">
-                                                                {{ $item->Deskripsi }}
-                                                            </p>
+                                                    <div class="row align-items-center">
+                                                        <h4 class="text-center fw-semibold">Deskripsi</h4>
+                                                        <span class="landing-title"></span>
+                                                        {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                        <div class="col-lg-12">
+                                                            <div class="row justify-content-center">
+                                                                <p class="col-lg-9 text-default sub-text mb-7">
+                                                                    {{ $item->Deskripsi }}
+                                                                </p>
+                                                            </div>
+
                                                         </div>
-
                                                     </div>
-                                                </div>
 
-                                                <div class="row align-items-center">
-                                                    <h4 class="text-center fw-semibold">Sejarah</h4>
-                                                    <span class="landing-title"></span>
-                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
-                                                    <div class="col-lg-12">
-                                                        <div class="row justify-content-center">
-                                                            <p class="col-lg-9 text-default sub-text mb-7">
-                                                                {{ $item->sejarah }}
-                                                            </p>
+                                                    <div class="row align-items-center">
+                                                        <h4 class="text-center fw-semibold">Sejarah</h4>
+                                                        <span class="landing-title"></span>
+                                                        {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                        <div class="col-lg-12">
+                                                            <div class="row justify-content-center">
+                                                                <p class="col-lg-9 text-default sub-text mb-7">
+                                                                    {{ $item->sejarah }}
+                                                                </p>
+                                                            </div>
+
                                                         </div>
-
                                                     </div>
-                                                </div>
 
-                                                <div class="row align-items-center">
-                                                    <h4 class="text-center fw-semibold">Letak Geografis</h4>
-                                                    <span class="landing-title"></span>
-                                                    {{-- <h2 class="text-center fw-semibold"></h2> --}}
-                                                    <div class="col-lg-12">
-                                                        <div class="row justify-content-center">
-                                                            <p class="col-lg-9 text-default sub-text mb-7">
-                                                                {{ $item->geografis }}
-                                                            </p>
+                                                    <div class="row align-items-center">
+                                                        <h4 class="text-center fw-semibold">Letak Geografis</h4>
+                                                        <span class="landing-title"></span>
+                                                        {{-- <h2 class="text-center fw-semibold"></h2> --}}
+                                                        <div class="col-lg-12">
+                                                            <div class="row justify-content-center">
+                                                                <p class="col-lg-9 text-default sub-text mb-7">
+                                                                    {{ $item->geografis }}
+                                                                </p>
+                                                            </div>
+
                                                         </div>
-
                                                     </div>
-                                                </div>
 
-                                            </div>
-                                        </section>
+                                                </div>
+                                            </section>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
 
 
@@ -366,7 +396,7 @@
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var options = {
                 strings: ['E-Pariwisata Kabupaten Soppeng'],
                 typeSpeed: 100, // Speed of typing in milliseconds

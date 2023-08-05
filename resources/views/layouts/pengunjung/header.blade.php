@@ -7,7 +7,7 @@
             <a class="logo-horizontal " href="">
                 <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
                 <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
-            </a>
+            </a>1
             <!-- LOGO -->
             {{-- <div class="d-flex order-lg-2 ms-auto header-right-icons">
                 <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"

@@ -27,27 +27,30 @@ class DestinasiWisataController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'HargaTiket' => 'nullable|string|max:255',
-            'FasilitasDestinasi' => 'nullable|string|max:255',
-            'JamBuka' => 'nullable|string|max:255',
-            'Deskripsi' => 'nullable|string',
-            'Sejarah' => 'nullable|string',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar sampul yang diizinkan
-            'gambar' => 'nullable|array',
-            'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar yang diizinkan
-        ], [
-        'nama.required' => 'Pastikan Anda mengisi nama destinasi.',
-        'alamat.required' => 'Pastikan Anda mengisi alamat destinasi.',
-        'latitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi.',
-        'longitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi.',
-        'gambar.0.image' => 'Pastikan Anda Memilih gambar yang sesuai dengan format dan size yang telah ditentukan.',
-        'gambar.0.mimes' => 'Pastikan Anda Memilih gambar dengan format: jpeg, png, jpg, gif.',
-    ]);
+        $request->validate(
+            [
+                'nama' => 'required|string|max:255',
+                'alamat' => 'required|string|max:255',
+                'HargaTiket' => 'nullable|string|max:255',
+                'FasilitasDestinasi' => 'nullable|string|max:255',
+                'JamBuka' => 'nullable|string|max:255',
+                'Deskripsi' => 'nullable|string',
+                'Sejarah' => 'nullable|string',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
+                'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar sampul yang diizinkan
+                'gambar' => 'nullable|array',
+                'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar yang diizinkan
+            ],
+            [
+                'nama.required' => 'Pastikan Anda mengisi nama destinasi.',
+                'alamat.required' => 'Pastikan Anda mengisi alamat destinasi.',
+                'latitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi.',
+                'longitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi.',
+                'gambar.0.image' => 'Pastikan Anda Memilih gambar yang sesuai dengan format dan size yang telah ditentukan.',
+                'gambar.0.mimes' => 'Pastikan Anda Memilih gambar dengan format: jpeg, png, jpg, gif.',
+            ],
+        );
         // Ambil data dari form
         $nama = $request->input('nama');
         $alamat = $request->input('alamat');
@@ -106,7 +109,6 @@ class DestinasiWisataController extends Controller
                 ->back()
                 ->with('error', 'Gagal menambahkan destinasi wisata.');
         }
-        
     }
 
     public function show($id)
@@ -122,9 +124,26 @@ class DestinasiWisataController extends Controller
         return view('destinasi_wisata.show', compact('destinasiWisata'));
     }
 
-    public function index()
+    // public function index()
+    // {
+    //     $destinasiWisataList = DestinasiWisata::all();
+
+    //     return view('destinasi_wisata.index', ['destinasiWisataList' => $destinasiWisataList]);
+    // }
+
+    public function index(Request $request)
     {
-        $destinasiWisataList = DestinasiWisata::all();
+        $query = DestinasiWisata::query();
+
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            // Add other fields if you want to search on them as well
+        }
+
+        // Get paginated results
+        $destinasiWisataList = $query->paginate(2); // Change 10 to your desired items per page
 
         return view('destinasi_wisata.index', ['destinasiWisataList' => $destinasiWisataList]);
     }

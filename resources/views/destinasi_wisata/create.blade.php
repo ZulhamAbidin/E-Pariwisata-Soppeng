@@ -87,7 +87,7 @@
                             <div class="form-group">
                                 <label for="gambar">Gambar</label>
                                 <input type="file" name="gambar[]" required id="gambar" class="form-control-file" multiple>
-                                <small class="form-text text-muted" >Unggah gambar baru Maksimal 3 Gambar (jpeg, png, jpg,
+                                <small class="form-text text-muted" >Unggah gambar baru Maksimal 4 Gambar (jpeg, png, jpg,
                                     gif)</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>

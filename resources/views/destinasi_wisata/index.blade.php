@@ -15,17 +15,28 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                {{-- <div class="card">
+                <div class="card">
 
                     <div class="card-body pb-4">
-                        <div class="input-group mb-2">
-                            <input type="seach" class="form-control form-control" id="search-input"
-                                placeholder="Searching.....">
-                            <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
-                        </div>
+                        {{-- <form action="{{ route('destinasi-wisata.index') }}" method="GET"></form>
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control form-control" id="search-input"
+                                    placeholder="Searching....." name="search">
+                                <button type="submit" class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</button>
+                            </div>
+                        </form> --}}
+
+                        <form action="{{ route('destinasi-wisata.index') }}" method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" name="search" class="form-control" placeholder="Cari Destinasi Wisata">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Cari</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                </div> --}}
+                </div>
 
                 <div class="card">
                     <div class="card-header">
@@ -33,7 +44,7 @@
                     </div>
 
                     <div class="card-body">
-                       
+
 
                         <div class="side-app">
 
@@ -83,6 +94,9 @@
                                         </div>
                                     </div>
                                 @endforeach
+
+                                {{ $destinasiWisataList->links('pagination::bootstrap-5') }}
+
                             </div>
 
 
