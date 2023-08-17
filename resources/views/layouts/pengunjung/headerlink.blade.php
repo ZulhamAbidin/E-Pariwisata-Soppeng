@@ -11,8 +11,7 @@
                     </a>
                     <ul class="side-menu">
                         <li class="slide">
-                            <a class="bok"
-                                data-bs-toggle="slide" href="{{ route('deskripsi.index') }}"><span
+                            <a class="bok" data-bs-toggle="slide" href="{{ route('deskripsi.index') }}"><span
                                     class="side-menu__label">Home</span></a>
                         </li>
                         <li class="slide">
@@ -34,25 +33,25 @@
                                 href="{{ route('pengunjung.kebudayaan.index') }}"><span
                                     class="side-menu__label">Kebudayaan</span></a>
                         </li>
-                        {{-- <li class="slide">
-                            <a class="bok" data-bs-toggle="slide" href="{{ route('deskripsi.index') }}"><span
-                                    class="side-menu__label">Deskripsi</span></a>
-                        </li> --}}
-                        {{-- <li class="slide">
-                            <a class="bok" data-bs-toggle="slide" href=""><span
-                                    class="side-menu__label">Contact</span></a>
-                        </li> --}}
+                        <!-- index.blade.php -->
+
                     </ul>
-                    {{-- <div class="header-nav-right d-none d-lg-flex">
-                        <a href="register.html"
-                            class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                            target="_blank">New User
-                        </a>
-                        <a href="login.html"
-                            class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                            target="_blank">Login
-                        </a>
-                    </div> --}}
+                    <div class="header-nav-right d-none d-lg-flex">
+                        @auth
+                            <div class="d-lg-none d-xl-block">
+                                <a href="{{ route('dashboard.index') }}"
+                                    class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
+                            </div>
+                        @endauth
+
+                        @guest
+                            <div class="d-lg-none d-xl-block">
+                                <a href="{{ route('login') }}"
+                                    class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login</a>
+                            </div>
+                        @endguest
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,6 +65,13 @@
             display: block !important;
             padding-top: 15px !important;
             margin-bottom: 10px !important;
+        }
+    }
+
+    @media screen and (min-width: 993px) {
+        .bok {
+            display: inline-block !important;
+            /* Anda dapat menambahkan properti styling lain untuk menyesuaikan tampilan */
         }
     }
 </style>

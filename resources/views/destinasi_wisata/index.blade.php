@@ -26,14 +26,14 @@
                             </div>
                         </form> --}}
 
-                        <form action="{{ route('destinasi-wisata.index') }}" method="GET">
+                        {{-- <form action="{{ route('destinasi-wisata.index') }}" method="GET">
                             <div class="input-group mb-3">
                                 <input type="text" name="search" class="form-control" placeholder="Cari Destinasi Wisata">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">Cari</button>
                                 </div>
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
 
                 </div>
@@ -95,7 +95,7 @@
                                     </div>
                                 @endforeach
 
-                                {{ $destinasiWisataList->links('pagination::bootstrap-5') }}
+                                {{-- {{ $destinasiWisataList->links('pagination::bootstrap-5') }} --}}
 
                             </div>
 
