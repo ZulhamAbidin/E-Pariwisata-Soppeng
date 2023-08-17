@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DestinasiKuliner;
+use App\Models\Destinasi;
 use App\Models\Komentar;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -11,16 +11,40 @@ use Illuminate\Database\QueryException;
 
 class PengunjungKulinerController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $destinasiKulinerList = Destinasi::all();
+    //     return view('kuliner.kuliner_list', compact('destinasiKulinerList'));
+    // }
+
+    public function index(Request $request)
     {
-        $destinasiKulinerList = DestinasiKuliner::all();
+        $query = Destinasi::query();
+
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($subquery) use ($search) {
+                $subquery->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            });
+
+            // Add filter by kategori
+            $query->where('kategori', 'kuliner');
+        } else {
+            // Filter by kategori if no search query
+            $query->where('kategori', 'kuliner');
+        }
+
+        // Get paginated results
+        $destinasiKulinerList = $query->paginate(2); // Ganti 2 dengan jumlah item per halaman yang diinginkan
+
         return view('kuliner.kuliner_list', compact('destinasiKulinerList'));
     }
 
-    public function show(DestinasiKuliner $destinasiKuliner)
-    {
-        // Ambil data daftar destinasi kuliner terbaru (kecuali destinasi kuliner saat ini)
-        $daftarKulinerTerbaru = DestinasiKuliner::where('id', '!=', $destinasiKuliner->id)
+    public function show(Destinasi $destinasiKuliner)
+    {               
+        $daftarKulinerTerbaru = Destinasi::where('kategori', 'Kuliner')
+            ->where('id', '!=', $destinasiKuliner->id)
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
@@ -33,13 +57,13 @@ class PengunjungKulinerController extends Controller
         return view('kuliner.kuliner_detail', compact('destinasiKuliner', 'daftarKulinerTerbaru', 'totalRating', 'averageRating', 'comments'));
     }
 
-    public function totalRating(DestinasiKuliner $destinasiKuliner)
+    public function totalRating(Destinasi $destinasiKuliner)
     {
         // Menghitung total rating dari komentar-komentar pada destinasi kuliner
         return $destinasiKuliner->komentars()->sum('rating');
     }
 
-    public function averageRating(DestinasiKuliner $destinasiKuliner)
+    public function averageRating(Destinasi $destinasiKuliner)
     {
         // Menghitung rata-rata rating dari komentar-komentar pada destinasi kuliner
         $totalRating = $this->totalRating($destinasiKuliner);
@@ -52,7 +76,7 @@ class PengunjungKulinerController extends Controller
         }
     }
 
-    public function tambahKomentar(Request $request, DestinasiKuliner $destinasiKuliner)
+    public function tambahKomentar(Request $request, Destinasi $destinasiKuliner)
 {
     $validator = Validator::make($request->all(), [
         'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'], // Hanya huruf dan spasi yang diperbolehkan

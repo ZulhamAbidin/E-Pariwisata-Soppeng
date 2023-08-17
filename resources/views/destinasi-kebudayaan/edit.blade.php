@@ -64,8 +64,8 @@
 
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea name="deskripsi" id="deskripsi"
-                                class="form-control">{{ $kebudayaan->deskripsi }}</textarea>
+                            <textarea name="Deskripsi" id="Deskripsi"
+                                class="form-control">{{ $kebudayaan->Deskripsi }}</textarea>
                         </div>
 
                         <div class="form-group">

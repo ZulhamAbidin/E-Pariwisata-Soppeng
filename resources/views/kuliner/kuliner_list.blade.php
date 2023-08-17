@@ -3,6 +3,22 @@
 @section('container')
     <div class="section bg-landing" id="Blog">
         <div class="container">
+
+            <div class="card">
+            
+                <div class="card-body pb-4">
+                    <form action="{{ route('pengunjung.kuliner.index') }}" method="GET">
+                        <div class="input-group mb-3">
+                            <input type="text" name="search" class="form-control" placeholder="Cari Destinasi">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            
+            </div>
+
             <div class="row">
                 <h4 class="text-center fw-semibold bok">Postingan Kuliner Terbaru </h4>
                 <span class="landing-title"></span>

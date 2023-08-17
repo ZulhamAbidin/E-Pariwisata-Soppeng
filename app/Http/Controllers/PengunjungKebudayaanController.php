@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kebudayaan;
+use App\Models\Destinasi;
 use App\Models\Komentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,16 +10,40 @@ use Illuminate\Database\QueryException;
 
 class PengunjungKebudayaanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $destinasikebudayaanList = Kebudayaan::all();
+        $query = Destinasi::query();
+
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($subquery) use ($search) {
+                $subquery->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            });
+
+            // Add filter by kategori
+            $query->where('kategori', 'kebudayaan');
+        } else {
+            // Filter by kategori if no search query
+            $query->where('kategori', 'kebudayaan');
+        }
+
+        // Get paginated results
+        $destinasikebudayaanList = $query->paginate(2); // Ganti 2 dengan jumlah item per halaman yang diinginkan
+
         return view('kebudayaan.kebudayaan_list', compact('destinasikebudayaanList'));
     }
 
-    public function show(Kebudayaan $destinasikebudayaan)
+    public function show(Destinasi $destinasikebudayaan)
     {
         // Ambil data daftar destinasi kebudayaan terbaru (kecuali destinasi kebudayaan saat ini)
-        $daftarkebudayaanTerbaru = Kebudayaan::where('id', '!=', $destinasikebudayaan->id)
+        // $daftarkebudayaanTerbaru = Destinasi::where('id', '!=', $destinasikebudayaan->id)
+        //     ->orderBy('created_at', 'desc')
+        //     ->limit(5)
+        //     ->get();
+
+        $daftarkebudayaanTerbaru = Destinasi::where('kategori', 'Kebudayaan')
+            ->where('id', '!=', $destinasikebudayaan->id)
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
@@ -32,13 +56,13 @@ class PengunjungKebudayaanController extends Controller
         return view('kebudayaan.kebudayaan_detail', compact('destinasikebudayaan', 'daftarkebudayaanTerbaru', 'totalRating', 'averageRating', 'comments'));
     }
 
-    public function totalRating(Kebudayaan $destinasikebudayaan)
+    public function totalRating(Destinasi $destinasikebudayaan)
     {
         // Menghitung total rating dari komentar-komentar pada destinasi kebudayaan
         return $destinasikebudayaan->komentars()->sum('rating');
     }
 
-    public function averageRating(Kebudayaan $destinasikebudayaan)
+    public function averageRating(Destinasi $destinasikebudayaan)
     {
         // Menghitung rata-rata rating dari komentar-komentar pada destinasi kebudayaan
         $totalRating = $this->totalRating($destinasikebudayaan);
@@ -51,7 +75,7 @@ class PengunjungKebudayaanController extends Controller
         }
     }
 
-    public function tambahKomentar(Request $request, Kebudayaan $destinasikebudayaan)
+    public function tambahKomentar(Request $request, Destinasi $destinasikebudayaan)
     {
         $validator = Validator::make($request->all(), [
             'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'], // Hanya huruf dan spasi yang diperbolehkan

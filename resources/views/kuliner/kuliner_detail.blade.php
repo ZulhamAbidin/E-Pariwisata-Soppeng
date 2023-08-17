@@ -5,8 +5,8 @@
 
         <div class="row">
 
-            <div class="col-xl-8">
-                <div class="card">
+            <div class="col-xl-7">
+                <div class="card mt-4">
                     <img class="card-img-top" src="{{ asset('storage/' . $destinasiKuliner->sampul) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="d-md-flex">
@@ -191,7 +191,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 mt-6">
+            <div class="col-xl-5 mt-6">
 
                 <div class="card">
                     <div class="card-header">
@@ -202,13 +202,13 @@
 
                             @foreach ($daftarKulinerTerbaru as $postinganTerbaru)
                                 <div class="d-flex overflow-visible">
-                                    <a href="{{ route('pengunjung.destinasi.show', $postinganTerbaru) }}"
+                                    <a href="{{ route('pengunjung.kuliner.show', $postinganTerbaru) }}"
                                         class="card-aside-column br-5 cover-image"
                                         data-bs-image-src="{{ asset('storage/' . $postinganTerbaru->sampul) }}"
                                         style="background: url('{{ asset('storage/' . $postinganTerbaru->sampul) }}') center center;"></a>
                                     <div class="ps-3 flex-column">
                                         <h4><a
-                                                href="{{ route('pengunjung.destinasi.show', $postinganTerbaru) }}">{{ $postinganTerbaru->nama }}</a>
+                                                href="{{ route('pengunjung.kuliner.show', $postinganTerbaru) }}">{{ $postinganTerbaru->nama }}</a>
                                         </h4>
                                         <div class="text-muted">{{ $postinganTerbaru->alamat }}</div>
                                     </div>

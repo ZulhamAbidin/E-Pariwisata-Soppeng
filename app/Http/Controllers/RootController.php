@@ -5,32 +5,52 @@ namespace App\Http\Controllers;
 use App\Models\Komentar;
 use Illuminate\Http\Request;
 use App\Models\DeskripsiKabupaten;
-use App\Models\DestinasiKuliner;
-use App\Models\DestinasiHotel;
-use App\Models\Kebudayaan;
-use App\Models\DestinasiWisata;
+use App\Models\Destinasi;
 use Illuminate\Database\Eloquent\Collection;
-
 
 class RootController extends Controller
 {
- public function index()
-{
-    $data = DeskripsiKabupaten::all();
+    public function index()
+    {
+        $data = DeskripsiKabupaten::all();
+        // Ambil 2 destinasi dengan rating rata-rata tertinggi
+        $topRatedDestinations = Destinasi::with('komentars')
+            ->withAvg('komentars', 'rating')
+            ->orderByDesc('komentars_avg_rating')
+            ->limit(4)
+            ->get();
 
-    // Mengambil semua postingan dari tabel komentars beserta ratingnya dan data nama destinasi serta deskripsi
-    $posts = Komentar::with(['kebudayaan', 'destinasiWisata', 'destinasiKuliner', 'destinasiHotel'])
-        ->select('komentars.*', 'kebudayaan.nama as nama_kebudayaan', 'kebudayaan.deskripsi as deskripsi_kebudayaan',
-                 'destinasi_wisata.nama as nama_wisata', 'destinasi_wisata.deskripsi as deskripsi_wisata',
-                 'destinasi_kuliner.nama as nama_kuliner', 'destinasi_kuliner.deskripsi as deskripsi_kuliner',
-                 'destinasi_hotel.nama as nama_hotel', 'destinasi_hotel.deskripsi as deskripsi_hotel')
-        ->leftJoin('kebudayaan', 'komentars.kebudayaan_id', '=', 'kebudayaan.id')
-        ->leftJoin('destinasi_wisata', 'komentars.destinasi_wisata_id', '=', 'destinasi_wisata.id')
-        ->leftJoin('destinasi_kuliner', 'komentars.destinasi_kuliner_id', '=', 'destinasi_kuliner.id')
-        ->leftJoin('destinasi_hotel', 'komentars.destinasi_hotel_id', '=', 'destinasi_hotel.id')
-        ->orderByDesc('rating')
-        ->get();
+        return view('welcome', compact('data', 'topRatedDestinations'));
+    }
 
-    return view('welcome', compact('posts', 'data'));
-}
+    public function cari(Request $request)
+    {
+        $keyword = $request->input('search'); // Ambil keyword pencarian dari input form
+        $posts = Destinasi::where('nama', 'like', '%' . $keyword . '%')
+            ->orWhere('alamat', 'like', '%' . $keyword . '%')
+            ->orWhere('HargaTiket', 'like', '%' . $keyword . '%')
+            ->orWhere('FasilitasDestinasi', 'like', '%' . $keyword . '%')
+            ->orWhere('JamBuka', 'like', '%' . $keyword . '%')
+            ->orWhere('Deskripsi', 'like', '%' . $keyword . '%')
+            ->orWhere('Sejarah', 'like', '%' . $keyword . '%')
+            ->orWhere('MenuKuliner', 'like', '%' . $keyword . '%')
+            ->orWhere('kategori', 'like', '%' . $keyword . '%')
+            ->get();
+        $noResults = $posts->isEmpty(); // Cek apakah tidak ada hasil
+
+        return view('postingan.semua-postingan', compact('posts', 'keyword', 'noResults'));
+    }
+
+
+    public function show(Destinasi $destination)
+    {
+        return view('postingan.detail', compact('destination'));
+    }
+
+    public function showAllPosts()
+    {
+        $posts = Destinasi::all(); // Ganti 'Postingan' dengan model yang sesuai
+
+        return view('postingan.semua-postingan', compact('posts'));
+    }
 }

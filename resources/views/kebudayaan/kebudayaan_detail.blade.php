@@ -5,8 +5,8 @@
 
         <div class="row">
 
-            <div class="col-xl-8">
-                <div class="card">
+            <div class="col-xl-7">
+                <div class="card mt-6">
                     <img class="card-img-top" src="{{ asset('storage/' . $destinasikebudayaan->sampul) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="d-md-flex">
@@ -191,7 +191,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 mt-6">
+            <div class="col-xl-5 mt-6">
 
                 <div class="card">
                     <div class="card-header">

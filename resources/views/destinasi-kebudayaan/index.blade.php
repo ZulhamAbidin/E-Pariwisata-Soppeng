@@ -15,10 +15,25 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
+
+                <div class="card">
+                    <div class="card-body pb-4">
+                        <form action="{{ route('destinasi-kebudayaan.index') }}" method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" name="search" class="form-control" placeholder="Cari Destinasi">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Cari</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">List Kebudayaan</h4>
                     </div>
+
 
                     <div class="card-body">
                         <div class="side-app">
