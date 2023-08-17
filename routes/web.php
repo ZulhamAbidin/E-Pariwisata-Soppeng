@@ -23,7 +23,7 @@ use App\Http\Controllers\PengunjungKebudayaanController;
 Route::get('/', [RootController::class, 'index'])->name('deskripsi.index');
 Route::get('/semua-postingan', [RootController::class, 'showAllPosts'])->name('semua.postingan');
 Route::get('/destination/{destination}', [RootController::class, 'show'])->name('destination.show');
-
+Route::get('/cari-postingan', [RootController::class, 'cari'])->name('cari.postingan');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth', 'verified']);
 

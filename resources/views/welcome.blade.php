@@ -8,7 +8,6 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
-    <!-- TITLE -->
     <title>E-Pariwisata</title>
 
     <style>
@@ -91,7 +90,6 @@
                     <!-- CONTAINER -->
                     <div class="main-container">
                         <div class="">
-
 
                             <!-- FITUR LIST -->
                             <div class="sptb section bg-white" id="Features">
@@ -183,7 +181,6 @@
                                 </div>
                             </div>
 
-
                             <style>
                                 .square-image {
                                     width: 200px;
@@ -201,31 +198,88 @@
                                 }
                             </style>
 
-                           <div class="section bg-landing" id="Blog">
-                            <div class="container">
-                                <div class="row">
-                                    <h4 class="text-center fw-semibold">Postingan Dengan Rating Tertinggi </h4>
-                                    <span class="landing-title"></span>
-                                    <h2 class="text-center fw-semibold mb-7"></h2>
-                                    
-                                 @foreach($topRatedDestinations as $destination)
-                                <li>
-                                    Nama Destinasi: {{ $destination->nama }}<br>
-                                    Alamat: {{ $destination->alamat }}<br>
-                                    Rating Rata-rata: {{ $destination->komentars_avg_rating }}
-                                    <br>
-                                    <a href="{{ route('destination.show', ['destination' => $destination->id]) }}">Lihat Detail</a>
-                                </li>
-                                @endforeach
+                            <div class="section bg-landing" id="Blog">
+                                <div class="container">
+                                    <div class="row">
+                                        <h4 class="text-center fw-semibold">Postingan</h4>
+                                        <span class="landing-title"></span>
+                                        <h2 class="text-center fw-semibold mb-7">Postingan Dengan Rating Tertinggi.</h2>
 
-                                    <div class="text-center">
-                                        <a href="{{-- {{ route('semua.postingan') }} --}}" target="_blank" class="btn btn-outline-primary pt-2 pb-2"><i
-                                                class="fe fe-arrow-right me-2"></i>Discover More
-                                        </a>
+                                        <div id="topRatedDestinationsContainer" class="row">
+                                            @foreach ($topRatedDestinations->take(2) as $destination)
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-transparent reveal active">
+                                                        <div class="card-body px-1">
+                                                            <div class="d-flex overflow-visible">
+                                                                <a href="{{ route('destination.show', ['destination' => $destination->id]) }}"
+                                                                    class="card-aside-column br-5 cover-image"
+                                                                    data-bs-image-src={{ asset('storage/' . $destination->sampul) }}
+                                                                    style="background: url(&quot;{{ asset('storage/' . $destination->sampul) }}&quot;)   center center;"></a>
+                                                                <div class="ps-3 flex-column">
+                                                                    <span
+                                                                        class="badge bg-primary me-1 mb-1 mt-1 text-uppercase">{{ $destination->kategori }}</span>
+                                                                    <h3><a
+                                                                            href="{{ route('destination.show', ['destination' => $destination->id]) }}">{{ $destination->nama }}</a>
+                                                                    </h3>
+                                                                    <p>Alamat: {{ $destination->alamat }}</p>
+                                                                    <p>Rating Rata-rata:
+                                                                        {{ number_format($destination->komentars_avg_rating, 2) }}
+                                                                    </p>
+                                                                    <a href="{{ route('destination.show', ['destination' => $destination->id]) }}"
+                                                                        class="btn btn-primary btn-sm btn-block">Lihat
+                                                                        Detail</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <div id="hiddenDestinations" class="row" style="display: none;">
+                                            @foreach ($topRatedDestinations->slice(2) as $destination)
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-transparent reveal active">
+                                                        <div class="card-body px-1">
+                                                            <div class="d-flex overflow-visible">
+                                                                <a href="{{ route('destination.show', ['destination' => $destination->id]) }}"
+                                                                    class="card-aside-column br-5 cover-image"
+                                                                    data-bs-image-src={{ asset('storage/' . $destination->sampul) }}
+                                                                    style="background: url(&quot;{{ asset('storage/' . $destination->sampul) }}&quot;) center
+                                                                center;"></a>
+                                                                <div class="ps-3 flex-column">
+                                                                    <span
+                                                                        class="badge bg-primary me-1 mb-1 mt-1 text-uppercase">{{ $destination->kategori }}</span>
+                                                                    <h3><a
+                                                                            href="{{ route('destination.show', ['destination' => $destination->id]) }}">{{ $destination->nama }}</a>
+                                                                    </h3>
+                                                                    <p>Alamat: {{ $destination->alamat }}</p>
+                                                                    <p>Rating Rata-rata:
+                                                                        {{ number_format($destination->komentars_avg_rating, 2) }}
+                                                                    </p>
+                                                                    <a href="{{ route('destination.show', ['destination' => $destination->id]) }}"
+                                                                        class="btn btn-primary btn-sm btn-block">Lihat
+                                                                        Detail</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                            <a href="{{ route('semua.postingan') }}">Lihat Semua Postingan</a>
+                                        </div>
+
+                                        <div class="text-center d-flex justify-content-center">
+                                            <button id="showMoreButton" class="btn btn-primary">Lihat Lebih
+                                                Banyak</button>
+                                            <button id="hideMoreButton" class="btn btn-primary"
+                                                style="display: none;">Sembunyikan Lebih Banyak</button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                             @foreach ($data as $item)
                                 <div class="section">
@@ -325,6 +379,28 @@
             var typed = new Typed('#typed-text', options);
         });
     </script>
+    <script>
+        var showMoreButton = document.getElementById('showMoreButton');
+        var hideMoreButton = document.getElementById('hideMoreButton');
+        var hiddenDestinationsContainer = document.getElementById('hiddenDestinations');
+
+        showMoreButton.addEventListener('click', showHiddenDestinations);
+        hideMoreButton.addEventListener('click', hideHiddenDestinations);
+
+        function showHiddenDestinations() {
+            hiddenDestinationsContainer.style.display = 'flex';
+            showMoreButton.style.display = 'none';
+            hideMoreButton.style.display = 'block';
+        }
+
+        function hideHiddenDestinations() {
+            hiddenDestinationsContainer.style.display = 'none';
+            showMoreButton.style.display = 'flex';
+            hideMoreButton.style.display = 'none';
+        }
+    </script>
+
+
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
