@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\DestinasiWisata;
+use App\Models\Destinasi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -63,7 +63,7 @@ class DestinasiWisataController extends Controller
         $longitude = $request->input('longitude');
 
         // Simpan data ke dalam database
-        $destinasiWisata = new DestinasiWisata([
+        $destinasiWisata = new Destinasi([
             'nama' => $nama,
             'alamat' => $alamat,
             'HargaTiket' => $hargaTiket,
@@ -73,6 +73,7 @@ class DestinasiWisataController extends Controller
             'Sejarah' => $sejarah,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'kategori' => 'wisata',
         ]);
 
         // Upload dan simpan gambar sampul
@@ -113,7 +114,7 @@ class DestinasiWisataController extends Controller
 
     public function show($id)
     {
-        $destinasiWisata = DestinasiWisata::find($id);
+        $destinasiWisata = Destinasi::find($id);
 
         if (!$destinasiWisata) {
             return redirect()
@@ -124,26 +125,26 @@ class DestinasiWisataController extends Controller
         return view('destinasi_wisata.show', compact('destinasiWisata'));
     }
 
-    // public function index()
-    // {
-    //     $destinasiWisataList = DestinasiWisata::all();
-
-    //     return view('destinasi_wisata.index', ['destinasiWisataList' => $destinasiWisataList]);
-    // }
-
     public function index(Request $request)
     {
-        $query = DestinasiWisata::query();
+        $query = Destinasi::query();
 
         // Check if there is a search query
         if ($request->has('search')) {
             $search = $request->input('search');
-            $query->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
-            // Add other fields if you want to search on them as well
+            $query->where(function ($subquery) use ($search) {
+                $subquery->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            });
+
+            // Add filter by kategori
+            $query->where('kategori', 'wisata');
+        } else {
+            // Filter by kategori if no search query
+            $query->where('kategori', 'wisata');
         }
 
         // Get paginated results
-        $destinasiWisataList = $query->paginate(2); // Change 10 to your desired items per page
+        $destinasiWisataList = $query->paginate(2); // Ganti 2 dengan jumlah item per halaman yang diinginkan
 
         return view('destinasi_wisata.index', ['destinasiWisataList' => $destinasiWisataList]);
     }
@@ -175,7 +176,7 @@ class DestinasiWisataController extends Controller
 
     public function edit($id)
     {
-        $destinasiWisata = DestinasiWisata::find($id);
+        $destinasiWisata = Destinasi::find($id);
 
         if (!$destinasiWisata) {
             return redirect()
@@ -188,7 +189,7 @@ class DestinasiWisataController extends Controller
 
     public function destroy($id)
     {
-        $destinasiWisata = DestinasiWisata::find($id);
+        $destinasiWisata = Destinasi::find($id);
 
         if (!$destinasiWisata) {
             return redirect()
@@ -222,7 +223,7 @@ class DestinasiWisataController extends Controller
         ]);
 
         // Find the destination by ID
-        $destination = DestinasiWisata::find($id);
+        $destination = Destinasi::find($id);
 
         // Update the destination data
         $destination->nama = $request->input('nama');

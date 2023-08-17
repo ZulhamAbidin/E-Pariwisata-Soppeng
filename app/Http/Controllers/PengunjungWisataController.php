@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DestinasiWisata;
+use App\Models\Destinasi;
 use App\Models\Komentar;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -11,19 +11,46 @@ use Illuminate\Database\QueryException;
 
 class PengunjungWisataController extends Controller
 {
-    public function index()
+    
+    public function index(Request $request)
     {
-        $destinasiWisataList = DestinasiWisata::all();
+        $query = Destinasi::query();
+
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($subquery) use ($search) {
+                $subquery->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            });
+
+            // Add filter by kategori
+            $query->where('kategori', 'wisata');
+        } else {
+            // Filter by kategori if no search query
+            $query->where('kategori', 'wisata');
+        }
+
+        // Get paginated results
+        $destinasiWisataList = $query->paginate(2); // Ganti 2 dengan jumlah item per halaman yang diinginkan
+
         return view('wisata.wisata_list', compact('destinasiWisataList'));
     }
 
-    public function show(DestinasiWisata $destinasiWisata)
+    public function show(Destinasi $destinasiWisata)
     {
         // Ambil data daftar postingan terbaru (kecuali postingan saat ini)
-        $daftarPostinganTerbaru = DestinasiWisata::where('id', '!=', $destinasiWisata->id)
+        // $daftarPostinganTerbaru = Destinasi::where('id', '!=', $destinasiWisata->id)
+        //     ->orderBy('created_at', 'desc')
+        //     ->limit(5)
+        //     ->get();
+
+         $daftarPostinganTerbaru = Destinasi::where('kategori', 'Wisata')
+            ->where('id', '!=', $destinasiWisata->id)
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
+
+
         // Hitung total rating dan rating rata-rata
         $totalRating = $this->totalRating($destinasiWisata);
         $averageRating = $this->averageRating($destinasiWisata);
@@ -32,13 +59,13 @@ class PengunjungWisataController extends Controller
         return view('wisata.wisata_detail', compact('destinasiWisata', 'daftarPostinganTerbaru', 'totalRating', 'averageRating', 'comments'));
     }
 
-    public function totalRating(DestinasiWisata $destinasiWisata)
+    public function totalRating(Destinasi $destinasiWisata)
     {
         // Menghitung total rating dari komentar-komentar pada postingan destinasi
         return $destinasiWisata->komentars()->sum('rating');
     }
 
-    public function averageRating(DestinasiWisata $destinasiWisata)
+    public function averageRating(Destinasi $destinasiWisata)
     {
         // Menghitung rata-rata rating dari komentar-komentar pada postingan destinasi
         $totalRating = $this->totalRating($destinasiWisata);
@@ -51,7 +78,7 @@ class PengunjungWisataController extends Controller
         }
     }
 
-public function tambahKomentar(Request $request, DestinasiWisata $destinasiWisata)
+public function tambahKomentar(Request $request, Destinasi $destinasiWisata)
 {
     $validator = Validator::make($request->all(), [
         'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'], // Hanya huruf dan spasi yang diperbolehkan

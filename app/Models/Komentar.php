@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Destinasi;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Komentar extends Model
 {
@@ -16,7 +17,12 @@ class Komentar extends Model
     protected $attributes = [
         'isi_komentar' => null,
     ];
-    
+
+    public function destinasi()
+    {
+        return $this->belongsTo(Destinasi::class, 'destinasi_id');
+    }
+
     public function destinasiWisata()
     {
         return $this->belongsTo(DestinasiWisata::class, 'destinasi_wisata_id');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\DestinasiKuliner;
+use App\Models\Destinasi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -27,25 +27,28 @@ class DestinasiKulinerController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'JamBuka' => 'nullable|string|max:255',
-            'Deskripsi' => 'nullable|string',
-            'MenuKuliner' => 'nullable|string',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar sampul yang diizinkan
-            'gambar' => 'nullable|array',
-            'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar yang diizinkan
-        ], [
-            'nama.required' => 'Pastikan Anda mengisi nama destinasi kuliner.',
-            'alamat.required' => 'Pastikan Anda mengisi alamat destinasi kuliner.',
-            'latitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi Kuliner.',
-            'longitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi Kuliner.',
-            'gambar.0.image' => 'Pastikan Anda Memilih gambar yang sesuai dengan format dan size yang telah ditentukan.',
-            'gambar.0.mimes' => 'Pastikan Anda Memilih gambar dengan format: jpeg, png, jpg, gif.',
-        ]);
+        $request->validate(
+            [
+                'nama' => 'required|string|max:255',
+                'alamat' => 'required|string|max:255',
+                'JamBuka' => 'nullable|string|max:255',
+                'Deskripsi' => 'nullable|string',
+                'MenuKuliner' => 'nullable|string',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
+                'sampul' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar sampul yang diizinkan
+                'gambar' => 'nullable|array',
+                'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048', // Format dan ukuran gambar yang diizinkan
+            ],
+            [
+                'nama.required' => 'Pastikan Anda mengisi nama destinasi kuliner.',
+                'alamat.required' => 'Pastikan Anda mengisi alamat destinasi kuliner.',
+                'latitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi Kuliner.',
+                'longitude.required' => 'Pastikan Anda Memilih Lokasi Destinasi Kuliner.',
+                'gambar.0.image' => 'Pastikan Anda Memilih gambar yang sesuai dengan format dan size yang telah ditentukan.',
+                'gambar.0.mimes' => 'Pastikan Anda Memilih gambar dengan format: jpeg, png, jpg, gif.',
+            ],
+        );
 
         // Ambil data dari form
         $nama = $request->input('nama');
@@ -57,7 +60,7 @@ class DestinasiKulinerController extends Controller
         $longitude = $request->input('longitude');
 
         // Simpan data ke dalam database
-        $destinasiKuliner = new DestinasiKuliner([
+        $destinasiKuliner = new Destinasi([
             'nama' => $nama,
             'alamat' => $alamat,
             'JamBuka' => $jamBuka,
@@ -65,6 +68,7 @@ class DestinasiKulinerController extends Controller
             'MenuKuliner' => $menukuliner,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'kategori' => 'kuliner',
         ]);
 
         // Upload dan simpan gambar sampul
@@ -105,7 +109,7 @@ class DestinasiKulinerController extends Controller
 
     public function show($id)
     {
-        $destinasiKuliner = DestinasiKuliner::find($id);
+        $destinasiKuliner = Destinasi::find($id);
 
         if (!$destinasiKuliner) {
             return redirect()
@@ -116,9 +120,33 @@ class DestinasiKulinerController extends Controller
         return view('destinasi_kuliner.show', compact('destinasiKuliner'));
     }
 
-    public function index()
+    // public function index()
+    // {
+    //     // $destinasiKulinerList = Destinasi::all();
+    //     $destinasiKulinerList = Destinasi::where('kategori', 'Kuliner')->get();
+    //     return view('destinasi_kuliner.index', ['destinasiKulinerList' => $destinasiKulinerList]);
+    // }
+
+    public function index(Request $request)
     {
-        $destinasiKulinerList = DestinasiKuliner::all();
+        $query = Destinasi::query();
+
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($subquery) use ($search) {
+                $subquery->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            });
+
+            // Add filter by kategori
+            $query->where('kategori', 'kuliner');
+        } else {
+            // Filter by kategori if no search query
+            $query->where('kategori', 'kuliner');
+        }
+
+        // Get paginated results
+        $destinasiKulinerList = $query->paginate(2); // Ganti 2 dengan jumlah item per halaman yang diinginkan
 
         return view('destinasi_kuliner.index', ['destinasiKulinerList' => $destinasiKulinerList]);
     }
@@ -150,7 +178,7 @@ class DestinasiKulinerController extends Controller
 
     public function edit($id)
     {
-        $destinasiKuliner = DestinasiKuliner::find($id);
+        $destinasiKuliner = Destinasi::find($id);
 
         if (!$destinasiKuliner) {
             return redirect()
@@ -163,7 +191,7 @@ class DestinasiKulinerController extends Controller
 
     public function destroy($id)
     {
-        $destinasiKuliner = DestinasiKuliner::find($id);
+        $destinasiKuliner = Destinasi::find($id);
 
         if (!$destinasiKuliner) {
             return redirect()
@@ -195,7 +223,7 @@ class DestinasiKulinerController extends Controller
         ]);
 
         // Find the destination by ID
-        $destination = DestinasiKuliner::find($id);
+        $destination = Destinasi::find($id);
 
         // Update the destination data
         $destination->nama = $request->input('nama');

@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Models\DestinasiHotel;
+use App\Models\Destinasi;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -55,13 +55,14 @@ class DestinasiHotelController extends Controller
         $longitude = $request->input('longitude');
 
         // Simpan data ke dalam database
-        $destinasihotel = new DestinasiHotel([
+        $destinasihotel = new Destinasi([
             'nama' => $nama,
             'alamat' => $alamat,
             'JamBuka' => $jamBuka,
             'Deskripsi' => $deskripsi,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'kategori' => 'hotel',
         ]);
 
         // Upload dan simpan gambar sampul
@@ -102,7 +103,7 @@ class DestinasiHotelController extends Controller
 
     public function show($id)
     {
-        $destinasihotel = DestinasiHotel::find($id);
+        $destinasihotel = Destinasi::find($id);
 
         if (!$destinasihotel) {
             return redirect()
@@ -113,12 +114,41 @@ class DestinasiHotelController extends Controller
         return view('destinasi_hotel.show', compact('destinasihotel'));
     }
 
-    public function index()
+    // public function index()
+    // {
+    //     // $destinasihotelList = Destinasi::all();
+    //     $destinasihotelList = Destinasi::where('kategori', 'Hotel')->get();
+
+    //     return view('destinasi_Hotel.index', ['destinasihotelList' => $destinasihotelList]);
+    // }
+
+    public function index(Request $request)
     {
-        $destinasihotelList = DestinasiHotel::all();
+        $query = Destinasi::query();
+
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($subquery) use ($search) {
+                $subquery->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            });
+
+            // Add filter by kategori
+            $query->where('kategori', 'hotel');
+        } else {
+            // Filter by kategori if no search query
+            $query->where('kategori', 'hotel');
+        }
+
+        // Get paginated results
+        $destinasihotelList = $query->paginate(2); // Ganti 2 dengan jumlah item per halaman yang diinginkan
 
         return view('destinasi_Hotel.index', ['destinasihotelList' => $destinasihotelList]);
     }
+
+
+
+
 
     private function geocodeAlamat($alamat)
     {
@@ -147,7 +177,7 @@ class DestinasiHotelController extends Controller
 
     public function edit($id)
     {
-        $destinasihotel = DestinasiHotel::find($id);
+        $destinasihotel = Destinasi::find($id);
 
         if (!$destinasihotel) {
             return redirect()
@@ -160,7 +190,7 @@ class DestinasiHotelController extends Controller
 
     public function destroy($id)
     {
-        $destinasihotel = DestinasiHotel::find($id);
+        $destinasihotel = Destinasi::find($id);
 
         if (!$destinasihotel) {
             return redirect()
@@ -191,7 +221,7 @@ class DestinasiHotelController extends Controller
         ]);
 
         // Find the destination by ID
-        $destination = DestinasiHotel::find($id);
+        $destination = Destinasi::find($id);
 
         // Update the destination data
         $destination->nama = $request->input('nama');

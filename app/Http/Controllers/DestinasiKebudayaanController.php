@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Models\Kebudayaan; 
+use App\Models\Destinasi; 
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -54,12 +54,13 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
         $longitude = $request->input('longitude');
 
         // Simpan data ke dalam database
-        $kebudayaan = new Kebudayaan([
+        $kebudayaan = new Destinasi([
             'nama' => $nama,
             'Deskripsi' => $Deskripsi,
             'alamat' => $alamat,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'kategori' => 'kebudayaan',
         ]);
 
         // Upload dan simpan gambar sampul
@@ -100,7 +101,7 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
 
     public function show($id)
     {
-        $kebudayaan = Kebudayaan::find($id);
+        $kebudayaan = Destinasi::find($id);
 
         if (!$kebudayaan) {
             return redirect()
@@ -111,16 +112,41 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
         return view('destinasi-kebudayaan.show', compact('kebudayaan'));
     }
 
-    public function index()
-    {
-        $kebudayaanList = Kebudayaan::all();
+    // public function index()
+    // {
+    //     // $kebudayaanList = Destinasi::all();
+    //     $kebudayaanList = Destinasi::where('kategori', 'kebudayaan')->get();
 
-        return view('destinasi-kebudayaan.index', ['kebudayaanList' => $kebudayaanList]);
+    //     return view('destinasi-kebudayaan.index', ['kebudayaanList' => $kebudayaanList]);
+    // }\
+    
+    public function index(Request $request)
+    {
+        $query = Destinasi::query();
+
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($subquery) use ($search) {
+                $subquery->where('nama', 'LIKE', '%' . $search . '%')->orWhere('alamat', 'LIKE', '%' . $search . '%');
+            });
+
+            // Add filter by kategori
+            $query->where('kategori', 'kebudayaan');
+        } else {
+            // Filter by kategori if no search query
+            $query->where('kategori', 'kebudayaan');
+        }
+
+        // Get paginated results
+        $kebudayaanList = $query->paginate(2); // Ganti 2 dengan jumlah item per halaman yang diinginkan
+
+         return view('destinasi-kebudayaan.index', ['kebudayaanList' => $kebudayaanList]);
     }
 
     public function edit($id)
     {
-        $kebudayaan = Kebudayaan::find($id);
+        $kebudayaan = Destinasi::find($id);
 
         if (!$kebudayaan) {
             return redirect()
@@ -133,7 +159,7 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
 
     public function destroy($id)
     {
-        $kebudayaan = Kebudayaan::find($id);
+        $kebudayaan = Destinasi::find($id);
 
         if (!$kebudayaan) {
             return redirect()
@@ -163,7 +189,7 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
         ]);
 
         // Find the kebudayaan by ID
-        $kebudayaan = Kebudayaan::find($id);
+        $kebudayaan = Destinasi::find($id);
 
         // Update the kebudayaan data
         $kebudayaan->nama = $request->input('nama');
@@ -214,6 +240,6 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
         // Redirect to the index page with a success message if everything is fine
         return redirect()
             ->route('destinasi-kebudayaan.index')
-            ->with('success', 'Kebudayaan berhasil diupdate.');
+            ->with('success', 'Destinasi berhasil diupdate.');
     }
 }

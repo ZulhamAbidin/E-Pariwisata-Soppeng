@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RootController;
-
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KebudayaanController;
@@ -22,16 +21,12 @@ use App\Http\Controllers\PengunjungKebudayaanController;
 
 
 Route::get('/', [RootController::class, 'index'])->name('deskripsi.index');
+Route::get('/semua-postingan', [RootController::class, 'showAllPosts'])->name('semua.postingan');
+Route::get('/destination/{destination}', [RootController::class, 'show'])->name('destination.show');
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth', 'verified']);
 
-
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -122,5 +117,7 @@ Route::middleware(['auth'])->group(function () {
 // Jika Anda ingin menampilkan list deskripsi, tambahkan rute ini
 Route::get('/deskripsi', [DeskripsiKabupatenController::class, 'index2'])->name('deskripsi.index2');
  
+
+
 
 require __DIR__ . '/auth.php';
