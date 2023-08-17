@@ -203,7 +203,8 @@
                                     <div class="row">
                                         <h4 class="text-center fw-semibold">Postingan</h4>
                                         <span class="landing-title"></span>
-                                        <h2 class="text-center fw-semibold mb-7">Postingan Dengan Rating Tertinggi.</h2>
+                                        <h2 class="text-center fw-semibold mb-7">Postingan Dengan Rating Tertinggi.
+                                        </h2>
 
                                         <div id="topRatedDestinationsContainer" class="row">
                                             @foreach ($topRatedDestinations->take(2) as $destination)
@@ -267,14 +268,15 @@
                                                 </div>
                                             @endforeach
 
-                                            <a href="{{ route('semua.postingan') }}">Lihat Semua Postingan</a>
+
                                         </div>
 
                                         <div class="text-center d-flex justify-content-center">
-                                            <button id="showMoreButton" class="btn btn-primary">Lihat Lebih
-                                                Banyak</button>
-                                            <button id="hideMoreButton" class="btn btn-primary"
-                                                style="display: none;">Sembunyikan Lebih Banyak</button>
+                                            <button id="showMoreButton" class="btn btn-primary">Lihat Lebih  Banyak</button>
+                                            <button id="hideMoreButton" class="btn btn-primary" style="display: none;">Sembunyikan Lebih Banyak</button>
+                                        </div>
+                                        <div class="text-center d-flex justify-content-center mt-2">
+                                            <a href="{{ route('semua.postingan') }}" class="btn btn-primary">Lihat Semua Postingan</a>
                                         </div>
 
                                     </div>

@@ -10,16 +10,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RootController extends Controller
 {
-    // public function index()
-    // {
-    //     $data = DeskripsiKabupaten::all();
-
-    //     return view('welcome', compact('posts', 'data'));
-    // }
     public function index()
     {
         $data = DeskripsiKabupaten::all();
-
         // Ambil 2 destinasi dengan rating rata-rata tertinggi
         $topRatedDestinations = Destinasi::with('komentars')
             ->withAvg('komentars', 'rating')
@@ -33,7 +26,6 @@ class RootController extends Controller
     public function cari(Request $request)
     {
         $keyword = $request->input('search'); // Ambil keyword pencarian dari input form
-
         $posts = Destinasi::where('nama', 'like', '%' . $keyword . '%')
             ->orWhere('alamat', 'like', '%' . $keyword . '%')
             ->orWhere('HargaTiket', 'like', '%' . $keyword . '%')
@@ -44,11 +36,11 @@ class RootController extends Controller
             ->orWhere('MenuKuliner', 'like', '%' . $keyword . '%')
             ->orWhere('kategori', 'like', '%' . $keyword . '%')
             ->get();
-
         $noResults = $posts->isEmpty(); // Cek apakah tidak ada hasil
 
         return view('postingan.semua-postingan', compact('posts', 'keyword', 'noResults'));
     }
+
 
     public function show(Destinasi $destination)
     {

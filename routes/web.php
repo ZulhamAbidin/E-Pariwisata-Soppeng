@@ -25,6 +25,7 @@ Route::get('/semua-postingan', [RootController::class, 'showAllPosts'])->name('s
 Route::get('/destination/{destination}', [RootController::class, 'show'])->name('destination.show');
 Route::get('/cari-postingan', [RootController::class, 'cari'])->name('cari.postingan');
 
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth', 'verified']);
 
 
@@ -117,7 +118,5 @@ Route::middleware(['auth'])->group(function () {
 // Jika Anda ingin menampilkan list deskripsi, tambahkan rute ini
 Route::get('/deskripsi', [DeskripsiKabupatenController::class, 'index2'])->name('deskripsi.index2');
  
-
-
 
 require __DIR__ . '/auth.php';

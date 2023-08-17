@@ -23,15 +23,17 @@
             <div class="row">
                 <h4 class="text-center fw-semibold bok">Semua Postingan </h4>
                 <span class="landing-title"></span>
+
+
                 <h2 class="text-center fw-semibold mb-7">Semua Destinasi</h2>
 
                 <div class="row">
-                    @if ($noResults)
+                    {{-- @if ($noResults)
                         <div class="col-lg-12">
                             <p>Tidak ditemukan hasil yang sesuai dengan pencarian.</p>
                         </div>
-                    @else
-                        @foreach ($posts as $post)
+                    @else --}}
+                    @foreach ($posts as $post)
                             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-4">
                                 <div class="card"> <a href="{{ route('pengunjung.destinasi.show', $post) }}"><img
                                             class="card-img-top" src="{{ url('storage/' . $post->sampul) }}"
@@ -52,8 +54,8 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    @endif
+                    @endforeach
+                    {{-- @endif --}}
                 </div>
 
 
