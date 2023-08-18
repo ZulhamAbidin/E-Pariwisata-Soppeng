@@ -7,41 +7,45 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DestinasiWisata;
-use App\Models\DestinasiKuliner;
-use App\Models\DestinasiHotel;
+use App\Models\Destinasi;
 use App\Models\Kebudayaan;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        // // Mengambil data destinasi wisata
+        // $destinasiWisata = Destinasi::all();
+        // $totalDestinasiWisata = $destinasiWisata->count();
+
+        // // Mengambil data destinasi kuliner
+        // $destinasiKuliner = Destinasi::all();
+        // $totalDestinasiKuliner = $destinasiKuliner->count();
+
+        // // Mengambil data destinasi hotel
+        // $destinasiHotel = Destinasi::all();
+        // $totalDestinasiHotel = $destinasiHotel->count();
+
+        // // Mengambil data kebudayaan
+        // $kebudayaan = Destinasi::all();
+        // $totalKebudayaan = $kebudayaan->count();
+
         // Mengambil data destinasi wisata
-        $destinasiWisata = DestinasiWisata::all();
+        $destinasiWisata = Destinasi::where('kategori', 'wisata')->get();
         $totalDestinasiWisata = $destinasiWisata->count();
 
         // Mengambil data destinasi kuliner
-        $destinasiKuliner = DestinasiKuliner::all();
+        $destinasiKuliner = Destinasi::where('kategori', 'kuliner')->get();
         $totalDestinasiKuliner = $destinasiKuliner->count();
 
         // Mengambil data destinasi hotel
-        $destinasiHotel = DestinasiHotel::all();
+        $destinasiHotel = Destinasi::where('kategori', 'hotel')->get();
         $totalDestinasiHotel = $destinasiHotel->count();
 
         // Mengambil data kebudayaan
-        $kebudayaan = Kebudayaan::all();
+        $kebudayaan = Destinasi::where('kategori', 'kebudayaan')->get();
         $totalKebudayaan = $kebudayaan->count();
 
-        return view('dashboard', compact(
-            'destinasiWisata',
-            'totalDestinasiWisata',
-            'destinasiKuliner',
-            'totalDestinasiKuliner',
-            'destinasiHotel',
-            'totalDestinasiHotel',
-            'kebudayaan',
-            'totalKebudayaan'
-        ));
+        return view('dashboard', compact('destinasiWisata', 'totalDestinasiWisata', 'destinasiKuliner', 'totalDestinasiKuliner', 'destinasiHotel', 'totalDestinasiHotel', 'kebudayaan', 'totalKebudayaan'));
     }
 }
-

@@ -1,13 +1,14 @@
 @extends('layouts.pengunjung')
 
 @section('container')
-    <div class="main-content app-content mt-4" id="">
+    <div class="main-content app-content mt-4 " id="" >
 
         <div class="row">
 
             <div class="col-xl-7">
                 <div class="card mt-6">
                     <img class="card-img-top" src="{{ asset('storage/' . $destinasihotel->sampul) }}" alt="Card image cap">
+                    
                     <div class="card-body">
                         <div class="d-md-flex">
 
@@ -41,6 +42,7 @@
 
                         </div>
                     </div>
+
                     <div class="card-body">
                         <h3><a href="javascript:void(0)"> {{ $destinasihotel->nama }}</a></h3>
                         <p class="card-text">{{ $destinasihotel->alamat }}</p>

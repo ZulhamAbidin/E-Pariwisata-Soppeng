@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <footer class="main-footer px-0 pb-0 text-center">
+                    <footer class="main-footer px-0 pb-0 text-center putih">
                         <div class="row ">
                             <div class="col-md-12 col-sm-12">
                                 Copyright © <span id="year"></span> <a href="javascript:void(0)"></a>.

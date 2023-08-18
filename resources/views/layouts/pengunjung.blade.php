@@ -48,16 +48,23 @@
             <div class="landing-top-header overflow-hidden">
                 @include('layouts.pengunjung.headerlink')
             </div>
+            
+            <style>
+                .abu {
+                    background-color: #F6F6FB !important;
+                }
+                .putih {
+                    background-color: #FFFFFF !important;
+                }
+            </style>
 
             <!--app-content open-->
             <div class="main-content mt-0">
                 <div class="side-app">
 
                     <!-- CONTAINER -->
-                    <div class="main-container">
-                        <div class="">
+                    <div class="main-container abu">
                             @yield('container')
-                        </div>
                     </div>
                     <!-- CONTAINER CLOSED-->
                 </div>
