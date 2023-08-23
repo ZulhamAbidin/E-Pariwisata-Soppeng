@@ -97,7 +97,7 @@
                                     </div>
                                 @endforeach
 
-                                {{-- {{ $destinasiWisataList->links('pagination::bootstrap-5') }} --}}
+                                {{ $destinasiWisataList->links('pagination::bootstrap-5') }}
 
                             </div>
 

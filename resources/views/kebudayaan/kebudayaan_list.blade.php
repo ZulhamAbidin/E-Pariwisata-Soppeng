@@ -46,6 +46,9 @@
                             </div>
                         </div>
                     @endforeach
+
+
+                    {{ $destinasikebudayaanList->links('pagination::bootstrap-5') }}
                 </div>
 
 

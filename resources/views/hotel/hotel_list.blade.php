@@ -45,6 +45,8 @@
                             </div>
                         </div>
                     @endforeach
+
+                    {{ $destinasihotelList->links('pagination::bootstrap-5') }}
                 </div>
 
 
