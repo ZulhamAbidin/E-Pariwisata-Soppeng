@@ -87,6 +87,15 @@ Route::get('/hotel', [PengunjungHotelController::class, 'index'])->name('pengunj
 Route::get('/hotel/{destinasihotel}', [PengunjungHotelController::class, 'show'])->name('pengunjung.hotel.show');
 Route::post('/hotel/{destinasihotel}/tambah-komentar', [PengunjungHotelController::class, 'tambahKomentar'])->name('pengunjung.hotel.tambah-komentar');
 
+Route::get('/destinasi/{destinasihotel}/total-balasan-komentar', [DestinasiController::class, 'totalBalasanKomentar'])
+    ->name('destinasi.total-balasan-komentar');
+
+// Route::post('/{destinasiHotel}/{komentar}/tambah-balasan-komentar', [PengunjungHotelController::class, 'tambahBalasanKomentar'])
+//     ->name('pengunjung.hotel.tambah-balasan-komentar');
+
+    // Menambahkan balasan komentar
+Route::post('/hotel/{destinasihotel}/{komentar}/tambah-balasan-komentar', [PengunjungHotelController::class, 'tambahBalasanKomentar'])
+    ->name('pengunjung.hotel.tambah-balasan-komentar');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::middleware(['auth'])->group(function () {

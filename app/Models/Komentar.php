@@ -42,4 +42,19 @@ class Komentar extends Model
     {
         return $this->belongsTo(Kebudayaan::class, 'kebudayaan_id');
     }
+
+    public function komentars()
+{
+    return $this->hasMany(Komentar::class, 'destinasi_id');
+}
+
+// public function balasanKomentars()
+// {
+//     return $this->hasManyThrough(BalasanKomentar::class, Komentar::class, 'destinasi_id', 'parent_komentar_id', 'id', 'id');
+// }
+
+public function balasanKomentars()
+    {
+        return $this->hasMany(BalasanKomentar::class, 'parent_komentar_id');
+    }
 }

@@ -14,7 +14,6 @@
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- STYLE CSS -->
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
 
@@ -77,6 +76,32 @@
         <!-- FOOTER CLOSED -->
     </div>
 
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const replyButtons = document.querySelectorAll('.reply-badge');
+        const commentForms = document.querySelectorAll('.comment-form');
+        
+        replyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const commentId = button.closest('.reply').getAttribute('data-commentid');
+                const form = document.querySelector(`.comment-form[data-commentid="${commentId}"]`);
+                
+                form.style.display = 'block';
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.comment-form') && !event.target.closest('.reply-badge')) {
+                commentForms.forEach(form => {
+                    form.style.display = 'none';
+                });
+            }
+        });
+    });
+</script>
+
     <!-- BACK-TO-TOP -->
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
@@ -109,6 +134,9 @@
 
     <!-- CUSTOM JS -->
     <script src="../assets/js/landing.js"></script>
+    <!-- CUSTOM JS -->
+    <script src="../assets/js/custom.js"></script>
+    <script src="{{ asset('assets/plugins/input-mask/jquery.mask.min.js') }}"></script>
 
 </body>
 

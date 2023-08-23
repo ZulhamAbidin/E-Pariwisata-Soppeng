@@ -1,14 +1,14 @@
 @extends('layouts.pengunjung')
 
 @section('container')
-    <div class="main-content app-content mt-4 " id="" >
+    <div class="main-content app-content mt-4 " id="">
 
         <div class="row">
 
             <div class="col-xl-7">
                 <div class="card mt-6">
                     <img class="card-img-top" src="{{ asset('storage/' . $destinasihotel->sampul) }}" alt="Card image cap">
-                    
+
                     <div class="card-body">
                         <div class="d-md-flex">
 
@@ -20,9 +20,10 @@
                             </a>
 
                             <a href="javascript:void(0);" class="d-flex me-4 mb-2">
-                                <i class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
+                                <i
+                                    class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
                                 <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                   {{ $destinasihotel->created_at->translatedFormat('l d F Y') }}
+                                    {{ $destinasihotel->created_at->translatedFormat('l d F Y') }}
                                 </div>
                             </a>
 
@@ -32,11 +33,13 @@
                                     Rating: {{ number_format($destinasihotel->averageRating(), 2) }}
                                 </div>
                             </a>
-                                                       
+
                             <div class="ms-auto">
                                 <a href="javascript:void(0);" class="d-flex mb-2">
-                                <i  class="fe fe-message-square fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
-                                <div class=" mt-3 ms-1 text-muted font-weight-semibold">{{ $destinasihotel->totalKomentar() }} Komentar</div>
+                                    <i
+                                        class="fe fe-message-square fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
+                                    <div class=" mt-3 ms-1 text-muted font-weight-semibold">
+                                        {{ $destinasihotel->totalKomentar() }} Komentar</div>
                                 </a>
                             </div>
 
@@ -49,13 +52,13 @@
                         <p class="text-justify"> {{ $destinasihotel->Deskripsi }}</p>
 
                         @if ($destinasihotel->gambar)
-                        <div class="row">
-                            @foreach (json_decode($destinasihotel->gambar) as $image)
-                            <div class="col-md-4 mb-3">
-                                <img src="{{ asset('storage/' . $image) }}" alt="Gambar" class="img-fluid">
+                            <div class="row">
+                                @foreach (json_decode($destinasihotel->gambar) as $image)
+                                    <div class="col-md-4 mb-3">
+                                        <img src="{{ asset('storage/' . $image) }}" alt="Gambar" class="img-fluid">
+                                    </div>
+                                @endforeach
                             </div>
-                            @endforeach
-                        </div>
                         @endif
 
                         <div class="ms-auto">
@@ -67,12 +70,77 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card body">
                     <div class="card-header">
-                        <div class="card-title">Commentar</div>
+                        <div class="card-title">Comments</div>
                     </div>
-                    
+
                     @foreach ($destinasihotel->komentars as $komentar)
+                        <div class="card-body pb-0">
+                            <div class="media mb-5 overflow-visible d-block d-sm-flex">
+                                {{-- <div class="me-3 mb-2">
+                                    <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"  src="../assets/images/users/5.jpg"> </a>
+                                </div> --}}
+                                <div class="media-body overflow-visible">
+                                    <div class="border mb-5 p-4 br-5">
+                                        <h5 class="mt-0">{{ $komentar->nama }}</h5>
+                                        <span><i class="fe fe-thumb-up text-danger"></i></span>
+                                        <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
+                                        <div class="mt-3 ms-1 text-muted font-weight-semibold">
+                                            {{ $komentar->created_at->diffForHumans() }}
+                                        </div>
+
+                                        <span class="reply" data-commentid="{{ $komentar->id }}">
+                                            <div class="reply-button mt-2">
+                                                <span class="reply-badge btn-primary bg-primary rounded-pill py-1 btn-sm px-2">
+                                                    <i class="fe fe-corner-up-left mx-1"></i>Reply
+                                                </span>
+                                            </div>
+                                        </span>
+                                        
+                                        <form method="POST" style="display: none;" class="comment-form mt-4" data-commentid="{{ $komentar->id }}"
+                                            action="{{ route('pengunjung.hotel.tambah-balasan-komentar', ['destinasihotel' => $destinasihotel->id, 'komentar' => $komentar->id]) }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="isi_balasan">Balas Komentar</label>
+                                                <textarea name="isi_balasan" class="form-control @error('isi_balasan') is-invalid @enderror"
+                                                    rows="3">{{ old('isi_balasan') }}</textarea>
+                                                @error('isi_balasan')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <button type="submit" class="btn btn-sm btn-primary">Balas</button>
+                                        </form>
+                                    </div>
+
+
+                                    {{-- komentar balasan --}}
+                                    @foreach ($komentar->balasanKomentars as $balasan)@if ($balasan->parent_komentar_id === $komentar->id)
+                                    <div class="media mb-5 overflow-visible">
+                                        <div class="me-6">
+                                            {{-- <a href="profile.html"> <img class="media-object rounded-circle thumb-sm"
+                                                    alt="64x64" src="../assets/images/users/2.jpg"> </a> --}}
+                                        </div>
+                                        <div class="media-body border p-4 overflow-visible br-5">
+                                            <h5 class="mt-0">Admin</h5>
+                                            <span><i class="fe fe-thumb-up text-danger"></i></span>
+                                            <p>{{ $balasan->isi_balasan }}</p>
+
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                    {{-- komentar balasan --}}
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    
+                </div>
+
+                {{-- @foreach ($destinasihotel->komentars as $komentar)
                     <div class="card-body pb-0">
                         <div class="media mb-1 overflow-visible d-block d-sm-flex">
                             <div class="me-3 mb-2">
@@ -87,74 +155,47 @@
                                     <div class="mt-3 ms-1 text-muted font-weight-semibold">
                                         {{ $komentar->created_at->diffForHumans() }}
                                     </div>
+
                                 </div>
+                                <!-- Tampilkan balasan komentar jika ada -->
+                                @foreach ($komentar->balasanKomentars as $balasan)
+                                    @if ($balasan->parent_komentar_id === $komentar->id)
+                                        <div class="balasan-komentar">
+                                            <p>Admin - Balasan:</p>
+                                            <p>{{ $balasan->isi_balasan }}</p>
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                                <!-- Form untuk menambah balasan komentar -->
+                                <form method="POST"
+                                    action="{{ route('pengunjung.hotel.tambah-balasan-komentar', ['destinasihotel' => $destinasihotel->id, 'komentar' => $komentar->id]) }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="isi_balasan">Balas Komentar</label>
+                                        <textarea name="isi_balasan" class="form-control @error('isi_balasan') is-invalid @enderror" rows="3">{{ old('isi_balasan') }}</textarea>
+                                        @error('isi_balasan')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Balas</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    @endforeach
-
-                    {{-- ular --}}
-                    
-                    {{-- <div class="card-body pb-0">
-                        @foreach ($destinasihotel->komentars->take(3) as $komentar)
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div>
-                            <div class="media-body overflow-visible">
-                                <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                    <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                    <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                        {{ $komentar->created_at->diffForHumans() }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    
-                        @if ($destinasihotel->komentars->count() > 3)
-                        <div class="text-end">
-                            <a href="#" id="showAllComments" class="text-muted">Lihat semua komentar</a>
-                        </div>
-                        <div id="allComments" style="display: none;">
-                            @foreach ($destinasihotel->komentars->slice(3) as $komentar)
-                            <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                                <div class="me-3 mb-2">
-                                    <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                            src="../assets/images/users/2.jpg"> </a>
-                                </div>
-                                <div class="media-body overflow-visible">
-                                    <div class="border mb-5 p-4 br-5">
-                                        <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                        <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                        <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                        <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                            {{ $komentar->created_at->diffForHumans() }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        @endif
-                    </div> --}}
-
-                </div>
+                @endforeach --}}
 
 
-                @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
                 @endif
-                
-                @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
                 @endif
 
                 <div class="card">
@@ -162,13 +203,14 @@
                         <div class="card-title">Add a Comments</div>
                     </div>
                     <div class="card-body">
-                        
+
 
                         <form action="{{ route('pengunjung.hotel.tambah-komentar', $destinasihotel) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama lengkap" required>
+                                <input type="text" class="form-control" id="nama" name="nama"
+                                    placeholder="Nama lengkap" required>
                             </div>
                             <div class="form-group">
                                 <label for="isi_komentar">Komentar</label>
@@ -227,27 +269,36 @@
         </div>
 
     </div>
-
+   
     <script>
         var map;
-    
+
         function initMap() {
-            var latitude = {{ $destinasihotel->latitude }};
-            var longitude = {{ $destinasihotel->longitude }};
+            var latitude = {
+                {
+                    $destinasihotel - > latitude
+                }
+            };
+            var longitude = {
+                {
+                    $destinasihotel - > longitude
+                }
+            };
             var location = [latitude, longitude];
-    
+
             map = L.map('map').setView(location, 13);
-    
+
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    
+
             L.marker(location).addTo(map)
                 .bindPopup('{{ $destinasihotel->nama }}').openPopup();
         }
-    
+
         document.addEventListener('DOMContentLoaded', function() {
             initMap();
         });
     </script>
+
 
     {{-- ular --}}
 

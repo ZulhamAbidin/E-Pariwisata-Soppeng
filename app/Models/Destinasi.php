@@ -62,4 +62,5 @@ class Destinasi extends Model
     {
         return $this->komentars->sum('rating');
     }
+    
 }
