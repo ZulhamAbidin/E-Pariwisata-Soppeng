@@ -51,6 +51,8 @@ Route::get('/wisata', [PengunjungWisataController::class, 'index'])->name('pengu
 Route::get('/wisata/{destinasiWisata}', [PengunjungWisataController::class, 'show'])->name('pengunjung.destinasi.show');
 Route::post('/wisata/{destinasiWisata}/tambah-komentar', [PengunjungWisataController::class, 'tambahKomentar'])->name('pengunjung.destinasi.tambah-komentar');
 
+
+// branchbaru
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // DestinasiKuliner
