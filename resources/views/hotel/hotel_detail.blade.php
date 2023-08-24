@@ -156,51 +156,6 @@
                     
                 </div>
 
-                {{-- @foreach ($destinasihotel->komentars as $komentar)
-                    <div class="card-body pb-0">
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div>
-                            <div class="media-body overflow-visible">
-                                <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                    <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                    <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                        {{ $komentar->created_at->diffForHumans() }}
-                                    </div>
-
-                                </div>
-                                <!-- Tampilkan balasan komentar jika ada -->
-                                @foreach ($komentar->balasanKomentars as $balasan)
-                                    @if ($balasan->parent_komentar_id === $komentar->id)
-                                        <div class="balasan-komentar">
-                                            <p>Admin - Balasan:</p>
-                                            <p>{{ $balasan->isi_balasan }}</p>
-                                        </div>
-                                    @endif
-                                @endforeach
-
-                                <!-- Form untuk menambah balasan komentar -->
-                                <form method="POST"
-                                    action="{{ route('pengunjung.hotel.tambah-balasan-komentar', ['destinasihotel' => $destinasihotel->id, 'komentar' => $komentar->id]) }}">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="isi_balasan">Balas Komentar</label>
-                                        <textarea name="isi_balasan" class="form-control @error('isi_balasan') is-invalid @enderror" rows="3">{{ old('isi_balasan') }}</textarea>
-                                        @error('isi_balasan')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Balas</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach --}}
-
 
                 @if (session('error'))
                     <div class="alert alert-danger">

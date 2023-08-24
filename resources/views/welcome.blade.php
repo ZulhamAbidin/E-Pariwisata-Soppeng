@@ -238,12 +238,12 @@
                                         </div>
 
                                         <div id="hiddenDestinations" class="row" style="display: none;">
-                                            @foreach ($topRatedDestinations->slice(2) as $destination)
+                                            {{-- @foreach ($topRatedDestinations->slice(2) as $destination)
                                                 <div class="col-lg-6">
                                                     <div class="card bg-transparent reveal active">
                                                         <div class="card-body px-1">
                                                             <div class="d-flex overflow-visible">
-                                                                <a href="{{ route('destination.show', ['destination' => $destination->id]) }}"
+                                                                <a href="{{ route('pengunjung.destinasi.show', $post) }}"
                                                                     class="card-aside-column br-5 cover-image"
                                                                     data-bs-image-src={{ asset('storage/' . $destination->sampul) }}
                                                                     style="background: url(&quot;{{ asset('storage/' . $destination->sampul) }}&quot;) center
@@ -251,14 +251,13 @@
                                                                 <div class="ps-3 flex-column">
                                                                     <span
                                                                         class="badge bg-primary me-1 mb-1 mt-1 text-uppercase">{{ $destination->kategori }}</span>
-                                                                    <h3><a
-                                                                            href="{{ route('destination.show', ['destination' => $destination->id]) }}">{{ $destination->nama }}</a>
+                                                                    <h3><a href="{{ route('pengunjung.destinasi.show', $post) }}">{{ $destination->nama }}</a>
                                                                     </h3>
                                                                     <p>Alamat: {{ $destination->alamat }}</p>
                                                                     <p>Rating Rata-rata:
                                                                         {{ number_format($destination->komentars_avg_rating, 2) }}
                                                                     </p>
-                                                                    <a href="{{ route('destination.show', ['destination' => $destination->id]) }}"
+                                                                    <a href="{{ route('pengunjung.destinasi.show', $post) }}"
                                                                         class="btn btn-primary btn-sm btn-block">Lihat
                                                                         Detail</a>
                                                                 </div>
@@ -266,6 +265,30 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            @endforeach --}}
+                                            @foreach ($topRatedDestinations->slice(2) as $destination)
+                                            <div class="col-lg-6">
+                                                <div class="card bg-transparent reveal active">
+                                                    <div class="card-body px-1">
+                                                        <div class="d-flex overflow-visible">
+                                                            <a href="{{ route('pengunjung.destinasi.show', $destination) }}"
+                                                                class="card-aside-column br-5 cover-image" data-bs-image-src={{ asset('storage/' .
+                                                                $destination->sampul) }}
+                                                                style="background: url(&quot;{{ asset('storage/' . $destination->sampul) }}&quot;) center
+                                                                center;"></a>
+                                                            <div class="ps-3 flex-column">
+                                                                <span class="badge bg-primary me-1 mb-1 mt-1 text-uppercase">{{ $destination->kategori }}</span>
+                                                                <h3><a href="{{ route('pengunjung.destinasi.show', $destination) }}">{{ $destination->nama }}</a>
+                                                                </h3>
+                                                                <p>Alamat: {{ $destination->alamat }}</p>
+                                                                <p>Rating Rata-rata: {{ number_format($destination->komentars_avg_rating, 2) }}</p>
+                                                                <a href="{{ route('pengunjung.destinasi.show', $destination) }}"
+                                                                    class="btn btn-primary btn-sm btn-block">Lihat Detail</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             @endforeach
 
 

@@ -13,6 +13,7 @@ class RootController extends Controller
     public function index()
     {
         $data = DeskripsiKabupaten::all();
+        $posts = Destinasi::all(); // Ganti 'Postingan' dengan model yang sesuai
         // Ambil 2 destinasi dengan rating rata-rata tertinggi
         $topRatedDestinations = Destinasi::with('komentars')
             ->withAvg('komentars', 'rating')
@@ -20,7 +21,7 @@ class RootController extends Controller
             ->limit(4)
             ->get();
 
-        return view('welcome', compact('data', 'topRatedDestinations'));
+        return view('welcome', compact('data', 'topRatedDestinations', 'posts'));
     }
 
     public function cari(Request $request)

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Destinasi;
 use App\Models\Komentar;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Destinasi;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
+use App\Models\BalasanKomentar;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PengunjungKulinerController extends Controller
 {
@@ -77,39 +79,85 @@ class PengunjungKulinerController extends Controller
     }
 
     public function tambahKomentar(Request $request, Destinasi $destinasiKuliner)
-{
-    $validator = Validator::make($request->all(), [
-        'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'], // Hanya huruf dan spasi yang diperbolehkan
-        'isi_komentar' => 'required',
-        'rating' => 'required|numeric|min:1|max:5', // Validasi rating antara 1 hingga 5
-    ]);
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'], // Hanya huruf dan spasi yang diperbolehkan
+            'isi_komentar' => 'required',
+            'rating' => 'required|numeric|min:1|max:5', // Validasi rating antara 1 hingga 5
+        ]);
 
-    if ($validator->fails()) {
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Membuat objek Komentar
+        $komentar = new Komentar([
+            'nama' => $request->input('nama'),
+            'isi_komentar' => $request->input('isi_komentar'),
+            'rating' => $request->input('rating'),
+        ]);
+
+        // Simpan komentar ke dalam tabel komentars yang berelasi dengan destinasi wisata
+        $destinasiKuliner->komentars()->save($komentar);
+
+        // Update nilai rata-rata rating di tabel destinasi_Ku$destinasiKuliner
+        $averageRating = $destinasiKuliner->komentars->avg('rating');
+        $destinasiKuliner->update([
+            'rating' => $averageRating,
+        ]);
+
         return redirect()
             ->back()
-            ->withErrors($validator)
-            ->withInput();
+            ->with('success', 'Komentar dan rating berhasil ditambahkan.');
     }
 
-    // Membuat objek Komentar
-    $komentar = new Komentar([
-        'nama' => $request->input('nama'),
-        'isi_komentar' => $request->input('isi_komentar'),
-        'rating' => $request->input('rating'),
-    ]);
+      public function tambahBalasanKomentar(Request $request, Destinasi $destinasiKuliner, $komentarId)
+    {
+        $komentar = Komentar::findOrFail($komentarId);
 
-    // Simpan komentar ke dalam tabel komentars yang berelasi dengan destinasi wisata
-    $destinasiKuliner->komentars()->save($komentar);
+        $validator = Validator::make($request->all(), [
+            'isi_balasan' => 'required',
+        ]);
 
-    // Update nilai rata-rata rating di tabel destinasi_Ku$destinasiKuliner
-    $averageRating = $destinasiKuliner->komentars->avg('rating');
-    $destinasiKuliner->update([
-        'rating' => $averageRating,
-    ]);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
-    return redirect()
-        ->back()
-        ->with('success', 'Komentar dan rating berhasil ditambahkan.');
-}
+        $parentKomentarId = $komentar->id;
+
+        // Inisialisasi centang_biru dengan false
+        $centangBiru = false;
+
+        // Periksa apakah pengguna telah login
+        if (Auth::check()) {
+            $centangBiru = true; // Jika pengguna telah login, atur centang_biru menjadi true
+        }
+
+        // Membuat objek BalasanKomentar dengan isi_balasan yang diambil dari form
+        $balasanKomentar = new BalasanKomentar([
+            'nama' => $request->input('nama'),
+            'isi_balasan' => $request->input('isi_balasan'),
+            'komentar_id' => $komentar->id,
+            'parent_komentar_id' => $parentKomentarId,
+            'centang_biru' => $centangBiru, // Tambahkan nilai centang_biru ke objek BalasanKomentar
+        ]);
+
+        $balasanKomentar->save();
+
+        return redirect()
+            ->route('pengunjung.kuliner.show', ['destinasiKuliner' => $destinasiKuliner->id])
+            ->with('success', 'Balasan komentar berhasil ditambahkan.');
+    }
+    
+    public function totalBalasanKomentar(Destinasi $destinasiKuliner)
+    {
+        return $destinasiKuliner->totalBalasanKomentar();
+    }
 
 }

@@ -23,6 +23,7 @@ use App\Http\Controllers\PengunjungKebudayaanController;
 Route::get('/', [RootController::class, 'index'])->name('deskripsi.index');
 Route::get('/semua-postingan', [RootController::class, 'showAllPosts'])->name('semua.postingan');
 Route::get('/destination/{destination}', [RootController::class, 'show'])->name('destination.show');
+
 Route::get('/cari-postingan', [RootController::class, 'cari'])->name('cari.postingan');
 
 
@@ -51,6 +52,8 @@ Route::get('/wisata', [PengunjungWisataController::class, 'index'])->name('pengu
 Route::get('/wisata/{destinasiWisata}', [PengunjungWisataController::class, 'show'])->name('pengunjung.destinasi.show');
 Route::post('/wisata/{destinasiWisata}/tambah-komentar', [PengunjungWisataController::class, 'tambahKomentar'])->name('pengunjung.destinasi.tambah-komentar');
 
+Route::post('/hotel/{destinasiWisata}/{komentar}/tambah-balasan-komentar', [PengunjungWisataController::class, 'tambahBalasanKomentar'])
+    ->name('pengunjung.destinasi.tambah-balasan-komentar');
 
 // branchbaru
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,6 +73,9 @@ Route::get('/kuliner', [PengunjungKulinerController::class, 'index'])->name('pen
 Route::get('/kuliner/{destinasiKuliner}', [PengunjungKulinerController::class, 'show'])->name('pengunjung.kuliner.show');
 Route::post('/kuliner/{destinasiKuliner}/tambah-komentar', [PengunjungKulinerController::class, 'tambahKomentar'])->name('pengunjung.kuliner.tambah-komentar');
 
+Route::post('/hotel/{destinasiKuliner}/{komentar}/tambah-balasan-komentar', [PengunjungKulinerController::class, 'tambahBalasanKomentar'])
+    ->name('pengunjung.kuliner.tambah-balasan-komentar');
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // DestinasiHotel
@@ -87,13 +93,6 @@ Route::get('/hotel', [PengunjungHotelController::class, 'index'])->name('pengunj
 Route::get('/hotel/{destinasihotel}', [PengunjungHotelController::class, 'show'])->name('pengunjung.hotel.show');
 Route::post('/hotel/{destinasihotel}/tambah-komentar', [PengunjungHotelController::class, 'tambahKomentar'])->name('pengunjung.hotel.tambah-komentar');
 
-Route::get('/destinasi/{destinasihotel}/total-balasan-komentar', [DestinasiController::class, 'totalBalasanKomentar'])
-    ->name('destinasi.total-balasan-komentar');
-
-// Route::post('/{destinasiHotel}/{komentar}/tambah-balasan-komentar', [PengunjungHotelController::class, 'tambahBalasanKomentar'])
-//     ->name('pengunjung.hotel.tambah-balasan-komentar');
-
-    // Menambahkan balasan komentar
 Route::post('/hotel/{destinasihotel}/{komentar}/tambah-balasan-komentar', [PengunjungHotelController::class, 'tambahBalasanKomentar'])
     ->name('pengunjung.hotel.tambah-balasan-komentar');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +112,8 @@ Route::get('/kebudayaan', [PengunjungKebudayaanController::class, 'index'])->nam
 Route::get('/kebudayaan/{destinasikebudayaan}', [PengunjungKebudayaanController::class, 'show'])->name('pengunjung.kebudayaan.show');
 Route::post('/kebudayaan/{destinasikebudayaan}/tambah-komentar', [PengunjungKebudayaanController::class, 'tambahKomentar'])->name('pengunjung.kebudayaan.tambah-komentar');
 
-
+Route::post('/hotel/{destinasikebudayaan}/{komentar}/tambah-balasan-komentar', [PengunjungKebudayaanController::class, 'tambahBalasanKomentar'])
+    ->name('pengunjung.kebudayaan.tambah-balasan-komentar');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::middleware(['auth'])->group(function () {

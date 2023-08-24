@@ -149,39 +149,7 @@ class PengunjungHotelController extends Controller
             ->route('pengunjung.hotel.show', ['destinasihotel' => $destinasihotel->id])
             ->with('success', 'Balasan komentar berhasil ditambahkan.');
     }
-
-    // public function tambahBalasanKomentar(Request $request, Destinasi $destinasihotel, $komentarId)
-    // {
-    //     $komentar = Komentar::findOrFail($komentarId);
-
-    //     $validator = Validator::make($request->all(), [
-    //         'isi_balasan' => 'required', // Tambahkan validasi bahwa isi_balasan harus diisi
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return redirect()
-    //             ->back()
-    //             ->withErrors($validator)
-    //             ->withInput();
-    //     }
-
-    //     $parentKomentarId = $komentar->id;
-
-    //     // Membuat objek BalasanKomentar dengan isi_balasan yang diambil dari form
-    //     $balasanKomentar = new BalasanKomentar([
-    //         'nama' => $request->input('nama'),
-    //         'isi_balasan' => $request->input('isi_balasan'),
-    //         'komentar_id' => $komentar->id,
-    //         'parent_komentar_id' => $parentKomentarId,
-    //     ]);
-
-    //     $balasanKomentar->save();
-
-    //     return redirect()
-    //         ->route('pengunjung.hotel.show', ['destinasihotel' => $destinasihotel->id])
-    //         ->with('success', 'Balasan komentar berhasil ditambahkan.');
-    // }
-
+    
     public function totalBalasanKomentar(Destinasi $destinasihotel)
     {
         return $destinasihotel->totalBalasanKomentar();

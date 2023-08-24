@@ -7,7 +7,7 @@
 
             <div class="col-xl-7">
                 <div class="card mt-6">
-                    <img class="card-img-top" src="{{ asset('storage/' . $destinasikebudayaan->sampul) }}" alt="Card image cap">
+                    <img class="card-img-top mt-6" src="{{ asset('storage/' . $destinasikebudayaan->sampul) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="d-md-flex">
 
@@ -65,82 +65,94 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Commentar</div>
-                    </div>
-                    
-                    @foreach ($destinasikebudayaan->komentars as $komentar)
-                    <div class="card-body pb-0">
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div>
-                            <div class="media-body overflow-visible">
-                                <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                    <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                    <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                        {{ $komentar->created_at->diffForHumans() }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-                    {{-- ular --}}
-                    
-                    {{-- <div class="card-body pb-0">
-                        @foreach ($destinasikebudayaan->komentars->take(3) as $komentar)
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div>
-                            <div class="media-body overflow-visible">
-                                <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                    <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                    <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                        {{ $komentar->created_at->diffForHumans() }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    
-                        @if ($destinasikebudayaan->komentars->count() > 3)
-                        <div class="text-end">
-                            <a href="#" id="showAllComments" class="text-muted">Lihat semua komentar</a>
-                        </div>
-                        <div id="allComments" style="display: none;">
-                            @foreach ($destinasikebudayaan->komentars->slice(3) as $komentar)
-                            <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                                <div class="me-3 mb-2">
-                                    <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                            src="../assets/images/users/2.jpg"> </a>
-                                </div>
-                                <div class="media-body overflow-visible">
-                                    <div class="border mb-5 p-4 br-5">
-                                        <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                        <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                        <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                        <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                            {{ $komentar->created_at->diffForHumans() }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        @endif
-                    </div> --}}
-
+               <div class="card body">
+                <div class="card-header">
+                    <div class="card-title">Comments</div>
                 </div>
+            
+                @foreach ($destinasikebudayaan->komentars as $komentar)
+                <div class="card-body pb-0">
+                    <div class="media mb-5 overflow-visible d-block d-sm-flex">
+                        {{-- <div class="me-3 mb-2">
+                            <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
+                                    src="../assets/images/users/5.jpg"> </a>
+                        </div> --}}
+                        <div class="media-body overflow-visible">
+                            <div class="border mb-5 p-4 br-5">
+                                <h5 class="mt-0">{{ $komentar->nama }}</h5>
+                                <span><i class="fe fe-thumb-up text-danger"></i></span>
+                                <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
+                                <div class="mt-3 ms-1 text-muted font-weight-semibold">
+                                    {{ $komentar->created_at->diffForHumans() }}
+                                </div>
+            
+                                <span class="reply" data-commentid="{{ $komentar->id }}">
+                                    <div class="reply-button mt-2">
+                                        <span class="reply-badge btn-primary bg-primary rounded-pill py-1 btn-sm px-2">
+                                            <i class="fe fe-corner-up-left mx-1"></i>Reply
+                                        </span>
+                                    </div>
+                                </span>
+            
+                                <form method="POST" style="display: none;" class="comment-form mt-4"
+                                    data-commentid="{{ $komentar->id }}"
+                                    action="{{ route('pengunjung.kebudayaan.tambah-balasan-komentar', ['destinasikebudayaan' => $destinasikebudayaan->id, 'komentar' => $komentar->id]) }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" name="centang_biru" value="{{ Auth::check() ? 1 : 0 }}">
+                                        <label for="nama">Nama</label>
+                                        <?php
+                                                                $namaValue = Auth::check() ? auth()->user()->name : old('nama');
+                                                                $readonly = Auth::check() ? 'readonly' : '';
+                                                            ?>
+                                        <input type="text" class="form-control mb-2" id="nama" name="nama"
+                                            placeholder="Nama lengkap" required value="{{ $namaValue }}" {{ $readonly }}>
+            
+                                        <label for="isi_balasan">Balas Komentar</label>
+                                        <textarea name="isi_balasan" class="form-control @error('isi_balasan') is-invalid @enderror"
+                                            rows="3">{{ old('isi_balasan') }}</textarea>
+                                        @error('isi_balasan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-primary">Balas</button>
+                                </form>
+                            </div>
+            
+            
+                            {{-- komentar balasan --}}
+                            @foreach ($komentar->balasanKomentars as $balasan)
+                            @if ($balasan->parent_komentar_id === $komentar->id)
+                            <div class="media mb-5 overflow-visible">
+                                <div class="me-6">
+                                    {{-- <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
+                                            src="../assets/images/users/2.jpg"> </a> --}}
+                                </div>
+                                <div class="media-body border p-4 overflow-visible br-5">
+                                    <h5 class="mt-0">
+                                        @if ($balasan->centang_biru)
+                                        <img src="{{ asset('images/logo.webp') }}" alt="" class="img-fluid"
+                                            style="width: 24px; height: 24px;"><!-- Tampilkan centang biru dengan ukuran fs-24 -->
+                                        @endif
+                                        {{ $balasan->nama }}
+                                    </h5>
+                                    <span>
+                                        <i class="fe fe-thumb-up text-danger"></i>
+                                    </span>
+                                    <p>{{ $balasan->isi_balasan }}</p>
+                                </div>
+                            </div>
+                            @endif
+                            @endforeach
+                            {{-- komentar balasan --}}
+            
+            
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            
+            </div>
 
 
                 @if(session('error'))
@@ -197,10 +209,9 @@
                     <div class="card-header">
                         <div class="card-title">Artikel Terkait</div>
                     </div>
+                    @foreach ($daftarkebudayaanTerbaru as $postinganTerbaru)
                     <div class="card-body">
                         <div class="">
-
-                            @foreach ($daftarkebudayaanTerbaru as $postinganTerbaru)
                                 <div class="d-flex overflow-visible">
                                     <a href="{{ route('pengunjung.kebudayaan.show', $postinganTerbaru) }}"
                                         class="card-aside-column br-5 cover-image"
@@ -213,10 +224,9 @@
                                         <div class="text-muted">{{ $postinganTerbaru->alamat }}</div>
                                     </div>
                                 </div>
-                            @endforeach
-
                         </div>
                     </div>
+                    @endforeach
                 </div>
 
             </div>
@@ -246,17 +256,5 @@
             initMap();
         });
     </script>
-
-    {{-- ular --}}
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#showAllComments").click(function(e) {
-                e.preventDefault();
-                $("#allComments").slideToggle();
-            });
-        });
-    </script> --}}
 
 @endsection

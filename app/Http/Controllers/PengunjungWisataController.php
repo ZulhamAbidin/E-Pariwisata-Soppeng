@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Destinasi;
 use App\Models\Komentar;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Destinasi;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
+use App\Models\BalasanKomentar;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PengunjungWisataController extends Controller
 {
@@ -113,5 +115,51 @@ public function tambahKomentar(Request $request, Destinasi $destinasiWisata)
         ->back()
         ->with('success', 'Komentar dan rating berhasil ditambahkan.');
 }
+
+  public function tambahBalasanKomentar(Request $request, Destinasi $destinasiWisata, $komentarId)
+    {
+        $komentar = Komentar::findOrFail($komentarId);
+
+        $validator = Validator::make($request->all(), [
+            'isi_balasan' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $parentKomentarId = $komentar->id;
+
+        // Inisialisasi centang_biru dengan false
+        $centangBiru = false;
+
+        // Periksa apakah pengguna telah login
+        if (Auth::check()) {
+            $centangBiru = true; // Jika pengguna telah login, atur centang_biru menjadi true
+        }
+
+        // Membuat objek BalasanKomentar dengan isi_balasan yang diambil dari form
+        $balasanKomentar = new BalasanKomentar([
+            'nama' => $request->input('nama'),
+            'isi_balasan' => $request->input('isi_balasan'),
+            'komentar_id' => $komentar->id,
+            'parent_komentar_id' => $parentKomentarId,
+            'centang_biru' => $centangBiru, // Tambahkan nilai centang_biru ke objek BalasanKomentar
+        ]);
+
+        $balasanKomentar->save();
+
+        return redirect()
+            ->route('pengunjung.destinasi.show', ['destinasiWisata' => $destinasiWisata->id])
+            ->with('success', 'Balasan komentar berhasil ditambahkan.');
+    }
+    
+    public function totalBalasanKomentar(Destinasi $destinasiWisata)
+    {
+        return $destinasiWisata->totalBalasanKomentar();
+    }
 
 }
