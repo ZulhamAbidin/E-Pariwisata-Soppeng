@@ -7,7 +7,7 @@
 
             <div class="col-xl-7">
                 <div class="card mt-6">
-                    <img class="card-img-top" src="{{ asset('storage/' . $destinasihotel->sampul) }}" alt="Card image cap">
+                    <img class="card-img-top mt-6" src="{{ asset('storage/' . $destinasihotel->sampul) }}" alt="Card image cap">
 
                     <div class="card-body">
                         <div class="d-md-flex">
@@ -102,6 +102,15 @@
                                             action="{{ route('pengunjung.hotel.tambah-balasan-komentar', ['destinasihotel' => $destinasihotel->id, 'komentar' => $komentar->id]) }}">
                                             @csrf
                                             <div class="form-group">
+                                                <input type="hidden" name="centang_biru" value="{{ Auth::check() ? 1 : 0 }}">
+                                                <label for="nama">Nama</label>
+                                                <?php
+                                                    $namaValue = Auth::check() ? auth()->user()->name : old('nama');
+                                                    $readonly = Auth::check() ? 'readonly' : '';
+                                                ?>
+                                                <input type="text" class="form-control mb-2" id="nama" name="nama" placeholder="Nama lengkap" required
+                                                    value="{{ $namaValue }}" {{ $readonly }}>
+                                        
                                                 <label for="isi_balasan">Balas Komentar</label>
                                                 <textarea name="isi_balasan" class="form-control @error('isi_balasan') is-invalid @enderror"
                                                     rows="3">{{ old('isi_balasan') }}</textarea>
@@ -115,17 +124,24 @@
 
 
                                     {{-- komentar balasan --}}
-                                    @foreach ($komentar->balasanKomentars as $balasan)@if ($balasan->parent_komentar_id === $komentar->id)
+                                    @foreach ($komentar->balasanKomentars as $balasan)
+                                    @if ($balasan->parent_komentar_id === $komentar->id)
                                     <div class="media mb-5 overflow-visible">
                                         <div class="me-6">
-                                            {{-- <a href="profile.html"> <img class="media-object rounded-circle thumb-sm"
-                                                    alt="64x64" src="../assets/images/users/2.jpg"> </a> --}}
+                                            {{-- <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
+                                                    src="../assets/images/users/2.jpg"> </a> --}}
                                         </div>
                                         <div class="media-body border p-4 overflow-visible br-5">
-                                            <h5 class="mt-0">Admin</h5>
-                                            <span><i class="fe fe-thumb-up text-danger"></i></span>
+                                            <h5 class="mt-0">
+                                                @if ($balasan->centang_biru)
+                                                <img src="{{ asset('images/logo.webp') }}" alt="" class="img-fluid" style="width: 24px; height: 24px;"><!-- Tampilkan centang biru dengan ukuran fs-24 -->
+                                                @endif
+                                                {{ $balasan->nama }}
+                                            </h5>
+                                            <span>
+                                                <i class="fe fe-thumb-up text-danger"></i>
+                                            </span>
                                             <p>{{ $balasan->isi_balasan }}</p>
-
                                         </div>
                                     </div>
                                     @endif
@@ -241,11 +257,12 @@
                     <div class="card-header">
                         <div class="card-title">Artikel Terkait</div>
                     </div>
+                    @foreach ($daftarhotelTerbaru as $postinganTerbaru)
                     <div class="card-body">
                         <div class="">
 
-                            @foreach ($daftarhotelTerbaru as $postinganTerbaru)
-                                <div class="d-flex overflow-visible">
+                            
+                                <div class="d-flex overflow-visible mt-4">
                                     <a href="{{ route('pengunjung.hotel.show', $postinganTerbaru) }}"
                                         class="card-aside-column br-5 cover-image"
                                         data-bs-image-src="{{ asset('storage/' . $postinganTerbaru->sampul) }}"
@@ -257,10 +274,11 @@
                                         <div class="text-muted">{{ $postinganTerbaru->alamat }}</div>
                                     </div>
                                 </div>
-                            @endforeach
+                           
 
                         </div>
                     </div>
+                    @endforeach
                 </div>
 
 
@@ -269,35 +287,69 @@
         </div>
 
     </div>
-   
+
     <script>
-        var map;
-
-        function initMap() {
-            var latitude = {
-                {
-                    $destinasihotel - > latitude
-                }
-            };
-            var longitude = {
-                {
-                    $destinasihotel - > longitude
-                }
-            };
-            var location = [latitude, longitude];
-
-            map = L.map('map').setView(location, 13);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-            L.marker(location).addTo(map)
-                .bindPopup('{{ $destinasihotel->nama }}').openPopup();
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initMap();
+        document.addEventListener('DOMContentLoaded', function () {
+            const lihatKomentarButtons = document.querySelectorAll('.lihat-komentar-btn');
+            const balasanKomentarElems = document.querySelectorAll('.balasan-komentar');
+    
+            lihatKomentarButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const commentId = button.getAttribute('data-commentid');
+                    balasanKomentarElems.forEach(elem => {
+                        if (elem.getAttribute('data-commentid') === commentId) {
+                            elem.style.display = 'block';
+                        } else {
+                            elem.style.display = 'none';
+                        }
+                    });
+                });
+            });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const showMoreButton = document.getElementById('showMoreComments');
+            const allComments = {!! json_encode($destinasihotel->komentars) !!};
+            const commentContainer = document.querySelector('.card-body');
+    
+            showMoreButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                commentContainer.innerHTML = ''; // Clear existing comments
+    
+                allComments.forEach(komentar => {
+                    commentContainer.insertAdjacentHTML('beforeend', `
+                        <div class="media mb-5 overflow-visible d-block d-sm-flex">
+                            <!-- Your code for displaying comments -->
+                        </div>
+                    `);
+                });
+            });
+        });
+    </script>
+
+    <script>
+        var map;
+        
+            function initMap() {
+                var latitude = {{ $destinasihotel->latitude }};
+                var longitude = {{ $destinasihotel->longitude }};
+                var location = [latitude, longitude];
+        
+                map = L.map('map').setView(location, 13);
+        
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+                L.marker(location).addTo(map)
+                    .bindPopup('{{ $destinasihotel->nama }}').openPopup();
+            }
+        
+            document.addEventListener('DOMContentLoaded', function() {
+                initMap();
+            });
+    </script>
+   
 
 
     {{-- ular --}}

@@ -8,7 +8,7 @@ class BalasanKomentar extends Model
 {
     protected $table = 'balasan_komentars'; // Menentukan nama tabel yang digunakan oleh model
     
-    protected $fillable = ['isi_balasan', 'komentar_id', 'parent_komentar_id'];
+    protected $fillable = ['nama', 'isi_balasan', 'komentar_id', 'parent_komentar_id', 'centang_biru'];
 
     // public function komentar()
     // {

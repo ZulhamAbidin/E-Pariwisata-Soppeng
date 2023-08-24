@@ -6,6 +6,7 @@ use App\Models\Komentar;
 use App\Models\Destinasi;
 use Illuminate\Http\Request;
 use App\Models\BalasanKomentar;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -108,12 +109,12 @@ class PengunjungHotelController extends Controller
             ->with('success', 'Komentar dan rating berhasil ditambahkan.');
     }
 
-    public function tambahBalasanKomentar(Request $request, Destinasi $destinasihotel, $komentarId)
+        public function tambahBalasanKomentar(Request $request, Destinasi $destinasihotel, $komentarId)
     {
         $komentar = Komentar::findOrFail($komentarId);
 
         $validator = Validator::make($request->all(), [
-            'isi_balasan' => 'required', // Tambahkan validasi bahwa isi_balasan harus diisi
+            'isi_balasan' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -125,11 +126,21 @@ class PengunjungHotelController extends Controller
 
         $parentKomentarId = $komentar->id;
 
+        // Inisialisasi centang_biru dengan false
+        $centangBiru = false;
+
+        // Periksa apakah pengguna telah login
+        if (Auth::check()) {
+            $centangBiru = true; // Jika pengguna telah login, atur centang_biru menjadi true
+        }
+
         // Membuat objek BalasanKomentar dengan isi_balasan yang diambil dari form
         $balasanKomentar = new BalasanKomentar([
+            'nama' => $request->input('nama'),
             'isi_balasan' => $request->input('isi_balasan'),
             'komentar_id' => $komentar->id,
             'parent_komentar_id' => $parentKomentarId,
+            'centang_biru' => $centangBiru, // Tambahkan nilai centang_biru ke objek BalasanKomentar
         ]);
 
         $balasanKomentar->save();
@@ -138,6 +149,38 @@ class PengunjungHotelController extends Controller
             ->route('pengunjung.hotel.show', ['destinasihotel' => $destinasihotel->id])
             ->with('success', 'Balasan komentar berhasil ditambahkan.');
     }
+
+    // public function tambahBalasanKomentar(Request $request, Destinasi $destinasihotel, $komentarId)
+    // {
+    //     $komentar = Komentar::findOrFail($komentarId);
+
+    //     $validator = Validator::make($request->all(), [
+    //         'isi_balasan' => 'required', // Tambahkan validasi bahwa isi_balasan harus diisi
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return redirect()
+    //             ->back()
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+
+    //     $parentKomentarId = $komentar->id;
+
+    //     // Membuat objek BalasanKomentar dengan isi_balasan yang diambil dari form
+    //     $balasanKomentar = new BalasanKomentar([
+    //         'nama' => $request->input('nama'),
+    //         'isi_balasan' => $request->input('isi_balasan'),
+    //         'komentar_id' => $komentar->id,
+    //         'parent_komentar_id' => $parentKomentarId,
+    //     ]);
+
+    //     $balasanKomentar->save();
+
+    //     return redirect()
+    //         ->route('pengunjung.hotel.show', ['destinasihotel' => $destinasihotel->id])
+    //         ->with('success', 'Balasan komentar berhasil ditambahkan.');
+    // }
 
     public function totalBalasanKomentar(Destinasi $destinasihotel)
     {

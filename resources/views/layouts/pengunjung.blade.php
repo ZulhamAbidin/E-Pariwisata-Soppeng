@@ -76,7 +76,43 @@
         <!-- FOOTER CLOSED -->
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const lihatKomentarButtons = document.querySelectorAll('.lihat-komentar-btn');
     
+            lihatKomentarButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const commentId = button.getAttribute('data-commentid');
+                    const targetElem = document.querySelector(`.balasan-komentar[data-commentid="${commentId}"]`);
+                    
+                    if (targetElem.style.display === 'none') {
+                        targetElem.style.display = 'block';
+                    } else {
+                        targetElem.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const lihatKomentarButtons = document.querySelectorAll('.lihat-komentar-btn');
+
+        lihatKomentarButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const commentId = button.getAttribute('data-commentid');
+                const targetElem = document.querySelector(`.balasan-komentar[data-commentid="${commentId}"]`);
+                
+                if (targetElem.style.display === 'none') {
+                    targetElem.style.display = 'block';
+                } else {
+                    targetElem.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
