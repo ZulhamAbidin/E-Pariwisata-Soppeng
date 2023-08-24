@@ -7,7 +7,7 @@
 
         <div class="col-xl-7">
             <div class="card mt-6">
-                <img class="card-img-top" src="{{ asset('storage/' . $destination->sampul) }}" alt="Card image cap">
+                <img class="card-img-top mt-6" src="{{ asset('storage/' . $destination->sampul) }}" alt="Card image cap">
                 <div class="card-body">
                     <div class="d-md-flex">
 

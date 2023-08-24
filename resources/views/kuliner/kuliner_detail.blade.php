@@ -7,7 +7,7 @@
 
             <div class="col-xl-7">
                 <div class="card mt-4">
-                    <img class="card-img-top" src="{{ asset('storage/' . $destinasiKuliner->sampul) }}" alt="Card image cap">
+                    <img class="card-img-top mt-6" src="{{ asset('storage/' . $destinasiKuliner->sampul) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="d-md-flex">
 
@@ -197,26 +197,24 @@
                     <div class="card-header">
                         <div class="card-title">Artikel Terkait</div>
                     </div>
-                    <div class="card-body">
-                        <div class="">
-
-                            @foreach ($daftarKulinerTerbaru as $postinganTerbaru)
-                                <div class="d-flex overflow-visible">
-                                    <a href="{{ route('pengunjung.kuliner.show', $postinganTerbaru) }}"
-                                        class="card-aside-column br-5 cover-image"
-                                        data-bs-image-src="{{ asset('storage/' . $postinganTerbaru->sampul) }}"
-                                        style="background: url('{{ asset('storage/' . $postinganTerbaru->sampul) }}') center center;"></a>
-                                    <div class="ps-3 flex-column">
-                                        <h4><a
-                                                href="{{ route('pengunjung.kuliner.show', $postinganTerbaru) }}">{{ $postinganTerbaru->nama }}</a>
-                                        </h4>
-                                        <div class="text-muted">{{ $postinganTerbaru->alamat }}</div>
+                    @foreach ($daftarKulinerTerbaru as $postinganTerbaru)
+                        <div class="card-body">
+                            <div class="">
+                                    <div class="d-flex overflow-visible">
+                                        <a href="{{ route('pengunjung.kuliner.show', $postinganTerbaru) }}"
+                                            class="card-aside-column br-5 cover-image"
+                                            data-bs-image-src="{{ asset('storage/' . $postinganTerbaru->sampul) }}"
+                                            style="background: url('{{ asset('storage/' . $postinganTerbaru->sampul) }}') center center;"></a>
+                                        <div class="ps-3 flex-column">
+                                            <h4><a
+                                                    href="{{ route('pengunjung.kuliner.show', $postinganTerbaru) }}">{{ $postinganTerbaru->nama }}</a>
+                                            </h4>
+                                            <div class="text-muted">{{ $postinganTerbaru->alamat }}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
 
 

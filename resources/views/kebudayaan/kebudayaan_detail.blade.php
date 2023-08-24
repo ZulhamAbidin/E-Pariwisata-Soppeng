@@ -7,7 +7,7 @@
 
             <div class="col-xl-7">
                 <div class="card mt-6">
-                    <img class="card-img-top" src="{{ asset('storage/' . $destinasikebudayaan->sampul) }}" alt="Card image cap">
+                    <img class="card-img-top mt-6" src="{{ asset('storage/' . $destinasikebudayaan->sampul) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="d-md-flex">
 
@@ -197,10 +197,9 @@
                     <div class="card-header">
                         <div class="card-title">Artikel Terkait</div>
                     </div>
+                    @foreach ($daftarkebudayaanTerbaru as $postinganTerbaru)
                     <div class="card-body">
                         <div class="">
-
-                            @foreach ($daftarkebudayaanTerbaru as $postinganTerbaru)
                                 <div class="d-flex overflow-visible">
                                     <a href="{{ route('pengunjung.kebudayaan.show', $postinganTerbaru) }}"
                                         class="card-aside-column br-5 cover-image"
@@ -213,10 +212,9 @@
                                         <div class="text-muted">{{ $postinganTerbaru->alamat }}</div>
                                     </div>
                                 </div>
-                            @endforeach
-
                         </div>
                     </div>
+                    @endforeach
                 </div>
 
 
