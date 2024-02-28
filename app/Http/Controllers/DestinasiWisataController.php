@@ -51,6 +51,7 @@ class DestinasiWisataController extends Controller
                 'gambar.0.mimes' => 'Pastikan Anda Memilih gambar dengan format: jpeg, png, jpg, gif.',
             ],
         );
+        
         // Ambil data dari form
         $nama = $request->input('nama');
         $alamat = $request->input('alamat');
@@ -78,7 +79,7 @@ class DestinasiWisataController extends Controller
 
         // Upload dan simpan gambar sampul
         if ($request->hasFile('sampul')) {
-            // Simpan gambar sampul ke dalam folder penyimpanan (misalnya folder public/images)
+            // Simpan gambar sampul ke dalam folder penyimpanan
             $sampulPath = $request->file('sampul')->store('images', 'public');
 
             // Simpan path gambar sampul di kolom "sampul" pada tabel
@@ -89,13 +90,12 @@ class DestinasiWisataController extends Controller
         if ($request->hasFile('gambar')) {
             $gambarPaths = [];
             foreach ($request->file('gambar') as $image) {
-                // Simpan gambar ke dalam folder penyimpanan (misalnya folder public/images)
+                // Simpan gambar ke dalam folder penyimpanan (public/images)
                 $path = $image->store('images', 'public');
                 // Simpan path gambar baru di array
                 $gambarPaths[] = $path;
             }
-
-            // Convert the array of paths to JSON and store it in the database
+            
             $destinasiWisata->gambar = json_encode($gambarPaths);
         }
 
