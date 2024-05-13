@@ -86,7 +86,7 @@
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#menu4" aria-expanded="false" aria-controls="menu4">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Destinasi Budaya
+                                Destinasi Budaya.
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="menu4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
