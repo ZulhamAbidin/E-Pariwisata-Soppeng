@@ -15,17 +15,6 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                {{-- <div class="card">
-
-                    <div class="card-body pb-4">
-                        <div class="input-group mb-2">
-                            <input type="seach" class="form-control form-control" id="search-input"
-                                placeholder="Searching.....">
-                            <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
-                        </div>
-                    </div>
-
-                </div> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -37,9 +26,6 @@
 
                         <div class="side-app">
 
-                            <!-- CONTAINER -->
-
-                            <!-- PAGE-HEADER -->
                             <div class="page-header">
                                 <h1 class="page-title">Destinasi Hotel</h1>
                                 <div>
@@ -65,7 +51,7 @@
                                                     {{ Str::limit($destinasihotel->Deskripsi, 500) }}</div>
                                                 <div class="d-flex align-items-center pt-5 mt-auto">
                                                     <div class="ms-auto">
-                                                        <a href="{{ route('destinasi-hotel.show', ['id' => $destinasihotel->id]) }}"
+                                                        <a href="{{ route('pengunjung.hotel.show', $destinasihotel) }}"
                                                             class="btn btn-primary">Lihat</a>
                                                         <a href="{{ route('destinasi-hotel.edit', ['id' => $destinasihotel->id]) }}"
                                                             class="btn btn-warning">Edit</a>

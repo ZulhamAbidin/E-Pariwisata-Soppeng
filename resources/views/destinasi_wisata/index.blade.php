@@ -15,28 +15,7 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                <div class="card">
-
-                    <div class="card-body pb-4">
-                        {{-- <form action="{{ route('destinasi-wisata.index') }}" method="GET"></form>
-                            <div class="input-group mb-2">
-                                <input type="text" class="form-control form-control" id="search-input"
-                                    placeholder="Searching....." name="search">
-                                <button type="submit" class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</button>
-                            </div>
-                        </form> --}}
-
-                        {{-- <form action="{{ route('destinasi-wisata.index') }}" method="GET">
-                            <div class="input-group mb-3">
-                                <input type="text" name="search" class="form-control" placeholder="Cari Destinasi Wisata">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">Cari</button>
-                                </div>
-                            </div>
-                        </form> --}}
-                    </div>
-
-                </div>
+                
 
                 <div class="card">
                     <div class="card-header">
@@ -48,9 +27,6 @@
 
                         <div class="side-app">
 
-                            <!-- CONTAINER -->
-
-                            <!-- PAGE-HEADER -->
                             <div class="page-header">
                                 <h1 class="page-title">Destinasi Wisata</h1>
                                 <div>
@@ -76,7 +52,7 @@
                                                     {{ Str::limit($destinasiWisata->Deskripsi, 500) }}</div>
                                                 <div class="d-flex align-items-center pt-5 mt-auto">
                                                     <div class="ms-auto">
-                                                        <a href="{{ route('destinasi-wisata.show', ['id' => $destinasiWisata->id]) }}"
+                                                        <a href="{{ route('pengunjung.destinasi.show', $destinasiWisata) }}"
                                                             class="btn btn-primary">Lihat</a>
                                                         <a href="{{ route('destinasi-wisata.edit', ['id' => $destinasiWisata->id]) }}"
                                                             class="btn btn-warning">Edit</a>
@@ -95,8 +71,6 @@
                                     </div>
                                 @endforeach
 
-                                {{-- {{ $destinasiWisataList->links('pagination::bootstrap-5') }} --}}
-
                             </div>
 
 
@@ -108,8 +82,6 @@
     @endsection
 
     @push('scripts')
-
-
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (session('success'))
@@ -137,7 +109,7 @@
         @endif
         <script>
             function confirmDelete(event) {
-                event.preventDefault(); // Tambahkan baris ini untuk mencegah penghapusan langsung
+                event.preventDefault(); 
 
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
@@ -150,10 +122,8 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Lanjutkan proses hapus dengan mengirimkan form
                         event.target.closest('form').submit();
                     } else {
-                        // Batalkan proses hapus
                         return false;
                     }
                 });

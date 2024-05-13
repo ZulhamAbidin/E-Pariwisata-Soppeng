@@ -15,12 +15,6 @@ class DestinasiKebudayaanController extends Controller // Ganti "DestinasiHotelC
 {
     public function create()
     {
-        try {
-            DB::connection()->getPdo();
-            echo 'Berhasil terhubung ke database!';
-        } catch (\Exception $e) {
-            die('Tidak dapat terhubung ke database: ' . $e->getMessage());
-        }
 
         return view('destinasi-kebudayaan.create'); // Ganti "destinasi_hotel.create" menjadi "kebudayaan.create"
     }

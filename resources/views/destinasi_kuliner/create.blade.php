@@ -15,18 +15,7 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                {{-- <div class="card">
-
-                    <div class="card-body pb-4">
-                        <div class="input-group mb-2">
-                            <input type="seach" class="form-control form-control" id="search-input"
-                                placeholder="Searching.....">
-                            <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
-                        </div>
-                    </div>
-
-                </div> --}}
-
+              
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Tambah Destinasi kuliner</h4>
@@ -45,12 +34,6 @@
                                 <input type="text" value="" required name="alamat" id="alamat"
                                     class="form-control" required>
                             </div>
-
-                            {{-- <div class="form-group">
-                                <label for="HargaTiket">Harga Tiket</label>
-                                <input type="number" value="" required name="HargaTiket" id="HargaTiket"
-                                    class="form-control">
-                            </div> --}}
 
                             <div class="form-group">
                                 <label for="JamBuka">Menu Utama Kuliner</label>
@@ -93,9 +76,7 @@
             </div>
         </div>
     </div>
-@endsection
 
-@push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -123,7 +104,7 @@
         var marker;
 
         function initMap() {
-            map = L.map('map').setView([-4.3097, 119.9312], 13); // Koordinat Kabupaten Soppeng, Sulawesi
+            map = L.map('map').setView([-4.3097, 119.9312], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
@@ -141,7 +122,6 @@
                 if (keyword) {
                     geocodeAlamat(keyword);
                 } else {
-                    // Reset preview map
                     marker.setLatLng([-6.1754, 106.8272]);
                     map.setView([-6.1754, 106.8272], 13);
                     fillLatitudeLongitudeInputs(-6.1754, 106.8272);
@@ -154,7 +134,6 @@
             document.getElementById('longitude').value = longitude.toFixed(6);
         }
 
-        // ... fungsi geocodeAlamat ...
 
         document.addEventListener('DOMContentLoaded', function() {
             initMap();
@@ -172,4 +151,7 @@
             });
         </script>
     @endif
-@endpush
+
+@endsection
+
+   

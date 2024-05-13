@@ -19,13 +19,11 @@ class PengunjungHotelController extends Controller
 
     public function show(DestinasiHotel $destinasihotel)
     {
-        // Ambil data daftar destinasi kuliner terbaru (kecuali destinasi kuliner saat ini)
         $daftarhotelTerbaru = DestinasiHotel::where('id', '!=', $destinasihotel->id)
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
 
-        // Hitung total rating dan rating rata-rata
         $totalRating = $this->totalRating($destinasihotel);
         $averageRating = $this->averageRating($destinasihotel);
         $comments = $destinasihotel->komentars;
@@ -35,13 +33,11 @@ class PengunjungHotelController extends Controller
 
     public function totalRating(DestinasiHotel $destinasihotel)
     {
-        // Menghitung total rating dari komentar-komentar pada destinasi kuliner
         return $destinasihotel->komentars()->sum('rating');
     }
 
     public function averageRating(DestinasiHotel $destinasihotel)
     {
-        // Menghitung rata-rata rating dari komentar-komentar pada destinasi kuliner
         $totalRating = $this->totalRating($destinasihotel);
         $totalKomentar = $destinasihotel->komentars()->count();
 
@@ -55,9 +51,10 @@ class PengunjungHotelController extends Controller
     public function tambahKomentar(Request $request, Destinasihotel $destinasihotel)
 {
     $validator = Validator::make($request->all(), [
-        'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'], // Hanya huruf dan spasi yang diperbolehkan
+        'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
         'isi_komentar' => 'required',
-        'rating' => 'required|numeric|min:1|max:5', // Validasi rating antara 1 hingga 5
+        'email' => 'required',
+        'rating' => 'required|numeric|min:1|max:5', 
     ]);
 
     if ($validator->fails()) {
@@ -67,17 +64,15 @@ class PengunjungHotelController extends Controller
             ->withInput();
     }
 
-    // Membuat objek Komentar
     $komentar = new Komentar([
         'nama' => $request->input('nama'),
         'isi_komentar' => $request->input('isi_komentar'),
+        'email' => $request->input('email'),
         'rating' => $request->input('rating'),
     ]);
 
-    // Simpan komentar ke dalam tabel komentars yang berelasi dengan destinasi wisata
     $destinasihotel->komentars()->save($komentar);
 
-    // Update nilai rata-rata rating di tabel destinasi_Ku$destinasihotel
     $averageRating = $destinasihotel->komentars->avg('rating');
     $destinasihotel->update([
         'rating' => $averageRating,

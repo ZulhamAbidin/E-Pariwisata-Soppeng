@@ -15,17 +15,7 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                {{-- <div class="card">
 
-                    <div class="card-body pb-4">
-                        <div class="input-group mb-2">
-                            <input type="seach" class="form-control form-control" id="search-input"
-                                placeholder="Searching.....">
-                            <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
-                        </div>
-                    </div>
-
-                </div> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -65,7 +55,7 @@
                                                     {{ Str::limit($destinasiKuliner->Deskripsi, 500) }}</div>
                                                 <div class="d-flex align-items-center pt-5 mt-auto">
                                                     <div class="ms-auto">
-                                                        <a href="{{ route('destinasi-kuliner.show', ['id' => $destinasiKuliner->id]) }}"
+                                                        <a href="{{ route('pengunjung.kuliner.show', $destinasiKuliner) }}"
                                                             class="btn btn-primary">Lihat</a>
                                                         <a href="{{ route('destinasi-kuliner.edit', ['id' => $destinasiKuliner->id]) }}"
                                                             class="btn btn-warning">Edit</a>
@@ -136,10 +126,8 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Lanjutkan proses hapus dengan mengirimkan form
                         event.target.closest('form').submit();
                     } else {
-                        // Batalkan proses hapus
                         return false;
                     }
                 });

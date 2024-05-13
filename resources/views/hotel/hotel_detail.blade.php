@@ -1,7 +1,15 @@
 @extends('layouts.pengunjung')
 
 @section('container')
-    <div class="main-content app-content mt-4" id="">
+
+
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-heading text-uppercase">Detail Lokasi Penginapan  {{ $destinasihotel->nama }} </div>
+    </div>
+</header>
+
+    <div class="container mt-4" id="">
 
         <div class="row">
 
@@ -43,8 +51,9 @@
                     </div>
                     <div class="card-body">
                         <h3><a href="javascript:void(0)"> {{ $destinasihotel->nama }}</a></h3>
-                        <p class="card-text">{{ $destinasihotel->alamat }}</p>
-                        <p class="text-justify"> {{ $destinasihotel->Deskripsi }}</p>
+                        <p class="card-text">Alamat Penginapan : {{ $destinasihotel->alamat }}</p>
+                        <p class="card-text">Jam Operasional : {{ $destinasihotel->JamBuka }}</p>
+                        <p class="text-justify">Deskripsi : {{ $destinasihotel->Deskripsi }}</p>
 
                         @if ($destinasihotel->gambar)
                         <div class="row">
@@ -59,7 +68,6 @@
                         <div class="ms-auto">
                             <div id="map" style="height: 250px;"></div>
                         </div>
-                        <!-- Replace $destinasihotel->latitude and $destinasihotel->longitude with the actual variables holding the latitude and longitude values -->
                         <a href="https://www.google.com/maps?q={{ $destinasihotel->latitude }},{{ $destinasihotel->longitude }}"
                             target="_blank" class="btn block btn-primary mt-2">Lihat di Google Maps</a>
                     </div>
@@ -72,14 +80,11 @@
                     
                     @foreach ($destinasihotel->komentars as $komentar)
                     <div class="card-body pb-0">
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div>
-                            <div class="media-body overflow-visible">
+                        <div class="row">
+                            <div class="col media-body overflow-visible">
                                 <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
+                                    <span class="fs-sm-1 text-muted">{{ $komentar->email }}</span>
+                                    <h5 class="mt-0">{{ $komentar->nama }} </h5>
                                     <span><i class="fe fe-thumb-up text-danger"></i></span>
                                     <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
                                     <div class="mt-3 ms-1 text-muted font-weight-semibold">
@@ -89,56 +94,8 @@
                             </div>
                         </div>
                     </div>
+                    
                     @endforeach
-
-                    {{-- ular --}}
-                    
-                    {{-- <div class="card-body pb-0">
-                        @foreach ($destinasihotel->komentars->take(3) as $komentar)
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div>
-                            <div class="media-body overflow-visible">
-                                <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                    <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                    <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                        {{ $komentar->created_at->diffForHumans() }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    
-                        @if ($destinasihotel->komentars->count() > 3)
-                        <div class="text-end">
-                            <a href="#" id="showAllComments" class="text-muted">Lihat semua komentar</a>
-                        </div>
-                        <div id="allComments" style="display: none;">
-                            @foreach ($destinasihotel->komentars->slice(3) as $komentar)
-                            <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                                <div class="me-3 mb-2">
-                                    <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                            src="../assets/images/users/2.jpg"> </a>
-                                </div>
-                                <div class="media-body overflow-visible">
-                                    <div class="border mb-5 p-4 br-5">
-                                        <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                        <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                        <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                        <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                            {{ $komentar->created_at->diffForHumans() }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        @endif
-                    </div> --}}
 
                 </div>
 
@@ -167,6 +124,10 @@
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama lengkap" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
                             </div>
                             <div class="form-group">
                                 <label for="isi_komentar">Komentar</label>
@@ -247,17 +208,5 @@
             initMap();
         });
     </script>
-
-    {{-- ular --}}
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#showAllComments").click(function(e) {
-                e.preventDefault();
-                $("#allComments").slideToggle();
-            });
-        });
-    </script> --}}
 
 @endsection

@@ -1,49 +1,37 @@
 @extends('layouts.pengunjung')
 
 @section('container')
-    <div class="section bg-landing" id="Blog">
-        <div class="container">
-            <div class="row">
-                <h4 class="text-center fw-semibold bok">Postingan Destinasi Wisata Terbaru </h4>
-                <span class="landing-title"></span>
-                <h2 class="text-center fw-semibold mb-7">Destinasi Wisata.</h2>
 
-                <div class="row">
-                    @foreach ($destinasiWisataList as $destinasiWisata)
-                        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-6">
-                            <div class="card"> <a href="{{ route('pengunjung.destinasi.show', $destinasiWisata) }}"><img class="card-img-top"
-                                        src="{{ url('storage/' . $destinasiWisata->sampul) }}"
-                                        alt="And this isn't my nose. This is a false one."></a>
-                                <div class="card-body d-flex flex-column">
-                                    <h3>{{ $destinasiWisata->nama }}</a></h3>
-                                    <small  class="d-block text-muted">{{ \Carbon\Carbon::parse($destinasiWisata->created_at)->locale('id')->diffForHumans() }}</small>
-                                    <div class="text-muted pt-2">{{ $destinasiWisata->alamat }}</div>
-                                    <div class="text-muted pt-2 text-justify">
-                                        {{ Str::limit($destinasiWisata->Deskripsi, 500) }}</div>
-                                    <div class="d-flex align-items-center pt-5 mt-auto">
-                                        <div class="ms-auto">
-                                            <a href="{{ route('pengunjung.destinasi.show', $destinasiWisata) }}"
-                                                class="btn btn-primary">Lihat</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-heading text-uppercase">Menu Destinasi Wisata</div>
+    </div>
+</header>
+
+<section class="page-section" id="Menu">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Menu</h2>
+            <h3 class="section-subheading text-muted">Destinasi Wisata</h3>
+        </div>
+        <div class="row text-center">
+
+            @foreach ($destinasiWisataList as $destinasiWisata)
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url('storage/' . $destinasiWisata->sampul) }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $destinasiWisata->nama }}</h5>
+                    <p class="card-text">{{ Str::limit($destinasiWisata->Deskripsi, 500) }}</p>
+                    <a href="{{ route('pengunjung.destinasi.show', $destinasiWisata) }}" class="btn btn-primary">Lihat
+                        Detail</a>
                 </div>
-
-
             </div>
+
+            @endforeach
+
         </div>
     </div>
+</section>
 
 @endsection
-
-
-<style>
-    @media screen and (max-width: 992px) {
-        .bok {
-            margin-top: 40px !important
-        }
-    }
-</style>

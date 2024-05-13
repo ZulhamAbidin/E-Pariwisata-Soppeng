@@ -15,17 +15,6 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                {{-- <div class="card">
-
-                    <div class="card-body pb-4">
-                        <div class="input-group mb-2">
-                            <input type="seach" class="form-control form-control" id="search-input"
-                                placeholder="Searching.....">
-                            <span class="input-group-text btn btn-primary" id="search-button">tidak aktif Search</span>
-                        </div>
-                    </div>
-
-                </div> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -69,16 +58,14 @@
                                 <label for="Sejarah">Sejarah</label>
                                 <textarea name="Sejarah" required id="Sejarah" class="form-control"></textarea>
                             </div>
-                            <div id="map" style="height: 400px; margin-top: 20px;"></div>
+
                             <div class="form-group">
                                 <label for="latitude" class="sr-only">Latitude</label>
-                                <input type="text" required name="latitude" id="latitude" class="form-control" required
-                                    readonly>
+                                <input type="text" required name="latitude" id="latitude" class="form-control" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="longitude" class="sr-only">Longitude</label>
-                                <input type="text" required name="longitude" id="longitude" class="form-control" required
-                                    readonly>
+                                <input type="text" required name="longitude" id="longitude" class="form-control" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="sampul">Sampul:</label>
@@ -87,48 +74,31 @@
                             <div class="form-group">
                                 <label for="gambar">Gambar</label>
                                 <input type="file" name="gambar[]" required id="gambar" class="form-control-file" multiple>
-                                <small class="form-text text-muted" >Unggah gambar baru Maksimal 4 Gambar (jpeg, png, jpg,
-                                    gif)</small>
+                                <small class="form-text text-muted" >Unggah gambar baru Maksimal 4 Gambar (jpeg, png, jpg, gif)</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
+
+                        <div class="form-group mt-4">
+                            <div id="map" style="height: 400px;"></div>
+                        </div>
+                    
 
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
-@endsection
 
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-    @if ($errors->any())
-        <script>
-            var errorMessage = "<ul>";
-            @foreach ($errors->all() as $error)
-                errorMessage += "<li>{{ $error }}</li>";
-            @endforeach
-            errorMessage += "</ul>";
-
-            Swal.fire({
-                title: "Error",
-                html: errorMessage,
-                icon: "error",
-                timer: 15000,
-                showConfirmButton: false
-            });
-        </script>
-    @endif
-
+    
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         var map;
         var marker;
 
         function initMap() {
-            map = L.map('map').setView([-4.3097, 119.9312], 13); // Koordinat Kabupaten Soppeng, Sulawesi
+            map = L.map('map').setView([-4.3097, 119.9312], 13); 
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
@@ -146,7 +116,7 @@
                 if (keyword) {
                     geocodeAlamat(keyword);
                 } else {
-                    // Reset preview map
+
                     marker.setLatLng([-6.1754, 106.8272]);
                     map.setView([-6.1754, 106.8272], 13);
                     fillLatitudeLongitudeInputs(-6.1754, 106.8272);
@@ -159,22 +129,11 @@
             document.getElementById('longitude').value = longitude.toFixed(6);
         }
 
-        // ... fungsi geocodeAlamat ...
-
         document.addEventListener('DOMContentLoaded', function() {
             initMap();
         });
     </script>
 
-    @if (session('error'))
-        <script>
-            Swal.fire({
-                title: "Gagal",
-                text: "{{ session('error') }}",
-                icon: "error",
-                timer: 3000,
-                showConfirmButton: false
-            });
-        </script>
-    @endif
-@endpush
+@endsection
+
+

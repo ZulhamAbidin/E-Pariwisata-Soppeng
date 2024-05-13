@@ -15,12 +15,6 @@ class DestinasiKulinerController extends Controller
 {
     public function create()
     {
-        try {
-            DB::connection()->getPdo();
-            echo 'Berhasil terhubung ke database!';
-        } catch (\Exception $e) {
-            die('Tidak dapat terhubung ke database: ' . $e->getMessage());
-        }
 
         return view('destinasi_kuliner.create');
     }

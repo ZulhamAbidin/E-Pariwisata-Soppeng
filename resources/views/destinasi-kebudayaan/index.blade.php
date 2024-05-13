@@ -48,8 +48,10 @@
                                                     {{ Str::limit($kebudayaan->deskripsi, 500) }}</div>
                                                 <div class="d-flex align-items-center pt-5 mt-auto">
                                                     <div class="ms-auto">
-                                                        <a href="{{ route('destinasi-kebudayaan.show', ['id' => $kebudayaan->id]) }}"
+
+                                                        <a href="{{ route('pengunjung.kebudayaan.show', $kebudayaan) }}"
                                                             class="btn btn-primary">Lihat</a>
+                                                            
                                                         <a href="{{ route('destinasi-kebudayaan.edit', ['id' => $kebudayaan->id]) }}"
                                                             class="btn btn-warning">Edit</a>
                                                         <form

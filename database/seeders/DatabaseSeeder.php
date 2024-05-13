@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         // Generate dummy users
         DB::table('users')->insert([
             'name' => 'astriayu',
+            'alamat' => 'gowa sarana indah',
+            'nohp' => '0895801138822',
             'email' => 'astriayu@gmail.com',
             'password' => bcrypt('astriayu'),
             'created_at' => now(),

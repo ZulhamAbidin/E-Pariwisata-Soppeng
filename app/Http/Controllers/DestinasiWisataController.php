@@ -15,14 +15,7 @@ class DestinasiWisataController extends Controller
 {
     public function create()
     {
-        try {
-            DB::connection()->getPdo();
-            echo 'Berhasil terhubung ke database!';
-        } catch (\Exception $e) {
-            die('Tidak dapat terhubung ke database: ' . $e->getMessage());
-        }
-
-        return view('destinasi_wisata.create');
+                return view('destinasi_wisata.create');
     }
 
     public function store(Request $request)
@@ -124,12 +117,6 @@ class DestinasiWisataController extends Controller
         return view('destinasi_wisata.show', compact('destinasiWisata'));
     }
 
-    // public function index()
-    // {
-    //     $destinasiWisataList = DestinasiWisata::all();
-
-    //     return view('destinasi_wisata.index', ['destinasiWisataList' => $destinasiWisataList]);
-    // }
 
     public function index(Request $request)
     {
@@ -142,8 +129,7 @@ class DestinasiWisataController extends Controller
             // Add other fields if you want to search on them as well
         }
 
-        // Get paginated results
-        $destinasiWisataList = $query->paginate(2); // Change 10 to your desired items per page
+        $destinasiWisataList = $query->get();
 
         return view('destinasi_wisata.index', ['destinasiWisataList' => $destinasiWisataList]);
     }

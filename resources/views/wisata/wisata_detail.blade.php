@@ -1,10 +1,16 @@
 @extends('layouts.pengunjung')
 
 @section('container')
-    <div class="main-content app-content mt-4" id="">
 
+
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-heading text-uppercase">Detail Destinasi Wisata  {{ $destinasiWisata->nama }} </div>
+    </div>
+</header>
+
+    <div class="container mt-4" id="">
         <div class="row">
-
             <div class="col-xl-8">
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('storage/' . $destinasiWisata->sampul) }}" alt="Card image cap">
@@ -43,8 +49,12 @@
                     </div>
                     <div class="card-body">
                         <h3><a href="javascript:void(0)"> {{ $destinasiWisata->nama }}</a></h3>
-                        <p class="card-text">{{ $destinasiWisata->alamat }}</p>
-                        <p class="text-justify"> {{ $destinasiWisata->Deskripsi }}</p>
+                        <p class="card-text">Alamat : {{ $destinasiWisata->alamat }}</p>
+                        <p class="card-text">Sejarah : {{ $destinasiWisata->Sejarah }}</p>
+                        <p class="card-text">Harga Tiket Masuk :{{ $destinasiWisata->HargaTiket }}</p>
+                        <p class="card-text">Fasilitas Destinasi Wisata :{{ $destinasiWisata->FasilitasDestinasi }}</p>
+                        <p class="card-text">Jam Buka : {{ $destinasiWisata->JamBuka }}</p>
+                        <p class="text-justify">Deskripsi : {{ $destinasiWisata->Deskripsi }}</p>
 
                         @if ($destinasiWisata->gambar)
                         <div class="row">
@@ -59,7 +69,7 @@
                         <div class="ms-auto">
                             <div id="map" style="height: 250px;"></div>
                         </div>
-                        <!-- Replace $destinasiWisata->latitude and $destinasiWisata->longitude with the actual variables holding the latitude and longitude values -->
+
                         <a href="https://www.google.com/maps?q={{ $destinasiWisata->latitude }},{{ $destinasiWisata->longitude }}"
                             target="_blank" class="btn block btn-primary mt-2">Lihat di Google Maps</a>
                     </div>
@@ -72,14 +82,11 @@
                     
                     @foreach ($destinasiWisata->komentars as $komentar)
                     <div class="card-body pb-0">
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            {{-- <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div> --}}
-                            <div class="media-body overflow-visible">
+                        <div class="row">
+                            <div class="col media-body overflow-visible">
                                 <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
+                                    <span class="fs-sm-1 text-muted">{{ $komentar->email }}</span>
+                                    <h5 class="mt-0">{{ $komentar->nama }} </h5>
                                     <span><i class="fe fe-thumb-up text-danger"></i></span>
                                     <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
                                     <div class="mt-3 ms-1 text-muted font-weight-semibold">
@@ -89,56 +96,10 @@
                             </div>
                         </div>
                     </div>
+                    
                     @endforeach
 
-                    {{-- ular --}}
-                    
-                    {{-- <div class="card-body pb-0">
-                        @foreach ($destinasiWisata->komentars->take(3) as $komentar)
-                        <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                            <div class="me-3 mb-2">
-                                <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                        src="../assets/images/users/2.jpg"> </a>
-                            </div>
-                            <div class="media-body overflow-visible">
-                                <div class="border mb-5 p-4 br-5">
-                                    <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                    <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                    <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                        {{ $komentar->created_at->diffForHumans() }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    
-                        @if ($destinasiWisata->komentars->count() > 3)
-                        <div class="text-end">
-                            <a href="#" id="showAllComments" class="text-muted">Lihat semua komentar</a>
-                        </div>
-                        <div id="allComments" style="display: none;">
-                            @foreach ($destinasiWisata->komentars->slice(3) as $komentar)
-                            <div class="media mb-1 overflow-visible d-block d-sm-flex">
-                                <div class="me-3 mb-2">
-                                    <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                            src="../assets/images/users/2.jpg"> </a>
-                                </div>
-                                <div class="media-body overflow-visible">
-                                    <div class="border mb-5 p-4 br-5">
-                                        <h5 class="mt-0">{{ $komentar->nama }}</h5>
-                                        <span><i class="fe fe-thumb-up text-danger"></i></span>
-                                        <p class="font-13 text-muted">{{ $komentar->isi_komentar }}</p>
-                                        <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                            {{ $komentar->created_at->diffForHumans() }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        @endif
-                    </div> --}}
+                  
 
                 </div>
 
@@ -167,6 +128,10 @@
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama lengkap" required>
                             </div>
                             <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="isi_komentar">Komentar</label>
                                 <textarea class="form-control" id="isi_komentar" name="isi_komentar" rows="5" placeholder="Isi komentar"
                                     required></textarea>
@@ -187,7 +152,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-xl-4 mt-6">
 
                 <div class="card">
@@ -218,11 +182,8 @@
 
 
             </div>
-
         </div>
-
     </div>
-
 
     <script>
         var map;
@@ -244,17 +205,4 @@
             initMap();
         });
     </script>
-
-    {{-- ular --}}
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#showAllComments").click(function(e) {
-                e.preventDefault();
-                $("#allComments").slideToggle();
-            });
-        });
-    </script> --}}
-
 @endsection
